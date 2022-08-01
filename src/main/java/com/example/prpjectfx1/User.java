@@ -9,6 +9,7 @@ public class User {
     private String email;
     private int account;
     private String bio;
+    private String photo;
 
     public String getName() {
         return name;
@@ -64,5 +65,13 @@ public class User {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

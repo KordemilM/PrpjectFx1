@@ -21,6 +21,7 @@ public class DatabaseInitializer {
                         "email varchar(255) NOT NULL," +
                         "business_account int NOT NULL," +
                         "bio varchar(255)," +
+                        "photo varchar(255),"+
                         "PRIMARY KEY (username))");
         statement.close();
     }

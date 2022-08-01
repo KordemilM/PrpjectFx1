@@ -1,5 +1,6 @@
 package com.example.prpjectfx1;
 
+import java.io.FileNotFoundException;
 import java.sql.*;
 
 public class UserRepository {
@@ -88,7 +89,8 @@ public class UserRepository {
         ResultSet resultSet = preparedStatement.executeQuery();
         if(resultSet.next()){
             user.setName(resultSet.getString(1));  user.setUserName(resultSet.getString(2));
-            user.setBio(resultSet.getString(7));
+            user.setBio(resultSet.getString(7));   user.setPhoto(resultSet.getString(8));
+            user.setAccount(resultSet.getInt(6));
             return user;
         }
         return null;
@@ -110,5 +112,15 @@ public class UserRepository {
         preparedStatement1.setString(3, user.getBio());
         preparedStatement1.setString(4, user.getUserName());
         preparedStatement1.executeUpdate();
+    }
+
+    protected static void addPhoto() throws SQLException, FileNotFoundException {
+        PreparedStatement preparedStatement = connection.prepareStatement("update user set " +
+                "photo=? WHERE username=?");
+        //InputStream in = new FileInputStream("H:\\B612.jpg");
+       // preparedStatement.setBlob(1,in);
+        preparedStatement.setString(1,"H:\\B612.jpg");
+        preparedStatement.setString(2,"ali");
+        preparedStatement.executeUpdate();
     }
 }

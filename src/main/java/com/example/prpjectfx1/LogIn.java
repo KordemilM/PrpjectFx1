@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.prefs.Preferences;
@@ -40,7 +41,7 @@ public class LogIn {
     }
 
     @FXML
-    protected void submitClick(ActionEvent event) throws SQLException {
+    protected void submitClick(ActionEvent event) throws SQLException, FileNotFoundException {
         usernameLabel.setText("");
         passwordLabel.setText("");
         int i = 0;
@@ -59,6 +60,7 @@ public class LogIn {
             passwordField.setText("");
         }
         if(i==2){
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("personalPage.fxml"));
             Parent root = null;
             try {

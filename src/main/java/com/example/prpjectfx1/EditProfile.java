@@ -6,7 +6,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -21,13 +25,22 @@ public class EditProfile {
     @FXML
     private CheckBox account;
     @FXML
-    Label okLabel;
+    private Label okLabel;
+    @FXML
+    private Label oooo;
+    @FXML
+    private ImageView imageView;
+
+    final FileChooser fileChooser = new FileChooser();
 
     protected void hmm2(String username) throws SQLException {
         User user = UserRepository.searchUser(username);
         usernameText.setText(user.getUserName());
         nameText.setText(user.getName());
         bioText.setText(user.getBio());
+//        /image/icon.png
+        Image image = new Image(getClass().getResourceAsStream("/" + user.getPhoto()));
+        imageView.setImage(image);
     }
 
     @FXML
@@ -57,6 +70,17 @@ public class EditProfile {
         } catch (
                 IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    protected void setMyPhoto(){
+        fileChooser.setTitle("My pictures");
+        File file = fileChooser.showOpenDialog(null);
+        if(file != null){
+            oooo.setText(file.getAbsolutePath());
+        }else {
+            oooo.setText("invalid");
         }
     }
 
