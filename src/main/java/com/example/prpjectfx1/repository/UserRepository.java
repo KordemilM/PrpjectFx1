@@ -20,14 +20,14 @@ public class UserRepository {
         }
     }
 
-    protected static boolean searchUserByUsername(String username) throws SQLException{
+    public static boolean searchUserByUsername(String username) throws SQLException{
 
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM user WHERE username='" + username + "'");
         return !resultSet.next();
     }
 
-    protected static boolean searchPassword(String username,String password) throws SQLException {
+    public static boolean searchPassword(String username, String password) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM user WHERE username=?");
         preparedStatement.setString(1, username);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -39,7 +39,7 @@ public class UserRepository {
         return false;
     }
 
-    protected static void addUser(User user) throws SQLException {
+    public static void addUser(User user) throws SQLException {
 
         PreparedStatement preparedStatement = connection.prepareStatement("insert into user " +
                 "(username,password,security_response,email,business_account) VALUES (?,?,?,?,?)");
@@ -51,7 +51,7 @@ public class UserRepository {
         preparedStatement.executeUpdate();
     }
 
-    protected static String numberOfFollowers(String username) throws SQLException {
+    public static String numberOfFollowers(String username) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM follow WHERE toId=?");
         preparedStatement.setString(1, username);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -62,7 +62,7 @@ public class UserRepository {
         return Integer.toString(c);
     }
 
-    protected static String numberOfFollowing(String username) throws SQLException {
+    public static String numberOfFollowing(String username) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM follow WHERE fromId=?");
         preparedStatement.setString(1, username);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -73,7 +73,7 @@ public class UserRepository {
         return Integer.toString(c);
     }
 
-    protected static boolean findFollow(String fromId,String toId) throws SQLException {
+    public static boolean findFollow(String fromId, String toId) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM follow WHERE fromId=? " +
                 "AND toId=?");
         preparedStatement.setString(1, fromId);
@@ -85,7 +85,7 @@ public class UserRepository {
         return true;
     }
 
-    protected static User searchUser(String username) throws SQLException {
+    public static User searchUser(String username) throws SQLException {
         User user = new User();
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM user WHERE username=?");
         preparedStatement.setString(1, username);
@@ -99,7 +99,7 @@ public class UserRepository {
         return null;
     }
 
-    protected static void addFollower(String fromId , String toId) throws SQLException {
+    public static void addFollower(String fromId, String toId) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("insert into follow (fromId,toId)" +
                 "VALUES (?,?)");
         preparedStatement.setString(1,fromId);
@@ -107,7 +107,7 @@ public class UserRepository {
         preparedStatement.executeUpdate();
     }
 
-    protected static void updateProfile(User user) throws SQLException {
+    public static void updateProfile(User user) throws SQLException {
         PreparedStatement preparedStatement1 = connection.prepareStatement("update user set " +
                 "name=?,business_account=?,bio=?,photo=? WHERE username=?");
         preparedStatement1.setString(1, user.getName());
