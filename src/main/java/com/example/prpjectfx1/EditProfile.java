@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.prefs.Preferences;
 
 public class EditProfile {
@@ -42,11 +43,11 @@ public class EditProfile {
         usernameText.setText(user.getUserName());
         nameText.setText(user.getName());
         bioText.setText(user.getBio());
-        if(user.getPhoto() != null){
-            Image image = new Image(getClass().getResourceAsStream(user.getPhoto()));
+        try{
+            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(user.getPhoto())));
             imageView.setImage(image);
-        }else {
-            Image image = new Image(getClass().getResourceAsStream("/image/profile.png"));
+        }catch (NullPointerException e){
+            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/image/profile.png")));
             imageView.setImage(image);
         }
 //        /image/icon.png
@@ -79,7 +80,7 @@ public class EditProfile {
     }
 
     @FXML
-    protected void back1ButtonClick(ActionEvent event) throws SQLException {
+    public void back1ButtonClick() throws SQLException {
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         String id = userPreferences.get("id", "");
         System.out.println(id + "******");
@@ -93,7 +94,7 @@ public class EditProfile {
         }
         PersonalPage personalPage = loader.getController();
         personalPage.setUser(id);
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Stage stage = Main.mainStage;
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
