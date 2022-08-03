@@ -79,10 +79,9 @@ public class EditProfile {
     }
 
     @FXML
-    protected void back1ButtonClick(ActionEvent event) throws SQLException {
+    public void back1ButtonClick() throws SQLException {
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         String id = userPreferences.get("id", "");
-        System.out.println(id + "******");
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("personalPage.fxml"));
         Parent root = null;
@@ -93,7 +92,7 @@ public class EditProfile {
         }
         PersonalPage personalPage = loader.getController();
         personalPage.setUser(id);
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Stage stage = Main.mainStage;   ///
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
