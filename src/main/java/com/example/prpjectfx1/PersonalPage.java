@@ -53,6 +53,8 @@ public class PersonalPage {
 
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         userPreferences.put("id", usernameLabel.getText());
+
+
     }
 
     @FXML
