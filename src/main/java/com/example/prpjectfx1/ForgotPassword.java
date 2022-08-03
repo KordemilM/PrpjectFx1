@@ -33,4 +33,5 @@ public class ForgotPassword {
         parent.getStylesheets().remove("/styles/lightMode.css");
         parent.getStylesheets().add("/styles/darkMode.css");
     }
+
 }
