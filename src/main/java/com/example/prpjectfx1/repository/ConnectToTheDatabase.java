@@ -1,4 +1,4 @@
-package com.example.prpjectfx1;
+package com.example.prpjectfx1.repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,5 +1,7 @@
 package com.example.prpjectfx1;
 
+import com.example.prpjectfx1.repository.ConnectToTheDatabase;
+import com.example.prpjectfx1.repository.DatabaseInitializer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

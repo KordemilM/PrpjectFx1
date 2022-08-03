@@ -1,5 +1,7 @@
 package com.example.prpjectfx1;
 
+import com.example.prpjectfx1.entity.User;
+import com.example.prpjectfx1.repository.UserRepository;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

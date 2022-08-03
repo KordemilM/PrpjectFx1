@@ -1,9 +1,9 @@
 package com.example.prpjectfx1;
 
-import javafx.event.ActionEvent;
+import com.example.prpjectfx1.entity.User;
+import com.example.prpjectfx1.repository.UserRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;

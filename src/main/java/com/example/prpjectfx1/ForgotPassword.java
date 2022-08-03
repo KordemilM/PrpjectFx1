@@ -7,9 +7,6 @@ import javafx.scene.layout.BorderPane;
 public class ForgotPassword {
 
     @FXML
-    Label lab;
-
-    @FXML
     BorderPane parent;
 
     private boolean isLightMode = true;

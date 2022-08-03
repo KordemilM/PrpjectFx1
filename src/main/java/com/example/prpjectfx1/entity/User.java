@@ -1,4 +1,4 @@
-package com.example.prpjectfx1;
+package com.example.prpjectfx1.entity;
 
 public class User {
 

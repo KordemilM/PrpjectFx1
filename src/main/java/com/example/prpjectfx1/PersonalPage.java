@@ -1,5 +1,7 @@
 package com.example.prpjectfx1;
 
+import com.example.prpjectfx1.entity.User;
+import com.example.prpjectfx1.repository.UserRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
