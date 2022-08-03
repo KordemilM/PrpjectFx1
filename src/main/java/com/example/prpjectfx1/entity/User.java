@@ -11,7 +11,6 @@ public class User {
     private String bio;
     private String photo;
 
-
     public String getName() {
         return name;
     }

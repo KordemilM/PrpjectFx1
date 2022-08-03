@@ -1,14 +1,12 @@
 package com.example.prpjectfx1;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 
 public class ForgotPassword {
 
     @FXML
     BorderPane parent;
-
     private boolean isLightMode = true;
 
     @FXML

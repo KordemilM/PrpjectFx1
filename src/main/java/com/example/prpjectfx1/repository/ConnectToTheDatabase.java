@@ -12,4 +12,5 @@ public class ConnectToTheDatabase {
                 .getConnection("jdbc:mysql://localhost:3306/project","root","M78fF52Kwa1");
         return connection;
     }
+
 }

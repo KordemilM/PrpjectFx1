@@ -34,4 +34,5 @@ public class DatabaseInitializer {
                 "PRIMARY KEY (id))");
         statement.close();
     }
+
 }
