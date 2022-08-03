@@ -22,6 +22,7 @@ public class ForgotPassword {
             setDarkMode();
         }
     }
+
     private void setLightMode(){
         parent.getStylesheets().remove("/styles/darkMode.css");
         parent.getStylesheets().add("/styles/lightMode.css");
