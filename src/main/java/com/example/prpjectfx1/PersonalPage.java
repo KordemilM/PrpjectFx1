@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.prefs.Preferences;
 
 public class PersonalPage {
@@ -44,16 +45,18 @@ public class PersonalPage {
         numFollowersLabel.setText(UserRepository.numberOfFollowers(username));
         numFollowingLabel.setText(UserRepository.numberOfFollowing(username));
 //        numPostLabel.setText(UserRepository.);
-        if(user.getPhoto() != null){
-            Image image = new Image(getClass().getResourceAsStream(user.getPhoto()));
+        try{
+            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(user.getPhoto())));
             profileImage1.setImage(image);
-        }else {
-            Image image = new Image(getClass().getResourceAsStream("/image/profile.png"));
+        }catch (NullPointerException e){
+            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/image/profile.png")));
             profileImage1.setImage(image);
         }
 
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         userPreferences.put("id", usernameLabel.getText());
+
+
     }
 
     @FXML
