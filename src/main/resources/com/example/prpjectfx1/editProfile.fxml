@@ -10,7 +10,7 @@
 <AnchorPane prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #c3edf2;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prpjectfx1.EditProfile">
    <children>
       <ImageView fx:id="imageView" fitHeight="50.0" fitWidth="50.0" layoutX="164.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#backButtonClick" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#back1ButtonClick" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../image/1659335597678-fococlipping-standard.png" />
          </image>

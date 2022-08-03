@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.prefs.Preferences;
@@ -41,7 +40,7 @@ public class LogIn {
     }
 
     @FXML
-    protected void submitClick(ActionEvent event) throws SQLException, FileNotFoundException {
+    protected void submitClick(ActionEvent event) throws SQLException {
         usernameLabel.setText("");
         passwordLabel.setText("");
         int i = 0;
@@ -69,7 +68,7 @@ public class LogIn {
                 e.printStackTrace();
             }
             PersonalPage personalPage = loader.getController();
-            personalPage.hmm(usernameField.getText());
+            personalPage.setUser(usernameField.getText());
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -79,6 +78,15 @@ public class LogIn {
 
     @FXML
     protected void forgotPasswordClick(){
-
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("forgotPassword.fxml"));
+        try {
+            Scene scene = new Scene(fxmlLoader.load(), 400, 500);
+            Stage stage  = Main.mainStage;
+            stage.setTitle("forgot Password");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

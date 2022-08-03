@@ -23,7 +23,7 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 400, 500);
         stage.setScene(scene);
-        stage.setMinWidth(420.0);
+        stage.setMinWidth(450.0);
         stage.setMinHeight(550.0);
 
        // stage.setResizable(false);

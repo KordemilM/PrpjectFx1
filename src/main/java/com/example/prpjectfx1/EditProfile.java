@@ -1,7 +1,10 @@
 package com.example.prpjectfx1;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -13,6 +16,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.prefs.Preferences;
 
 public class EditProfile {
 
@@ -33,14 +37,29 @@ public class EditProfile {
 
     final FileChooser fileChooser = new FileChooser();
 
-    protected void hmm2(String username) throws SQLException {
+    protected void setProperty(String username) throws SQLException {
         User user = UserRepository.searchUser(username);
         usernameText.setText(user.getUserName());
         nameText.setText(user.getName());
         bioText.setText(user.getBio());
+        if(user.getPhoto() != null){
+            Image image = new Image(getClass().getResourceAsStream(user.getPhoto()));
+            imageView.setImage(image);
+        }else {
+            Image image = new Image(getClass().getResourceAsStream("/image/profile.png"));
+            imageView.setImage(image);
+        }
 //        /image/icon.png
-        Image image = new Image(getClass().getResourceAsStream("/" + user.getPhoto()));
-        imageView.setImage(image);
+    }
+
+    @FXML
+    protected void setMyPhoto(){
+        fileChooser.setTitle("My pictures");
+        File file = fileChooser.showOpenDialog(null);
+        String address = file.getAbsolutePath();
+        int i = address.lastIndexOf("\\");
+        oooo.setText("/image/" + address.substring(i+1));
+        // icon.png
     }
 
     @FXML
@@ -49,6 +68,7 @@ public class EditProfile {
         user.setUserName(usernameText.getText());
         user.setName(nameText.getText());
         user.setBio(bioText.getText());
+        user.setPhoto(oooo.getText());
         if(account.isSelected()){
             user.setAccount(0);
         }else
@@ -59,29 +79,24 @@ public class EditProfile {
     }
 
     @FXML
-    protected void backButtonClick() {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("personalPage.fxml"));
+    protected void back1ButtonClick(ActionEvent event) throws SQLException {
+        Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
+        String id = userPreferences.get("id", "");
+        System.out.println(id + "******");
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("personalPage.fxml"));
+        Parent root = null;
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 400, 500);
-            Stage stage = Main.mainStage;
-            stage.setTitle("");
-            stage.setScene(scene);
-            stage.show();
-        } catch (
-                IOException e) {
+            root = loader.load();
+        } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    protected void setMyPhoto(){
-        fileChooser.setTitle("My pictures");
-        File file = fileChooser.showOpenDialog(null);
-        if(file != null){
-            oooo.setText(file.getAbsolutePath());
-        }else {
-            oooo.setText("invalid");
-        }
+        PersonalPage personalPage = loader.getController();
+        personalPage.setUser(id);
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

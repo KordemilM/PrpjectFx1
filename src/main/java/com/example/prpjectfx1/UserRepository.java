@@ -106,11 +106,12 @@ public class UserRepository {
 
     protected static void updateProfile(User user) throws SQLException {
         PreparedStatement preparedStatement1 = connection.prepareStatement("update user set " +
-                "name=?,business_account=?,bio=? WHERE username=?");
+                "name=?,business_account=?,bio=?,photo=? WHERE username=?");
         preparedStatement1.setString(1, user.getName());
         preparedStatement1.setInt(2, user.getAccount());
         preparedStatement1.setString(3, user.getBio());
-        preparedStatement1.setString(4, user.getUserName());
+        preparedStatement1.setString(4, user.getPhoto());
+        preparedStatement1.setString(5, user.getUserName());
         preparedStatement1.executeUpdate();
     }
 

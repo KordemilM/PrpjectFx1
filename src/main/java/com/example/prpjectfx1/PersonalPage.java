@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -32,15 +33,23 @@ public class PersonalPage {
     @FXML
     private Label numFollowersLabel;
 
-    protected void hmm(String username) throws SQLException {
-        User user = new User();
-        user = UserRepository.searchUser(username);
+    protected void setUser(String username) throws SQLException {
+
+        User user = UserRepository.searchUser(username);
         usernameLabel.setText(user.getUserName());
         nameLabel.setText(user.getName());
         bioLabel.setText(user.getBio());
         numFollowersLabel.setText(UserRepository.numberOfFollowers(username));
         numFollowingLabel.setText(UserRepository.numberOfFollowing(username));
 //        numPostLabel.setText(UserRepository.);
+        if(user.getPhoto() != null){
+            Image image = new Image(getClass().getResourceAsStream(user.getPhoto()));
+            profileImage1.setImage(image);
+        }else {
+            Image image = new Image(getClass().getResourceAsStream("/image/profile.png"));
+            profileImage1.setImage(image);
+        }
+
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         userPreferences.put("id", usernameLabel.getText());
     }
@@ -69,11 +78,15 @@ public class PersonalPage {
             e.printStackTrace();
         }
         EditProfile editProfile = loader.getController();
-        editProfile.hmm2(usernameLabel.getText());
+        editProfile.setProperty(usernameLabel.getText());
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("");
         stage.setScene(scene);
         stage.show();
+    }
+
+    protected void settingButtonClick(){
+
     }
 }

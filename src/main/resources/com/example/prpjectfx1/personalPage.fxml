@@ -66,7 +66,7 @@
             <Image url="@../../../image/1659274976683-fococlipping-standard.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="60.0" fitWidth="63.0" layoutX="34.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="profileImage1" fitHeight="60.0" fitWidth="63.0" layoutX="34.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../image/B612_20180223_112824.jpg" />
          </image>

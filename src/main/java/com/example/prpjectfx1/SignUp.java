@@ -97,10 +97,9 @@ public class SignUp {
 
         if(i==6){
             //submitLabel.setText("sign up was successful:))");
-
+            //time
             UserRepository.addUser(user);
 
-            ////time
             FXMLLoader loader = new FXMLLoader(getClass().getResource("personalPage.fxml"));
             Parent root = null;
             try {
@@ -109,7 +108,7 @@ public class SignUp {
                 e.printStackTrace();
             }
             PersonalPage personalPage = loader.getController();
-            personalPage.hmm(usernameText.getText());
+            personalPage.setUser(usernameText.getText());
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
