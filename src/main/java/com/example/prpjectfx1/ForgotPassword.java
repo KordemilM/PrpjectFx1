@@ -8,6 +8,7 @@ public class ForgotPassword {
 
     @FXML
     Label lab;
+
     @FXML
     BorderPane parent;
 
