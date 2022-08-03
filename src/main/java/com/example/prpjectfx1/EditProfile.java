@@ -2,10 +2,8 @@ package com.example.prpjectfx1;
 
 import com.example.prpjectfx1.entity.User;
 import com.example.prpjectfx1.repository.UserRepository;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
@@ -81,7 +79,7 @@ public class EditProfile {
     }
 
     @FXML
-    protected void back1ButtonClick(ActionEvent event) throws SQLException {
+    protected void back1ButtonClick() throws SQLException {
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         String id = userPreferences.get("id", "");
         System.out.println(id + "******");
@@ -95,7 +93,7 @@ public class EditProfile {
         }
         PersonalPage personalPage = loader.getController();
         personalPage.setUser(id);
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Stage stage = Main.mainStage;
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

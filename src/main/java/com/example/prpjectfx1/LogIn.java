@@ -10,12 +10,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.prefs.Preferences;
 
 public class LogIn {
+
+    @FXML
+    private AnchorPane pane;
 
     @FXML
     private TextField usernameField;
@@ -25,6 +29,11 @@ public class LogIn {
     private Label usernameLabel;
     @FXML
     private Label passwordLabel;
+
+    protected void theme(){
+        pane.getStylesheets().add(getClass().getResource("/com/styles/" +
+                (HelloController.isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
+    }
 
     @FXML
     protected void SignUpClick(){
