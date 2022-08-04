@@ -117,8 +117,10 @@ public class SignUp {
         }else securityLabel.setText("!!!");
 
         if(i==6){
+
             //submitLabel.setText("sign up was successful:))");
             //time
+
             UserRepository.addUser(user);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("personalPage.fxml"));

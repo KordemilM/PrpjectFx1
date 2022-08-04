@@ -12,10 +12,11 @@ import java.io.IOException;
 
 public class HelloController {
 
+    public static boolean isLightMode = true;
+
     @FXML
     private AnchorPane pane;
 
-    public static boolean isLightMode = true;
 
     @FXML
     public void changeMode(){
