@@ -20,7 +20,6 @@ public class LogIn {
 
     @FXML
     private AnchorPane pane;
-
     @FXML
     private TextField usernameField;
     @FXML
