@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
@@ -20,6 +21,8 @@ import java.util.prefs.Preferences;
 
 public class EditProfile {
 
+    @FXML
+    private AnchorPane pane;
     @FXML
     private TextField usernameText;
     @FXML
@@ -37,6 +40,13 @@ public class EditProfile {
 
     final FileChooser fileChooser = new FileChooser();
 
+
+    protected void theme(){
+        pane.getStylesheets().add(getClass().getResource("/com/styles/" +
+                (HelloController.isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
+    }
+
+
     protected void setProperty(String username) throws SQLException {
         User user = UserRepository.searchUser(username);
         usernameText.setText(user.getUserName());
@@ -46,7 +56,7 @@ public class EditProfile {
             Image image = new Image(getClass().getResourceAsStream(user.getPhoto()));
             imageView.setImage(image);
         }else {
-            Image image = new Image(getClass().getResourceAsStream("/image/profile.png"));
+            Image image = new Image(getClass().getResourceAsStream("/image/user_icon.png"));
             imageView.setImage(image);
         }
 //        /image/icon.png
@@ -82,7 +92,6 @@ public class EditProfile {
     protected void back1ButtonClick() throws SQLException {
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         String id = userPreferences.get("id", "");
-        System.out.println(id + "******");
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("personalPage.fxml"));
         Parent root = null;
@@ -93,6 +102,7 @@ public class EditProfile {
         }
         PersonalPage personalPage = loader.getController();
         personalPage.setUser(id);
+        personalPage.theme();
         Stage stage = Main.mainStage;
         Scene scene = new Scene(root);
         stage.setScene(scene);

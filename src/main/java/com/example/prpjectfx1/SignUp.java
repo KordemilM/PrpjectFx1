@@ -132,6 +132,7 @@ public class SignUp {
             }
             PersonalPage personalPage = loader.getController();
             personalPage.setUser(usernameText.getText());
+            personalPage.theme();
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -141,15 +142,18 @@ public class SignUp {
 
     @FXML
     protected void backButtonClick(){
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("logIn.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("logIn.fxml"));
+        Parent root = null;
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 400, 500);
-            Stage stage  = Main.mainStage;
-            stage.setTitle("");
-            stage.setScene(scene);
-            stage.show();
+            root = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        LogIn logIn = loader.getController();
+        logIn.theme();
+        Stage stage = Main.mainStage;
+        Scene scene = new Scene(root);//Main.mainStage;
+        stage.setScene(scene);
+        stage.show();
     }
 }

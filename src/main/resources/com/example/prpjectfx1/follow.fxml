@@ -1,96 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
 
-<AnchorPane prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #c3edf2;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prpjectfx1.Follow">
-   <children>
-      <HBox layoutY="470.0" prefHeight="30.0" prefWidth="400.0" />
-      <HBox prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #f89dcb;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" styleClass="primary-color" stylesheets="@../../styles/lightMode.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prpjectfx1.Follow">
+    <bottom>
+        <AnchorPane prefHeight="37.0" prefWidth="400.0" styleClass="primary-color" BorderPane.alignment="CENTER">
+            <children>
+                <StackPane layoutX="7.0" layoutY="7.0" prefHeight="30.0" prefWidth="30.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="363.0">
+                    <children>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../image/1659250867121-fococlipping-standard.png" />
+                            </image>
+                            <StackPane.margin>
+                                <Insets top="1.0" />
+                            </StackPane.margin>
+                        </ImageView>
+                    </children>
+                </StackPane>
+                <StackPane layoutX="95.0" layoutY="9.0" prefHeight="30.0" prefWidth="30.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="9.0">
+                    <children>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#searchButtonClick" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../image/1659251490458-fococlipping-standard.png" />
+                            </image>
+                            <StackPane.margin>
+                                <Insets bottom="3.0" />
+                            </StackPane.margin>
+                        </ImageView>
+                    </children>
+                </StackPane>
+                <StackPane layoutX="185.0" layoutY="9.0" prefHeight="30.0" prefWidth="30.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="185.0" AnchorPane.topAnchor="9.0">
+                    <children>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../image/images-fococlipping-standard.png" />
+                            </image>
+                            <StackPane.margin>
+                                <Insets bottom="4.0" />
+                            </StackPane.margin>
+                        </ImageView>
+                    </children>
+                </StackPane>
+                <StackPane layoutX="356.0" layoutY="7.0" prefHeight="30.0" prefWidth="30.0" AnchorPane.leftAnchor="356.0" AnchorPane.rightAnchor="14.0">
+                    <children>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../image/user_icon.png" />
+                            </image>
+                            <StackPane.margin>
+                                <Insets bottom="2.0" />
+                            </StackPane.margin>
+                        </ImageView>
+                    </children>
+                </StackPane>
+                <StackPane layoutX="276.0" layoutY="7.0" prefHeight="30.0" prefWidth="30.0" AnchorPane.leftAnchor="276.0" AnchorPane.rightAnchor="94.0">
+                    <children>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../image/chat_icon.png" />
+                            </image>
+                            <StackPane.margin>
+                                <Insets bottom="2.0" />
+                            </StackPane.margin>
+                        </ImageView>
+                    </children>
+                </StackPane>
+            </children>
+        </AnchorPane>
+    </bottom>
+    <center>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="secondary-color" BorderPane.alignment="CENTER" />
+    </center>
+   <top>
+      <AnchorPane prefHeight="66.0" prefWidth="400.0" styleClass="primary-color" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#searchFollower" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../image/1659251490458-fococlipping-standard.png" />
-               </image>
-               <HBox.margin>
-                  <Insets left="20.0" top="10.0" />
-               </HBox.margin>
-            </ImageView>
-            <TextField fx:id="searchText" prefHeight="25.0" prefWidth="335.0" promptText="Search" style="-fx-background-radius: 50; -fx-background-color: #ffbdde; -fx-border-color: #ffbdde; -fx-border-radius: 50;">
-               <HBox.margin>
-                  <Insets top="10.0" />
-               </HBox.margin>
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </TextField>
-         </children>
-      </HBox>
-      <Pane layoutX="50.0" layoutY="120.0" prefHeight="250.0" prefWidth="300.0">
-         <children>
-            <AnchorPane prefHeight="250.0" prefWidth="300.0">
+            <StackPane layoutX="29.0" layoutY="18.0" prefHeight="30.0" prefWidth="30.0">
                <children>
-                  <Label fx:id="usernameLabel" layoutX="16.0" layoutY="14.0" textFill="#b90352">
-                     <font>
-                        <Font name="Century Schoolbook Bold Italic" size="20.0" />
-                     </font></Label>
-                  <Label fx:id="nameLabel" layoutX="16.0" layoutY="108.0" textFill="#b90352">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="bioLabel" layoutX="15.0" layoutY="132.0" textFill="#b90352" />
-                  <Label fx:id="followingLabel" layoutX="240.0" layoutY="81.0" textFill="#b90352">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="followerLabel" layoutX="176.0" layoutY="81.0" textFill="#b90352">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="postLabel" layoutX="110.0" layoutY="81.0" textFill="#b90352">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="numFollowingLabel" layoutX="240.0" layoutY="53.0" textFill="#b90352">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="numFollowerLabel" layoutX="176.0" layoutY="53.0" textFill="#b90352">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="numPostLabel" layoutX="110.0" layoutY="53.0" textFill="#b90352">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="followButton" layoutX="62.0" layoutY="192.0" mnemonicParsing="false" onAction="#followButtonClick" prefHeight="25.0" prefWidth="177.0" style="-fx-background-color: #ffbdde; -fx-background-radius: 30; -fx-border-radius: 30;" text="Follow" textFill="#b20059" visible="false">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Label fx:id="hmmm" layoutX="112.0" layoutY="228.0" textFill="#2706a8">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                </children>
-            </AnchorPane>
+            </StackPane>
+            <TextField layoutX="68.0" layoutY="21.0" prefHeight="26.0" prefWidth="310.0" />
          </children>
-      </Pane>
-      <Label fx:id="noUserLabel" layoutX="186.0" layoutY="66.0" textFill="#2706a8">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-   </children>
-</AnchorPane>
+      </AnchorPane>
+   </top>
+</BorderPane>

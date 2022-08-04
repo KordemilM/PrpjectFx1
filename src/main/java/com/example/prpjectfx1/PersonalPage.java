@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -20,9 +22,11 @@ import java.util.prefs.Preferences;
 public class PersonalPage {
 
     @FXML
-    private ImageView profileImage1;
+    BorderPane borderPane;
     @FXML
-    private ImageView profileImage2;
+    private ImageView profileImage;
+    @FXML
+    private ImageView settingImage;
     @FXML
     private Label usernameLabel;
     @FXML
@@ -36,6 +40,13 @@ public class PersonalPage {
     @FXML
     private Label numFollowersLabel;
 
+
+    protected void theme(){
+        borderPane.getStylesheets().add(getClass().getResource("/com/styles/" +
+                (HelloController.isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
+    }
+
+
     protected void setUser(String username) throws SQLException {
 
         User user = UserRepository.searchUser(username);
@@ -47,10 +58,10 @@ public class PersonalPage {
 //        numPostLabel.setText(UserRepository.);
         try{
             Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(user.getPhoto())));
-            profileImage1.setImage(image);
+            profileImage.setImage(image);
         }catch (NullPointerException e){
-            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/image/profile.png")));
-            profileImage1.setImage(image);
+            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/image/user_icon.png")));
+            profileImage.setImage(image);
         }
 
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
@@ -60,7 +71,7 @@ public class PersonalPage {
     }
 
     @FXML
-    private void followButtonClick(){
+    private void searchButtonClick(){
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("follow.fxml"));
         try {
             Scene scene = new Scene(fxmlLoader.load(), 400, 500);
@@ -84,6 +95,7 @@ public class PersonalPage {
         }
         EditProfile editProfile = loader.getController();
         editProfile.setProperty(usernameLabel.getText());
+        editProfile.theme();
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("");

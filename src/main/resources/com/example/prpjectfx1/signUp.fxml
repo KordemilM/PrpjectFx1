@@ -12,16 +12,19 @@
       <PasswordField fx:id="repeatPasswordText" layoutX="126.0" layoutY="215.0" promptText="repeat password" styleClass="round-border" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="215.0" />
       <TextField fx:id="accountText" layoutX="126.0" layoutY="271.0" styleClass="round-border" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="271.0" />
       <TextField fx:id="securityText" layoutX="126.0" layoutY="343.0" styleClass="round-border" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="343.0" />
-      <Label fx:id="emailLabel" layoutX="126.0" layoutY="30.0" textFill="#c90266" AnchorPane.leftAnchor="126.0" AnchorPane.topAnchor="30.0">
+      <Label fx:id="emailLabel" layoutX="126.0" layoutY="30.0" prefHeight="17.0" prefWidth="133.0" textFill="#c90266" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="141.0" AnchorPane.topAnchor="30.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <Label fx:id="usernameLabel" layoutX="126.0" layoutY="86.0" textFill="#c90266" AnchorPane.leftAnchor="126.0" AnchorPane.topAnchor="86.0" />
-      <Label fx:id="passwordLabel" layoutX="126.0" layoutY="142.0" textFill="#c90266" AnchorPane.leftAnchor="126.0" AnchorPane.topAnchor="142.0">
+      <Label fx:id="usernameLabel" layoutX="126.0" layoutY="86.0" prefHeight="17.0" prefWidth="175.0" textFill="#c90266" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="99.0" AnchorPane.topAnchor="86.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="passwordLabel" layoutX="126.0" layoutY="142.0" prefHeight="17.0" prefWidth="261.0" textFill="#c90266" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="142.0">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font></Label>
-      <Label fx:id="repeatPasswordLabel" layoutX="126.0" layoutY="198.0" textFill="#c90266" AnchorPane.leftAnchor="126.0" AnchorPane.topAnchor="198.0">
+      <Label fx:id="repeatPasswordLabel" layoutX="126.0" layoutY="198.0" textFill="#c90266" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="141.0" AnchorPane.topAnchor="198.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
@@ -45,18 +48,19 @@
             <Font name="System Bold Italic" size="12.0" />
          </font>
       </Button>
-      <Label fx:id="accountLabel" layoutX="230.0" layoutY="255.0" textFill="#c90266" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="255.0">
+      <Label fx:id="accountLabel" layoutX="230.0" layoutY="255.0" prefHeight="17.0" prefWidth="149.0" textFill="#c90266" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="255.0">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font></Label>
-      <Label fx:id="securityLabel" layoutX="287.0" layoutY="328.0" textFill="#c90266" AnchorPane.leftAnchor="287.0" AnchorPane.topAnchor="328.0">
+      <Label fx:id="securityLabel" layoutX="289.0" layoutY="328.0" prefHeight="17.0" prefWidth="36.0" textFill="#c90266" AnchorPane.leftAnchor="289.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="328.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <Button layoutX="14.0" layoutY="461.0" mnemonicParsing="false" onAction="#backButtonClick" style="-fx-background-radius: 10;" styleClass="primary-color" text="Back" textFill="#c90266" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="461.0">
+      <Button layoutX="14.0" layoutY="461.0" mnemonicParsing="false" onAction="#backButtonClick" style="-fx-background-radius: 10;" styleClass="primary-color" text="Back" textFill="#d3065f" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="461.0">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
       </Button>
+      <StackPane layoutX="-38.0" layoutY="67.0" prefHeight="52.0" prefWidth="155.0" />
    </children>
 </AnchorPane>

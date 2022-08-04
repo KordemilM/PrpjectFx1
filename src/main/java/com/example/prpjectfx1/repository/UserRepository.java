@@ -21,12 +21,12 @@ public class UserRepository {
     public static boolean searchUserByUsername(String username) throws SQLException{
 
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM user WHERE username='" + username + "'");
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM my_user WHERE username='" + username + "'");
         return !resultSet.next();
     }
 
     public static boolean searchPassword(String username, String password) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM user WHERE username=?");
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM my_user WHERE username=?");
         preparedStatement.setString(1, username);
         ResultSet resultSet = preparedStatement.executeQuery();
         if(resultSet.next()){
@@ -39,7 +39,7 @@ public class UserRepository {
 
     public static void addUser(User user) throws SQLException {
 
-        PreparedStatement preparedStatement = connection.prepareStatement("insert into user " +
+        PreparedStatement preparedStatement = connection.prepareStatement("insert into my_user " +
                 "(username,password,security_response,email,business_account) VALUES (?,?,?,?,?)");
         preparedStatement.setString(1,user.getUserName());
         preparedStatement.setString(2,user.getPassword());
@@ -85,7 +85,7 @@ public class UserRepository {
 
     public static User searchUser(String username) throws SQLException {
         User user = new User();
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM user WHERE username=?");
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM my_user WHERE username=?");
         preparedStatement.setString(1, username);
         ResultSet resultSet = preparedStatement.executeQuery();
         if(resultSet.next()){
@@ -106,7 +106,7 @@ public class UserRepository {
     }
 
     public static void updateProfile(User user) throws SQLException {
-        PreparedStatement preparedStatement1 = connection.prepareStatement("update user set " +
+        PreparedStatement preparedStatement1 = connection.prepareStatement("update my_user set " +
                 "name=?,business_account=?,bio=?,photo=? WHERE username=?");
         preparedStatement1.setString(1, user.getName());
         preparedStatement1.setInt(2, user.getAccount());
@@ -117,7 +117,7 @@ public class UserRepository {
     }
 
     protected static void addPhoto() throws SQLException, FileNotFoundException {
-        PreparedStatement preparedStatement = connection.prepareStatement("update user set " +
+        PreparedStatement preparedStatement = connection.prepareStatement("update my_user set " +
                 "photo=? WHERE username=?");
         //InputStream in = new FileInputStream("H:\\B612.jpg");
        // preparedStatement.setBlob(1,in);

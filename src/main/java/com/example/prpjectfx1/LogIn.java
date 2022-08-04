@@ -91,6 +91,7 @@ public class LogIn {
             }
             PersonalPage personalPage = loader.getController();
             personalPage.setUser(usernameField.getText());
+            personalPage.theme();
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
