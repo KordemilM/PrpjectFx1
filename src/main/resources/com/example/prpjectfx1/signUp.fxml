@@ -12,16 +12,16 @@
       <PasswordField fx:id="repeatPasswordText" layoutX="126.0" layoutY="215.0" promptText="repeat password" styleClass="round-border" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="215.0" />
       <TextField fx:id="accountText" layoutX="126.0" layoutY="271.0" styleClass="round-border" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="271.0" />
       <TextField fx:id="securityText" layoutX="126.0" layoutY="343.0" styleClass="round-border" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="343.0" />
-      <Label fx:id="emailLabel" layoutX="126.0" layoutY="30.0" textFill="#b20505" AnchorPane.leftAnchor="126.0" AnchorPane.topAnchor="30.0">
+      <Label fx:id="emailLabel" layoutX="126.0" layoutY="30.0" textFill="#c90266" AnchorPane.leftAnchor="126.0" AnchorPane.topAnchor="30.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <Label fx:id="usernameLabel" layoutX="126.0" layoutY="86.0" textFill="#b20505" AnchorPane.leftAnchor="126.0" AnchorPane.topAnchor="86.0" />
-      <Label fx:id="passwordLabel" layoutX="126.0" layoutY="142.0" textFill="#b20505" AnchorPane.leftAnchor="126.0" AnchorPane.topAnchor="142.0">
+      <Label fx:id="usernameLabel" layoutX="126.0" layoutY="86.0" textFill="#c90266" AnchorPane.leftAnchor="126.0" AnchorPane.topAnchor="86.0" />
+      <Label fx:id="passwordLabel" layoutX="126.0" layoutY="142.0" textFill="#c90266" AnchorPane.leftAnchor="126.0" AnchorPane.topAnchor="142.0">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font></Label>
-      <Label fx:id="repeatPasswordLabel" layoutX="126.0" layoutY="198.0" textFill="#b20505" AnchorPane.leftAnchor="126.0" AnchorPane.topAnchor="198.0">
+      <Label fx:id="repeatPasswordLabel" layoutX="126.0" layoutY="198.0" textFill="#c90266" AnchorPane.leftAnchor="126.0" AnchorPane.topAnchor="198.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
@@ -45,11 +45,11 @@
             <Font name="System Bold Italic" size="12.0" />
          </font>
       </Button>
-      <Label fx:id="accountLabel" layoutX="230.0" layoutY="255.0" textFill="#b20505" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="255.0">
+      <Label fx:id="accountLabel" layoutX="230.0" layoutY="255.0" textFill="#c90266" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="255.0">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font></Label>
-      <Label fx:id="securityLabel" layoutX="287.0" layoutY="328.0" textFill="#b20505" AnchorPane.leftAnchor="287.0" AnchorPane.topAnchor="328.0">
+      <Label fx:id="securityLabel" layoutX="287.0" layoutY="328.0" textFill="#c90266" AnchorPane.leftAnchor="287.0" AnchorPane.topAnchor="328.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
