@@ -11,12 +11,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 
 public class SignUp {
 
+    @FXML
+    private AnchorPane pane;
     @FXML
     private PasswordField passwordText;
     @FXML
@@ -43,7 +47,22 @@ public class SignUp {
     private Label securityLabel;
     @FXML
     private Label submitLabel;
+    @FXML
+    private Label businessLabel;
+    @FXML
+    private Label questionLabel1;
+    @FXML
+    private Label questionLabel2;
 
+    protected void theme(){
+        pane.getStylesheets().add(getClass().getResource("/com/styles/" +
+                (HelloController.isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
+        if(!HelloController.isLightMode){
+            businessLabel.setTextFill(Paint.valueOf("#ffd9ec"));
+            questionLabel1.setTextFill(Paint.valueOf("#ffd9ec"));
+            questionLabel2.setTextFill(Paint.valueOf("#ffd9ec"));
+        }
+    }
 
     @FXML
     protected void submitButtonClick(ActionEvent event) throws SQLException {

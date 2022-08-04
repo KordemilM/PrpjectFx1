@@ -4,14 +4,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #c3edf2;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prpjectfx1.SignUp">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" styleClass="secondary-color" stylesheets="@../../styles/lightMode.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prpjectfx1.SignUp">
    <children>
-      <TextField fx:id="emailText" layoutX="126.0" layoutY="47.0" promptText="email" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="47.0" />
-      <TextField fx:id="usernameText" layoutX="126.0" layoutY="103.0" promptText="username" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="103.0" />
-      <PasswordField fx:id="passwordText" layoutX="126.0" layoutY="159.0" promptText="password" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="159.0" />
-      <PasswordField fx:id="repeatPasswordText" layoutX="126.0" layoutY="215.0" promptText="repeat password" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="215.0" />
-      <TextField fx:id="accountText" layoutX="126.0" layoutY="271.0" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="271.0" />
-      <TextField fx:id="securityText" layoutX="126.0" layoutY="343.0" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="343.0" />
+      <TextField fx:id="emailText" layoutX="126.0" layoutY="47.0" promptText="email" styleClass="round-border" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="47.0" />
+      <TextField fx:id="usernameText" layoutX="126.0" layoutY="103.0" promptText="username" styleClass="round-border" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="103.0" />
+      <PasswordField fx:id="passwordText" layoutX="126.0" layoutY="159.0" promptText="password" styleClass="round-border" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="159.0" />
+      <PasswordField fx:id="repeatPasswordText" layoutX="126.0" layoutY="215.0" promptText="repeat password" styleClass="round-border" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="215.0" />
+      <TextField fx:id="accountText" layoutX="126.0" layoutY="271.0" styleClass="round-border" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="271.0" />
+      <TextField fx:id="securityText" layoutX="126.0" layoutY="343.0" styleClass="round-border" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="343.0" />
       <Label fx:id="emailLabel" layoutX="126.0" layoutY="30.0" textFill="#b20505" AnchorPane.leftAnchor="126.0" AnchorPane.topAnchor="30.0">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -25,22 +25,22 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <Label layoutX="126.0" layoutY="255.0" text="business account?" textFill="#2706a8" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="181.0" AnchorPane.topAnchor="255.0">
+      <Label fx:id="businessLabel" layoutX="126.0" layoutY="255.0" text="business account?" textFill="#2503ab" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="181.0" AnchorPane.topAnchor="255.0">
          <font>
             <Font name="System Bold" size="11.0" />
          </font>
       </Label>
-      <Label layoutX="94.0" layoutY="311.0" text="sequrity question: in which primary school" textFill="#2706a8" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="54.0" AnchorPane.topAnchor="311.0">
+      <Label fx:id="questionLabel1" layoutX="94.0" layoutY="311.0" text="sequrity question: in which primary school" textFill="#2503ab" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="54.0" AnchorPane.topAnchor="311.0">
          <font>
             <Font name="System Bold" size="11.0" />
          </font>
       </Label>
-      <Label layoutX="123.0" layoutY="327.0" text="did you start your first grade?" textFill="#2706a8" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="119.0" AnchorPane.topAnchor="327.0">
+      <Label fx:id="questionLabel2" layoutX="126.0" layoutY="328.0" text="did you start your first grade?" textFill="#2503ab" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="119.0" AnchorPane.topAnchor="328.0">
          <font>
             <Font name="System Bold" size="11.0" />
          </font>
       </Label>
-      <Button layoutX="174.0" layoutY="401.0" mnemonicParsing="false" onAction="#submitButtonClick" prefHeight="27.0" prefWidth="59.0" style="-fx-border-color: #f882bd; -fx-border-radius: 20; -fx-background-radius: 20; -fx-background-color: #f882bd;" text="Signup" textFill="#2706a8" AnchorPane.leftAnchor="174.0" AnchorPane.rightAnchor="167.0" AnchorPane.topAnchor="401.0">
+      <Button layoutX="174.0" layoutY="401.0" mnemonicParsing="false" onAction="#submitButtonClick" prefHeight="27.0" prefWidth="59.0" style="-fx-background-color: #dd439d;" styleClass="round-border" text="Signup" textFill="#ffd9ec" AnchorPane.leftAnchor="174.0" AnchorPane.rightAnchor="167.0" AnchorPane.topAnchor="401.0">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font>
@@ -49,11 +49,11 @@
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font></Label>
-      <Label fx:id="securityLabel" layoutX="290.0" layoutY="327.0" textFill="#b20505" AnchorPane.leftAnchor="278.0" AnchorPane.topAnchor="327.0">
+      <Label fx:id="securityLabel" layoutX="287.0" layoutY="328.0" textFill="#b20505" AnchorPane.leftAnchor="287.0" AnchorPane.topAnchor="328.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <Button layoutX="14.0" layoutY="461.0" mnemonicParsing="false" onAction="#backButtonClick" style="-fx-background-color: #f882bd; -fx-background-radius: 10;" text="Back" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="461.0">
+      <Button layoutX="14.0" layoutY="461.0" mnemonicParsing="false" onAction="#backButtonClick" style="-fx-background-radius: 10;" styleClass="primary-color" text="Back" textFill="#c90266" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="461.0">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>

@@ -6,19 +6,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class HelloController {
-    @FXML
-    private Label welcomeText;
+
     @FXML
     private AnchorPane pane;
 
     public static boolean isLightMode = true;
+
     @FXML
     public void changeMode(){
         isLightMode = !isLightMode;
@@ -41,8 +39,6 @@ public class HelloController {
 
     @FXML
     protected void onStartButtonClick(ActionEvent event) {
-        //welcomeText.setText("Welcome to Twitter!");
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("logIn.fxml"));
         Parent root = null;
         try {
@@ -57,4 +53,5 @@ public class HelloController {
         stage.setScene(scene);
         stage.show();
     }
+
 }

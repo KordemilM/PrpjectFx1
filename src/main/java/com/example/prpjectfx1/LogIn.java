@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -28,25 +29,35 @@ public class LogIn {
     private Label usernameLabel;
     @FXML
     private Label passwordLabel;
-
+    @FXML
+    private Label forgotLabel;
+    @FXML
+    private Label signupLabel;
 
     protected void theme(){
         pane.getStylesheets().add(getClass().getResource("/com/styles/" +
                 (HelloController.isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
+        if(!HelloController.isLightMode){
+            forgotLabel.setTextFill(Paint.valueOf("#ffd9ec"));
+            signupLabel.setTextFill(Paint.valueOf("#ffd9ec"));
+        }
     }
 
     @FXML
     protected void SignUpClick(){
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("signUp.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("signUp.fxml"));
+        Parent root = null;
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 400, 500);
-            Stage stage  = Main.mainStage;
-            stage.setTitle("Sign up");
-            stage.setScene(scene);
-            stage.show();
+            root = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        SignUp signUp = loader.getController();
+        signUp.theme();
+        Stage stage = Main.mainStage;
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML

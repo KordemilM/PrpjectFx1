@@ -1,10 +1,10 @@
 .primary-color{
-    -fx-background-color: #FFFFFF;
+    -fx-background-color:  #fce7f0;
 }
 
 .secondary-color{
-    -fx-background-color: #E7E7E7;
+    -fx-background-color:  #ffd9ec;
 }
 .round-border{
-    -fx-background-radius: 100;
+    -fx-background-radius: 50;
 }
