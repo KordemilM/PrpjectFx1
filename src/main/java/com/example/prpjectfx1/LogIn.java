@@ -29,6 +29,7 @@ public class LogIn {
     @FXML
     private Label passwordLabel;
 
+
     protected void theme(){
         pane.getStylesheets().add(getClass().getResource("/com/styles/" +
                 (HelloController.isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
