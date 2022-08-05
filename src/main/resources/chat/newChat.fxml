@@ -18,7 +18,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="400.0" onDragDetected="#backToChatList" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.phase2.chat.newChat_Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="400.0" onDragDetected="#backToChatList" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prpjectfx1.Messanger.newChat_Controller">
    <top>
       <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER_LEFT">
          <BorderPane.margin>
@@ -149,7 +149,7 @@
                      </font>
                   </Label>
                   <TextField fx:id="addContact" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" promptText="usrname" />
-                  <Button mnemonicParsing="false" text="add" />
+                  <Button mnemonicParsing="false" onAction="#Add_new_Contact" text="add" />
                </children>
                <padding>
                   <Insets bottom="10.0" />
