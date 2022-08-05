@@ -74,7 +74,7 @@ public class LogIn {
             usernameLabel.setText("no user exists with this username");
             usernameField.setText("");
         }
-        if(UserRepository.searchPassword(usernameField.getText(),passwordField.getText())){
+        if(UserRepository.searchUserByUsernameAndPassword(usernameField.getText(),passwordField.getText())){
             i++;
         }else {
             passwordLabel.setText("Your password is not correct");
