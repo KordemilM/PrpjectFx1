@@ -122,5 +122,4 @@ public class PersonalPage {
         stage.setScene(scene);
         stage.show();
     }
-
 }

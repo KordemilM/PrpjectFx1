@@ -143,4 +143,5 @@ public class Setting {
         borderPane.getStylesheets().add(getClass().getResource("/com/styles/" +
                 (isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
     }
+
 }

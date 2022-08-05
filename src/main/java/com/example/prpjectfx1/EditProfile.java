@@ -106,5 +106,4 @@ public class EditProfile {
         stage.setScene(scene);
         stage.show();
     }
-
 }
