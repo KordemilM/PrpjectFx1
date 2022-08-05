@@ -95,9 +95,9 @@
         </VBox>
     </top>
    <bottom>
-      <Accordion fx:id="accordion" onMouseDragOver="#accordionClick" BorderPane.alignment="CENTER">
+      <Accordion fx:id="accordion" BorderPane.alignment="CENTER">
         <panes>
-          <TitledPane animated="false" onMouseClicked="#accordionClick" prefHeight="314.0" prefWidth="400.0">
+          <TitledPane animated="false" prefHeight="314.0" prefWidth="400.0">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="secondary-color">
                      <children>
@@ -110,7 +110,7 @@
                               </ImageView>
                            </children>
                         </StackPane>
-                        <Button layoutX="43.6" layoutY="93.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #dd439d;" text="Log out" textFill="#fcddec" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="284.0">
+                        <Button layoutX="43.6" layoutY="93.0" mnemonicParsing="false" onAction="#logOutClick" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #dd439d;" text="Log out" textFill="#fcddec" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="284.0">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
