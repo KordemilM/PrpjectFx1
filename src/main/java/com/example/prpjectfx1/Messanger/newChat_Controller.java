@@ -152,6 +152,7 @@ public class newChat_Controller implements Initializable {
                                           `id` int NOT NULL AUTO_INCREMENT,
                                           `chat_id` int NOT NULL,
                                           `Type` enum('Group','private') NOT NULL DEFAULT 'Group',
+                                          `last_Update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                                           PRIMARY KEY (`id`),
                                           UNIQUE KEY `chat_id_UNIQUE` (`chat_id`)
                                         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;""");
@@ -215,6 +216,7 @@ public class newChat_Controller implements Initializable {
                     "  `id` int NOT NULL AUTO_INCREMENT,\n" +
                     "  `chat_id` int NOT NULL,\n" +
                     "  `Type` enum('Group','private') NOT NULL DEFAULT 'private',\n" +
+                    "  `last_Update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n" +//last update
                     "  PRIMARY KEY (`id`),\n" +
                     "  UNIQUE KEY `chat_id_UNIQUE` (`chat_id`)\n" +
                     ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;\n");
@@ -269,6 +271,7 @@ public class newChat_Controller implements Initializable {
                       `description` varchar(200) DEFAULT NULL,
                       `profile` varchar(200) NOT NULL DEFAULT 'file: /Profile_pic/default.png',
                       `Type` enum('Group','private') NOT NULL DEFAULT 'Group',
+                        `last_Update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                       PRIMARY KEY (`chat_id`),
                       UNIQUE KEY `chat_id_UNIQUE` (`chat_id`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -278,6 +281,7 @@ public class newChat_Controller implements Initializable {
                     "  `id` int NOT NULL AUTO_INCREMENT,\n" +
                     "  `chat_id` int NOT NULL,\n" +
                     "  `Type` enum('Group','private') NOT NULL DEFAULT 'Group',\n" +
+                    "  `last_Update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n" +//last update
                     "  PRIMARY KEY (`id`),\n" +
                     "  UNIQUE KEY `chat_id_UNIQUE` (`chat_id`)\n" +
                     ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;\n");
