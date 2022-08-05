@@ -43,7 +43,7 @@ public class EditProfile {
 
     protected void theme(){
         pane.getStylesheets().add(getClass().getResource("/com/styles/" +
-                (HelloController.isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
+                (Setting.isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
     }
 
 

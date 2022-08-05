@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" styleClass="primary-color" stylesheets="@../../styles/lightMode.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prpjectfx1.Follow">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" styleClass="primary-color" stylesheets="@../../styles/lightMode.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prpjectfx1.Follow">
     <bottom>
         <AnchorPane prefHeight="37.0" prefWidth="400.0" styleClass="primary-color" BorderPane.alignment="CENTER">
             <children>
@@ -72,19 +78,40 @@
             </children>
         </AnchorPane>
     </bottom>
-    <center>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="secondary-color" BorderPane.alignment="CENTER" />
-    </center>
    <top>
       <AnchorPane prefHeight="66.0" prefWidth="400.0" styleClass="primary-color" BorderPane.alignment="CENTER">
          <children>
-            <StackPane layoutX="29.0" layoutY="18.0" prefHeight="30.0" prefWidth="30.0">
+            <StackPane layoutX="38.0" layoutY="20.0" prefHeight="27.0" prefWidth="30.0" style="-fx-background-color: #fffefe;" AnchorPane.leftAnchor="38.0">
                <children>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="26.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../image/search_icon.png" />
+                     </image>
+                  </ImageView>
                </children>
             </StackPane>
-            <TextField layoutX="68.0" layoutY="21.0" prefHeight="26.0" prefWidth="310.0" />
+            <TextField fx:id="searchText" layoutX="68.0" layoutY="20.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: #fffefe;" AnchorPane.leftAnchor="68.0" AnchorPane.rightAnchor="49.0" />
          </children>
       </AnchorPane>
    </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="secondary-color" BorderPane.alignment="CENTER">
+         <children>
+            <ScrollPane layoutY="144.0" prefHeight="251.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="144.0">
+              <content>
+                <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="395.0" prefWidth="400.0">
+                     <children>
+                        <StackPane layoutX="173.0" layoutY="103.0" prefHeight="30.0" prefWidth="54.0" AnchorPane.leftAnchor="173.0" AnchorPane.rightAnchor="173.0" />
+                        <VBox layoutX="62.0" layoutY="18.0" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" styleClass="secondary-color" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="238.0">
+                           <children>
+                              <Button mnemonicParsing="false" text="Button" />
+                           </children>
+                        </VBox>
+                        <Button layoutX="287.0" layoutY="80.0" mnemonicParsing="false" styleClass="secondary-color" text="Button" />
+                     </children></AnchorPane>
+              </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+   </center>
 </BorderPane>

@@ -56,8 +56,8 @@ public class SignUp {
 
     protected void theme(){
         pane.getStylesheets().add(getClass().getResource("/com/styles/" +
-                (HelloController.isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
-        if(!HelloController.isLightMode){
+                (Setting.isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
+        if(!Setting.isLightMode){
             businessLabel.setTextFill(Paint.valueOf("#ffd9ec"));
             questionLabel1.setTextFill(Paint.valueOf("#ffd9ec"));
             questionLabel2.setTextFill(Paint.valueOf("#ffd9ec"));

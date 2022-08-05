@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" styleClass="primary-color" stylesheets="@../../styles/lightMode.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prpjectfx1.Setting">
+
+    <top>
+        <VBox prefHeight="163.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+            <children>
+                <AnchorPane prefHeight="166.0" prefWidth="400.0" styleClass="primary-color">
+                    <children>
+                        <Label fx:id="usernameLabel" disable="true" layoutX="14.0" layoutY="14.0" textFill="#cd055f">
+                            <font>
+                                <Font name="System Bold Italic" size="25.0" />
+                            </font>
+                        </Label>
+                        <StackPane layoutX="363.0" layoutY="9.0" prefHeight="30.0" prefWidth="30.0" AnchorPane.rightAnchor="7.0">
+                            <children>
+                                <ImageView fx:id="settingImage" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#backClick" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../image/1659274976683-fococlipping-standard.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </StackPane>
+                        <StackPane disable="true" layoutX="14.0" layoutY="48.0" prefHeight="50.0" prefWidth="50.0">
+                            <children>
+                                <ImageView fx:id="profileImage" disable="true" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                            </children>
+                        </StackPane>
+                        <Label fx:id="nameLabel" disable="true" layoutX="14.0" layoutY="106.0" prefHeight="17.0" prefWidth="64.0" textFill="#cd055f">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font></Label>
+                        <Button disable="true" layoutX="92.0" layoutY="137.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="216.0" style="-fx-background-color: #dd439d;" styleClass="round-border" text="Edit profile" textFill="#ffd9ec" AnchorPane.leftAnchor="92.0" AnchorPane.rightAnchor="92.0">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+                        <StackPane disable="true" layoutX="180.0" layoutY="51.0" prefHeight="28.0" prefWidth="43.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="177.0">
+                            <children>
+                                <Label fx:id="numPostLabel" textFill="#cd055f">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font></Label>
+                            </children>
+                        </StackPane>
+                        <StackPane layoutX="180.0" layoutY="69.0" prefHeight="28.0" prefWidth="43.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="177.0">
+                            <children>
+                                <Label disable="true" prefHeight="17.0" prefWidth="35.0" text="Posts" textFill="#cd055f">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font></Label>
+                            </children>
+                        </StackPane>
+                        <StackPane layoutX="247.0" layoutY="69.0" prefHeight="28.0" prefWidth="56.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="97.0">
+                            <children>
+                                <Label disable="true" prefHeight="17.0" prefWidth="56.0" text="Followers" textFill="#cd055f">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font></Label>
+                            </children>
+                        </StackPane>
+                        <StackPane layoutX="247.0" layoutY="51.0" prefHeight="28.0" prefWidth="43.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="110.0">
+                            <children>
+                                <Label fx:id="numFollowersLabel" disable="true" prefHeight="10.0" prefWidth="28.0" textFill="#cd055f">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font></Label>
+                            </children>
+                        </StackPane>
+                        <StackPane disable="true" layoutX="320.0" layoutY="51.0" prefHeight="28.0" prefWidth="43.0" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="37.0">
+                            <children>
+                                <Label fx:id="numFollowingLabel" textFill="#cd055f">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font></Label>
+                            </children>
+                        </StackPane>
+                        <StackPane layoutX="320.0" layoutY="68.0" prefHeight="28.0" prefWidth="56.0" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="24.0">
+                            <children>
+                                <Label disable="true" prefHeight="17.0" prefWidth="57.0" text="Following" textFill="#cd055f">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font></Label>
+                            </children>
+                        </StackPane>
+                        <Label fx:id="bioLabel" disable="true" layoutX="14.0" layoutY="123.0" prefHeight="17.0" prefWidth="57.0" textFill="#cd055f" />
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
+    </top>
+   <bottom>
+      <Accordion fx:id="accordion" onMouseDragOver="#accordionClick" BorderPane.alignment="CENTER">
+        <panes>
+          <TitledPane animated="false" onMouseClicked="#accordionClick" prefHeight="314.0" prefWidth="400.0">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="secondary-color">
+                     <children>
+                        <StackPane layoutX="33.0" layoutY="14.0" prefHeight="50.0" prefWidth="50.0" AnchorPane.bottomAnchor="233.60000000000002" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="324.6" AnchorPane.topAnchor="14.0">
+                           <children>
+                              <ImageView cache="true" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#changeThemeClick" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../image/dark.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </StackPane>
+                        <Button layoutX="43.6" layoutY="93.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #dd439d;" text="Log out" textFill="#fcddec" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="284.0">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="52.6" layoutY="161.0" mnemonicParsing="false" onAction="#logInClick" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #dd439d;" text="Go to login" textFill="#fcddec" AnchorPane.leftAnchor="43.0" AnchorPane.rightAnchor="255.0">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+            </content>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+          </TitledPane>
+        </panes>
+      </Accordion>
+   </bottom>
+</BorderPane>

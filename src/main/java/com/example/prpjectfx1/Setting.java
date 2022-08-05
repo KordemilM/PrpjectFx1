@@ -2,24 +2,32 @@ package com.example.prpjectfx1;
 
 import com.example.prpjectfx1.entity.User;
 import com.example.prpjectfx1.repository.UserRepository;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.Label;
+import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.prefs.Preferences;
 
-public class PersonalPage {
+public class Setting {
 
+    public static boolean isLightMode = true;
+
+    @FXML
+    private Accordion accordion;
+    @FXML
+    private TitledPane titledPane;
     @FXML
     private BorderPane borderPane;
     @FXML
@@ -39,14 +47,7 @@ public class PersonalPage {
     @FXML
     private Label numFollowersLabel;
 
-
-    protected void theme(){
-        borderPane.getStylesheets().add(getClass().getResource("/com/styles/" +
-                (Setting.isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
-    }
-
-
-    protected void setUser(String username) throws SQLException {
+    protected void setUserInSetting(String username) throws SQLException {
 
         User user = UserRepository.searchUser(username);
         usernameLabel.setText(user.getUserName());
@@ -62,63 +63,86 @@ public class PersonalPage {
             Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/image/user_icon.png")));
             profileImage.setImage(image);
         }
+    }
 
-        Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
-        userPreferences.put("id", usernameLabel.getText());
-
+    @FXML
+    protected void accordionClick(){
 
     }
 
     @FXML
-    private void searchButtonClick(){
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("follow.fxml"));
-        try {
-            Scene scene = new Scene(fxmlLoader.load(), 400, 500);
-            Stage stage  = Main.mainStage;
-            stage.setTitle("");
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    protected void editButtonClick(ActionEvent event) throws SQLException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("editProfile.fxml"));
+    protected void logOutClick() throws SQLException {
+        UserRepository.deleteUser(usernameLabel.getText());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("logIn.fxml"));
         Parent root = null;
         try {
             root = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        EditProfile editProfile = loader.getController();
-        editProfile.setProperty(usernameLabel.getText());
-        editProfile.theme();
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setTitle("");
+        LogIn logIn = loader.getController();
+        logIn.theme();
+        Stage stage = Main.mainStage;
+        Scene scene = new Scene(root);//Main.mainStage;
         stage.setScene(scene);
         stage.show();
     }
 
     @FXML
-    protected void settingButtonClick() throws SQLException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("setting.fxml"));
+    protected void logInClick(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("logIn.fxml"));
         Parent root = null;
         try {
             root = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Setting setting = loader.getController();
-        setting.setUserInSetting(usernameLabel.getText());
-        setting.accordionClick();
-        //setUserInSetting.theme();
+        LogIn logIn = loader.getController();
+        logIn.theme();
+        Stage stage = Main.mainStage;
+        Scene scene = new Scene(root);//Main.mainStage;
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    protected void changeThemeClick(){
+        isLightMode = !isLightMode;
+        if(isLightMode){
+            setLightMode();
+        }else {
+            setDarkMode();
+        }
+    }
+
+    private void setLightMode(){
+        borderPane.getStylesheets().remove(getClass().getResource("/com/styles/darkMode.css").toExternalForm());
+        borderPane.getStylesheets().add(getClass().getResource("/com/styles/lightMode.css").toExternalForm());
+    }
+
+    private void setDarkMode(){
+        borderPane.getStylesheets().remove(getClass().getResource("/com/styles/lightMode.css").toExternalForm());
+        borderPane.getStylesheets().add(getClass().getResource("/com/styles/darkMode.css").toExternalForm());
+    }
+
+
+    @FXML
+    protected void backClick() throws SQLException {
+        Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
+        String id = userPreferences.get("id", "");
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("personalPage.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        PersonalPage personalPage = loader.getController();
+        personalPage.setUser(id);
+        personalPage.theme();
         Stage stage = Main.mainStage;
         Scene scene = new Scene(root);
-        stage.setTitle("");
         stage.setScene(scene);
         stage.show();
     }

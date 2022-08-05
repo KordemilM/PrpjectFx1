@@ -125,4 +125,10 @@ public class UserRepository {
         preparedStatement.setString(2,"ali");
         preparedStatement.executeUpdate();
     }
+
+    public static void deleteUser(String username) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM my_user WHERE username=?");
+        preparedStatement.setString(1,username);
+        preparedStatement.executeUpdate();
+    }
 }

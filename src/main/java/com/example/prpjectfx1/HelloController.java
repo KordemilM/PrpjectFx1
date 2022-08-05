@@ -12,31 +12,31 @@ import java.io.IOException;
 
 public class HelloController {
 
-    public static boolean isLightMode = true;
+//    public static boolean isLightMode = true;
 
     @FXML
     private AnchorPane pane;
 
 
-    @FXML
-    public void changeMode(){
-        isLightMode = !isLightMode;
-        if(isLightMode){
-            setLightMode();
-        }else {
-            setDarkMode();
-        }
-    }
-
-    private void setLightMode(){
-        pane.getStylesheets().remove(getClass().getResource("/com/styles/darkMode.css").toExternalForm());
-        pane.getStylesheets().add(getClass().getResource("/com/styles/lightMode.css").toExternalForm());
-    }
-
-    private void setDarkMode(){
-        pane.getStylesheets().remove(getClass().getResource("/com/styles/lightMode.css").toExternalForm());
-        pane.getStylesheets().add(getClass().getResource("/com/styles/darkMode.css").toExternalForm());
-    }
+//    @FXML
+//    public void changeMode(){
+//        isLightMode = !isLightMode;
+//        if(isLightMode){
+//            setLightMode();
+//        }else {
+//            setDarkMode();
+//        }
+//    }
+//
+//    private void setLightMode(){
+//        pane.getStylesheets().remove(getClass().getResource("/com/styles/darkMode.css").toExternalForm());
+//        pane.getStylesheets().add(getClass().getResource("/com/styles/lightMode.css").toExternalForm());
+//    }
+//
+//    private void setDarkMode(){
+//        pane.getStylesheets().remove(getClass().getResource("/com/styles/lightMode.css").toExternalForm());
+//        pane.getStylesheets().add(getClass().getResource("/com/styles/darkMode.css").toExternalForm());
+//    }
 
     @FXML
     protected void onStartButtonClick(ActionEvent event) {

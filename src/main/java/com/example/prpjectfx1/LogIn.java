@@ -37,8 +37,8 @@ public class LogIn {
 
     protected void theme(){
         pane.getStylesheets().add(getClass().getResource("/com/styles/" +
-                (HelloController.isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
-        if(!HelloController.isLightMode){
+                (Setting.isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
+        if(!Setting.isLightMode){
             forgotLabel.setTextFill(Paint.valueOf("#ffd9ec"));
             signupLabel.setTextFill(Paint.valueOf("#ffd9ec"));
         }
