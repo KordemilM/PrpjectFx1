@@ -3,6 +3,8 @@ package com.example.prpjectfx1.repository;
 import com.example.prpjectfx1.entity.User;
 import java.io.FileNotFoundException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class UserRepository {
 
@@ -25,7 +27,7 @@ public class UserRepository {
         return !resultSet.next();
     }
 
-    public static boolean searchPassword(String username, String password) throws SQLException {
+    public static boolean searchUserByUsernameAndPassword(String username, String password) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM my_user WHERE username=?");
         preparedStatement.setString(1, username);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -71,7 +73,7 @@ public class UserRepository {
         return Integer.toString(c);
     }
 
-    public static boolean findFollow(String fromId, String toId) throws SQLException {
+    public static boolean findFollowedOrNO(String fromId, String toId) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM follow WHERE fromId=? " +
                 "AND toId=?");
         preparedStatement.setString(1, fromId);
@@ -97,7 +99,7 @@ public class UserRepository {
         return null;
     }
 
-    public static void addFollower(String fromId, String toId) throws SQLException {
+    public static void addFollowing(String fromId, String toId) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("insert into follow (fromId,toId)" +
                 "VALUES (?,?)");
         preparedStatement.setString(1,fromId);
@@ -130,5 +132,38 @@ public class UserRepository {
         PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM my_user WHERE username=?");
         preparedStatement.setString(1,username);
         preparedStatement.executeUpdate();
+    }
+
+    public static ArrayList userSuggestion(String username) throws SQLException {
+        HashMap<String,Integer> map = new HashMap<>();
+
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM follow WHERE fromId IN " +
+                "(SELECT toId FROM follow WHERE fromId = ?)" +
+                " AND toId NOT IN (SELECT toId FROM follow WHERE fromId = ?) AND toId!=?");
+        preparedStatement.setString(1,username);
+        preparedStatement.setString(2,username);
+        preparedStatement.setString(3,username);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()){
+            map.put(resultSet.getString(3),0);
+        }
+
+        for (String s : map.keySet()) {
+            PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT COUNT(*) FROM follow WHERE "+
+                    "(fromId = ? AND toId IN (SELECT toId FROM follow WHERE fromId = ?)) OR " +
+                    "(toId = ? AND fromId IN (SELECT toId FROM follow WHERE fromId = ?))");
+            preparedStatement1.setString(1,s);
+            preparedStatement1.setString(2,username);
+            preparedStatement1.setString(3,s);
+            preparedStatement1.setString(4,username);
+
+            ResultSet resultSet1 = preparedStatement1.executeQuery();
+            if(resultSet1.next()){
+                map.put(s,resultSet1.getInt(1));
+            }
+        }
+        ArrayList<String> list = new ArrayList<>(map.keySet());
+        list.sort((o1, o2) -> Integer.compare(map.get(o2), map.get(o1)));
+        return list;
     }
 }

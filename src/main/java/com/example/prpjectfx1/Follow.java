@@ -8,15 +8,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.prefs.Preferences;
 
 public class Follow {
 
+    @FXML
+    private ScrollPane scrollPane;
     @FXML
     private BorderPane borderPane;
     @FXML
@@ -43,6 +47,20 @@ public class Follow {
     private Label postLabel;
     @FXML
     private Button followButton;
+    @FXML
+    private Button button1;
+    @FXML
+    private Button button2;
+    @FXML
+    private Button button3;
+    @FXML
+    private Button button4;
+    @FXML
+    private Button button5;
+    @FXML
+    private Button button6;
+    @FXML
+    private Button button7;
 
     protected void theme(){
         borderPane.getStylesheets().add(getClass().getResource("/com/styles/" +
@@ -63,7 +81,7 @@ public class Follow {
 
 //        numPostLabel.setText("");
 
-        if(!UserRepository.searchUserByUsername(searchText.getText())){
+        if(!UserRepository.searchUserByUsername(searchText.getText()) && !searchText.getText().equals("")){
             User user = UserRepository.searchUser(searchText.getText());
             usernameLabel.setText(user.getUserName());
             nameLabel.setText(user.getName());
@@ -87,11 +105,12 @@ public class Follow {
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         String id = userPreferences.get("id", "");
 
-        if(UserRepository.findFollow(id,usernameLabel.getText())){
-            UserRepository.addFollower(id,usernameLabel.getText());
-            noUserLabel.setText("Now you follow "+ usernameLabel.getText());
+        if(UserRepository.findFollowedOrNO(id,searchText.getText())){
+            UserRepository.addFollowing(id,searchText.getText());
+            noUserLabel.setText("Now you follow "+ searchText.getText());
         } else
-            noUserLabel.setText("you used to follow " + usernameLabel.getText());
+            noUserLabel.setText("you used to follow " + searchText.getText());
+        followButton.setVisible(false);
     }
 
     @FXML
@@ -114,4 +133,37 @@ public class Follow {
         stage.setScene(scene);
         stage.show();
     }
+
+    @FXML
+    protected void userSuggestionClick() throws SQLException {
+        Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
+        String id = userPreferences.get("id", "");
+        ArrayList<String> users = UserRepository.userSuggestion(id);
+        if(users.size()>0){
+            scrollPane.setVisible(true);
+            button1.setText(users.get(0));  button2.setText(users.get(1));  button3.setText(users.get(2));
+            button4.setText(users.get(3));  button5.setText(users.get(4));  button6.setText(users.get(5));
+            button7.setText(users.get(6));
+        }
+    }
+
+    @FXML
+    protected void button1Click(){
+        if(!button1.getText().equals("")){
+            searchText.setText(button1.getText());
+        }
+    }
+    @FXML
+    protected void button2Click(){
+        if(!button2.getText().equals("")){
+            searchText.setText(button2.getText());
+        }
+    }
+    @FXML
+    protected void button3Click(){
+        if(!button3.getText().equals("")){
+            searchText.setText(button3.getText());
+        }
+    }
+
 }

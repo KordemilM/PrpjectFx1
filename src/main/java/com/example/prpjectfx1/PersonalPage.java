@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -22,6 +23,8 @@ public class PersonalPage {
 
     @FXML
     private BorderPane borderPane;
+    @FXML
+    private Circle circle;
     @FXML
     private ImageView profileImage;
     @FXML
@@ -55,6 +58,7 @@ public class PersonalPage {
         try{
             Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(user.getPhoto())));
             profileImage.setImage(image);
+            profileImage.setClip(new Circle(20,20,20));
         }catch (NullPointerException e){
             Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/image/user_icon.png")));
             profileImage.setImage(image);
@@ -62,7 +66,6 @@ public class PersonalPage {
 
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         userPreferences.put("id", usernameLabel.getText());
-
 
     }
 
