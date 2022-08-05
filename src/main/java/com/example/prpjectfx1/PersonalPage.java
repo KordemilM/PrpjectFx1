@@ -25,8 +25,6 @@ public class PersonalPage {
     @FXML
     private ImageView profileImage;
     @FXML
-    private ImageView settingImage;
-    @FXML
     private Label usernameLabel;
     @FXML
     private Label bioLabel;
@@ -44,7 +42,6 @@ public class PersonalPage {
         borderPane.getStylesheets().add(getClass().getResource("/com/styles/" +
                 (Setting.isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
     }
-
 
     protected void setUser(String username) throws SQLException {
 
@@ -71,16 +68,20 @@ public class PersonalPage {
 
     @FXML
     private void searchButtonClick(){
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("follow.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("follow.fxml"));
+        Parent root = null;
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 400, 500);
-            Stage stage  = Main.mainStage;
-            stage.setTitle("");
-            stage.setScene(scene);
-            stage.show();
+            root = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Follow follow = loader.getController();
+        follow.theme();
+        Stage stage = Main.mainStage;
+        Scene scene = new Scene(root);
+        stage.setTitle("");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
@@ -114,12 +115,12 @@ public class PersonalPage {
         }
         Setting setting = loader.getController();
         setting.setUserInSetting(usernameLabel.getText());
-        setting.accordionClick();
-        //setUserInSetting.theme();
+        setting.theme();
         Stage stage = Main.mainStage;
         Scene scene = new Scene(root);
         stage.setTitle("");
         stage.setScene(scene);
         stage.show();
     }
+
 }

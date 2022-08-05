@@ -40,12 +40,10 @@ public class EditProfile {
 
     final FileChooser fileChooser = new FileChooser();
 
-
     protected void theme(){
         pane.getStylesheets().add(getClass().getResource("/com/styles/" +
                 (Setting.isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
     }
-
 
     protected void setProperty(String username) throws SQLException {
         User user = UserRepository.searchUser(username);

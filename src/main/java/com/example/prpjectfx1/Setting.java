@@ -4,7 +4,6 @@ import com.example.prpjectfx1.entity.User;
 import com.example.prpjectfx1.repository.UserRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
@@ -14,7 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -63,11 +61,6 @@ public class Setting {
             Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/image/user_icon.png")));
             profileImage.setImage(image);
         }
-    }
-
-    @FXML
-    protected void accordionClick(){
-
     }
 
     @FXML
@@ -125,7 +118,6 @@ public class Setting {
         borderPane.getStylesheets().add(getClass().getResource("/com/styles/darkMode.css").toExternalForm());
     }
 
-
     @FXML
     protected void backClick() throws SQLException {
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
@@ -145,5 +137,10 @@ public class Setting {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    protected void theme(){
+        borderPane.getStylesheets().add(getClass().getResource("/com/styles/" +
+                (isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
     }
 }
