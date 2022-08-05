@@ -8,15 +8,19 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 public class Main extends Application {
 
-    static Stage mainStage;
+    public static Stage mainStage;
+    public static Connection connection;
+    public static String OnlineUser;
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         DatabaseInitializer databaseInitializer = new DatabaseInitializer();
-        databaseInitializer.createTables(ConnectToTheDatabase.ConnectDatabase());
+        connection = ConnectToTheDatabase.ConnectDatabase();
+        databaseInitializer.createTables(connection);
         launch();
     }
 
