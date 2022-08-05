@@ -93,7 +93,9 @@ public class Chats_View_Controller implements Initializable {
                     //find last message
                     String lastMessageText = "";
                     ResultSet lastMessageResult = Main.connection.createStatement().executeQuery
-                            ("SELECT `content`,`picture`,`sender_username`");
+                            ("SELECT * ّ" +
+                                    "FROM `messenger`.`"+chats.getString("chat_id")+"_chat` " +
+                                    "ORDER BY `send_time` DESC LIMIT 1");
                     lastMessage.setMnemonicParsing(false);
                     VBox.setVgrow(lastMessage, javafx.scene.layout.Priority.ALWAYS);
                     //<Font name="System Bold" size="19.0" />

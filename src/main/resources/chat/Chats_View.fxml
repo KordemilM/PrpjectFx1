@@ -79,7 +79,7 @@
                                           <Circle fill="DODGERBLUE" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
                                        </graphic>
                                     </Label>
-                                    <Label prefHeight="18.0"  VBox.vgrow="ALWAYS">
+                                    <Label prefHeight="18.0" VBox.vgrow="ALWAYS">
                                        <font>
                                           <Font size="17.0" />
                                        </font>
