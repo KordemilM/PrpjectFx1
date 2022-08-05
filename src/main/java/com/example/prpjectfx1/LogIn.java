@@ -89,6 +89,7 @@ public class LogIn {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            Main.OnlineUser = usernameLabel.getText();
             PersonalPage personalPage = loader.getController();
             personalPage.setUser(usernameField.getText());
             personalPage.theme();

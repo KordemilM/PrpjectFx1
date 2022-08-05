@@ -122,7 +122,7 @@ public class SignUp {
             //time
 
             UserRepository.addUser(user);
-
+            Main.OnlineUser = usernameLabel.getText();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("personalPage.fxml"));
             Parent root = null;
             try {
