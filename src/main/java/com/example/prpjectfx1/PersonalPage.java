@@ -126,16 +126,16 @@ public class PersonalPage {
 
     @FXML
     protected void chatButtonClick() {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Chats_View.fxml"));
-        try {
-            Scene scene = new Scene(fxmlLoader.load(), 400, 500);
-            Stage stage  = Main.mainStage;
-            stage.setTitle("");
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Chats_View.fxml"));
+//        try {
+//            Scene scene = new Scene(fxmlLoader.load(), 400, 500);
+//            Stage stage  = Main.mainStage;
+//            stage.setTitle("");
+//            stage.setScene(scene);
+//            stage.show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @FXML
