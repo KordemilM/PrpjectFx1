@@ -19,6 +19,8 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.prefs.Preferences;
 
+import static com.example.prpjectfx1.Main.OnlineUser;
+
 public class PersonalPage {
 
     @FXML
@@ -47,7 +49,9 @@ public class PersonalPage {
     protected void setUser(String username) throws SQLException {
 
         User user = UserRepository.searchUser(username);
+        assert user != null;
         usernameLabel.setText(user.getUserName());
+        OnlineUser = user.getUserName();
         nameLabel.setText(user.getName());
         bioLabel.setText(user.getBio());
         numFollowersLabel.setText(UserRepository.numberOfFollowers(username));

@@ -136,10 +136,11 @@ public class Chats_View_Controller implements Initializable {
     }
 
     public void addChat() {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("newChat.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/chat/newChat.fxml"));
         try {
             Main.mainStage.setScene(new Scene(fxmlLoader.load()));
         } catch (IOException e) {
+            System.out.println("problem with newChat.fxml");
             throw new RuntimeException(e);
         }
     }

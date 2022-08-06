@@ -10,10 +10,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
-import java.nio.file.Files;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,8 +34,9 @@ public class newChat_Controller implements Initializable {
     private Label Check_username , Warnings;
     @FXML
     private ImageView imageView;
-    private String picturePath;
+    private String pictureName = "default.png";
     private final List<String> members = new ArrayList<>();
+    private File GroupPic_file;
     public void choosePicture() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Group Picture");
@@ -45,20 +44,11 @@ public class newChat_Controller implements Initializable {
                 new FileChooser.ExtensionFilter("Photo",
                         "*.png","*.jpg");
         fileChooser.getExtensionFilters().add(extension);
-        File file = fileChooser.showOpenDialog(null);
-        if(file != null){
-            try {
-                picturePath = "/Profile_pic/"+file.getName();
-                Files.copy(file.toPath(),new File(picturePath).toPath());
-            }catch (Exception e) {
-                System.out.println(e.getMessage());
-                picturePath = file.toPath().toString();
-            }
-            Image image = new Image("file: "+picturePath);
+        GroupPic_file = fileChooser.showOpenDialog(null);
+        if(GroupPic_file != null){
+            Image image = new Image(String.valueOf(GroupPic_file.toURI()));
             imageView.setImage(image);
-        }
-        else{
-            picturePath = imageView.getImage().toString();
+            pictureName = GroupPic_file.getName();
         }
     }
 
@@ -85,10 +75,13 @@ public class newChat_Controller implements Initializable {
             SplitMenuButton newMember = new SplitMenuButton(m);
             newMember.setText(username);
             memberList.getChildren().add(newMember);
+            try{
             m.setOnAction(event -> {
                 members.remove(username);
                 memberList.getChildren().remove(newMember);
-            });
+            });}catch(Exception e){
+                System.out.println(e);
+            }
             Check_username.setText("added");
         }else{
             Check_username.setText("not found");
@@ -99,12 +92,16 @@ public class newChat_Controller implements Initializable {
         //check Name
         if (GroupName.getText().equals("")) {Warnings.setText("Please Choose A Name");}
         //check members
-        else if (members.size() == 0) {Warnings.setText("Please");}
+        else if (members.size() == 0) {Warnings.setText("Please be alone some where else.");}
         //done
         else {
             int  id;
         //Database
             {
+                //get chatroom id
+                ResultSet r = Main.connection.createStatement().executeQuery
+                        ("SELECT MAX(chat_id) AS Last_id FROM `messenger`.`chat_info`");
+                r.next(); id = r.getInt("Last_id") + 1;
                 //add Online User to members
                 members.add(OnlineUser);
                 //add to chat_info Table
@@ -116,12 +113,9 @@ public class newChat_Controller implements Initializable {
                     VALUES (?,?,?)""");
                 p.setString(1,GroupName.getText());
                 p.setString(2,description.getText());
-                p.setString(3,picturePath);
+                pictureName = id+".png";
+                p.setString(3,pictureName);
                 p.executeUpdate();
-                //get chatroom id
-                ResultSet r = Main.connection.createStatement().executeQuery
-                        ("SELECT MAX(chat_id) AS Last_id FROM `messenger`.`chat_info`");
-                r.next(); id = r.getInt("Last_id");
                 //creat member Table for Group
                 Main.connection.createStatement().executeUpdate("CREATE TABLE `"+id+"_members` (\n" +
                         "  `id` int NOT NULL AUTO_INCREMENT,\n" +
@@ -176,6 +170,11 @@ public class newChat_Controller implements Initializable {
 
                 }
             }
+        //copy picture to server
+        {
+            if(GroupPic_file != null)
+                copyFileUsingStream(GroupPic_file, new File("./src/main/resources/Profile_pic/" + pictureName));
+        }
         //Change scene to Chat_View
             {
                 Chats_View_Controller.id = id;
@@ -264,7 +263,7 @@ public class newChat_Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Initialize DataBase
         try {
-            Main.connection.createStatement().executeUpdate("CREATE IF NOT EXISTS DATABASE `messenger` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;\n");
+            Main.connection.createStatement().executeUpdate("CREATE DATABASE IF NOT EXISTS `messenger` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;\n");
             Main.connection.createStatement().executeUpdate("""
                     CREATE TABLE IF NOT EXISTS `chat_info` (
                       `chat_id` int NOT NULL AUTO_INCREMENT,
@@ -289,6 +288,31 @@ public class newChat_Controller implements Initializable {
                     ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;\n");
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void BackToChatList() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/chat/Chats_View.fxml"));
+        Main.mainStage.setScene(new Scene(fxmlLoader.load()));
+    }
+
+    //methode to copy the image to the server
+    private static void copyFileUsingStream(File source, File dest) throws IOException {
+        InputStream is = null;
+        OutputStream os = null;
+        try {
+            is = new FileInputStream(source);
+            os = new FileOutputStream(dest);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = is.read(buffer)) > 0) {
+                os.write(buffer, 0, length);
+            }
+        } finally {
+            assert is != null;
+            is.close();
+            assert os != null;
+            os.close();
         }
     }
 }
