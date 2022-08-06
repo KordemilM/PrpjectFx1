@@ -150,7 +150,7 @@
                                  <graphic>
                                     <TextFlow maxWidth="200.0" textAlignment="RIGHT">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" wrappingWidth="146.53125" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="146.53125" />
                                        </children>
                                     </TextFlow>
                                  </graphic>

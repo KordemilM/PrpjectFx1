@@ -1,5 +1,6 @@
 package com.example.prpjectfx1;
 
+import com.example.prpjectfx1.Messanger.Chats_View_Controller;
 import com.example.prpjectfx1.entity.User;
 import com.example.prpjectfx1.repository.UserRepository;
 import javafx.event.ActionEvent;
@@ -130,16 +131,21 @@ public class PersonalPage {
 
     @FXML
     protected void chatButtonClick() {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/chat/Chats_View.fxml"));
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/chat/Chats_View.fxml"));
+        Parent root = null;
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 400, 500);
-            Stage stage  = Main.mainStage;
-            stage.setTitle("");
-            stage.setScene(scene);
-            stage.show();
+            root = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Chats_View_Controller chats_view_controller = loader.getController();
+        chats_view_controller.theme();
+        Stage stage = Main.mainStage;
+        Scene scene = new Scene(root);
+        stage.setTitle("");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML

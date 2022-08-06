@@ -2,6 +2,7 @@ package com.example.prpjectfx1.Messanger;
 
 import com.example.prpjectfx1.Main;
 import com.example.prpjectfx1.PersonalPage;
+import com.example.prpjectfx1.Setting;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
@@ -25,6 +27,9 @@ import java.util.prefs.Preferences;
 import static com.example.prpjectfx1.Main.OnlineUser;
 
 public class Chats_View_Controller implements Initializable {
+
+    @FXML
+    private BorderPane borderPane;
     @FXML
     private VBox chatListView;
     @Override
@@ -146,11 +151,17 @@ public class Chats_View_Controller implements Initializable {
         }
     }
 
-    public void backClick() throws SQLException, IOException {
+    public void theme(){
+        borderPane.getStylesheets().add(getClass().getResource("/com/styles/" +
+                (Setting.isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
+    }
+
+    @FXML
+    public void PersonalPageClick() throws SQLException, IOException {
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         String id = userPreferences.get("id", "");
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/prpjectfx1/personalPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("com/example/prpjectfx1/PersonalPage.java"));
         PersonalPage personalPage = loader.getController();
         personalPage.setUser(id);
         personalPage.theme();
