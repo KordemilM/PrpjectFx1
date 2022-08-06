@@ -125,4 +125,9 @@ public class PersonalPage {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void messengerButton() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/chat/Chats_View.fxml"));
+        Main.mainStage.setScene(new Scene(loader.load()));
+    }
 }
