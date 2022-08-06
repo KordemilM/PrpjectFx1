@@ -2,7 +2,9 @@ package com.example.prpjectfx1.Messanger;
 
 import com.example.prpjectfx1.Main;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -11,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,9 +28,10 @@ public class Chats_View_Controller implements Initializable {
     public static int id;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //get Chats from DB
         try {
+            //get Chats from DB
             ResultSet chats = Main.connection.createStatement().executeQuery("SELECT * FROM `messenger`.`"+OnlineUser+"_chatslist` ORDER BY `last_Update` DESC " );
+            //make the list of chats
             while (chats.next()){
                 Button btn = new Button();//init button
                 {
@@ -91,17 +95,39 @@ public class Chats_View_Controller implements Initializable {
                 {
                     vBox.getChildren().add(lastMessage);//add label to vBox
                     //find last message
-                    String lastMessageText = "";
+                    String lastMessageText = "", lastMessage_sender = "" , lastMessage_time = "";
                     ResultSet lastMessageResult = Main.connection.createStatement().executeQuery
                             ("SELECT * ّ" +
-                                    "FROM `messenger`.`"+chats.getString("chat_id")+"_chat` " +
+                                    "FROM `messenger`.`"+chats.getString("chat_id")+"_chat` c " +
+                                    "LEFT JOIN `project`.`user` u ON c.`sender_username` = u.`username` " +
                                     "ORDER BY `send_time` DESC LIMIT 1");
+                    if(lastMessageResult.next()){
+                        lastMessageText = lastMessageResult.getString("content");
+                        lastMessage_sender = lastMessageResult.getString("name");
+                        if (lastMessage_sender.equals(OnlineUser)){
+                            lastMessage_sender = "You";
+                        }
+                        lastMessage_time = lastMessageResult.getTimestamp("send_time").toString();
+                        if (lastMessageResult.getString("picture") != null) lastMessageText = "Picture";
+                    }
+                    lastMessage.setText(lastMessage_sender + ": " + lastMessageText + " " + lastMessage_time);
                     lastMessage.setMnemonicParsing(false);
                     VBox.setVgrow(lastMessage, javafx.scene.layout.Priority.ALWAYS);
-                    //<Font name="System Bold" size="19.0" />
-                    lastMessage.setFont(new javafx.scene.text.Font("System Bold", 19.0));
+                    lastMessage.setPrefHeight(18.0);
+                    lastMessage.setFont(new javafx.scene.text.Font(17.0));
                 }
+                HBox.setMargin(vBox, new javafx.geometry.Insets(10.0, 0.0, 10.0, 10.0));
 
+                //add event to button
+                btn.setOnAction(event -> {
+                    Chats_View_Controller.id = Integer.parseInt(btn.getId());
+                    FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Chats_View.fxml"));
+                    try {
+                        Main.mainStage.setScene(new Scene(fxmlLoader.load()));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
