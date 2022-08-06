@@ -1,9 +1,9 @@
 .primary-color{
-    -fx-background-color: #383838;
+    -fx-background-color: #3c3c3c;
 }
 
 .secondary-color{
-    -fx-background-color: #282828;
+    -fx-background-color: #2f2f2f;
 }
 .round-border{
     -fx-background-radius: 50;
