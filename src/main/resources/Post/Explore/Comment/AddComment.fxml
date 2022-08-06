@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prpjectfx1.Post.AddCommentController">
+   <children>
+      <TextField fx:id="commentSub" alignment="CENTER" promptText="Subject" />
+      <TextField fx:id="comment" alignment="TOP_LEFT" prefHeight="253.0" prefWidth="250.0" promptText="Comment" />
+      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addThisComment" prefHeight="70.0" prefWidth="250.0" text="Add Comment">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+   </children>
+</VBox>

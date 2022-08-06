@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prpjectfx1.Post.RecentController">
+   <children>
+      <Label fx:id="userName" layoutX="35.0" layoutY="27.0" prefHeight="18.0" prefWidth="187.0" text="Username" />
+      <ImageView fx:id="image" fitHeight="188.0" fitWidth="330.0" layoutX="35.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="content" alignment="TOP_LEFT" layoutX="34.0" layoutY="301.0" prefHeight="78.0" prefWidth="330.0" text="Content" />
+      <Label fx:id="subject" layoutX="35.0" layoutY="45.0" prefHeight="18.0" prefWidth="187.0" text="Subject" />
+      <Label fx:id="likes" layoutX="35.0" layoutY="265.0" prefHeight="18.0" prefWidth="66.0" text="Likes" />
+      <Label fx:id="views" layoutX="129.0" layoutY="266.0" prefHeight="18.0" prefWidth="66.0" text="Views" />
+      <Label fx:id="date" layoutX="222.0" layoutY="267.0" prefHeight="18.0" prefWidth="66.0" text="Date" />
+      <Label fx:id="page" alignment="CENTER" contentDisplay="CENTER" layoutX="178.0" layoutY="435.0" prefHeight="18.0" prefWidth="41.0" text="Page" textAlignment="CENTER" />
+      <Button layoutX="313.0" layoutY="432.0" mnemonicParsing="false" onAction="#nextPage" text="Next" />
+      <Button layoutX="34.0" layoutY="432.0" mnemonicParsing="false" onAction="#previousPage" text="Prev" />
+      <Button layoutX="180.0" layoutY="460.0" mnemonicParsing="false" onAction="#back" text="Back" />
+      <Button fx:id="likeRecent" layoutX="101.0" layoutY="391.0" mnemonicParsing="false" onAction="#likePost" text="like" />
+      <Button fx:id="addComRecent" layoutX="148.0" layoutY="391.0" mnemonicParsing="false" onAction="#addComment" text="Add Comment" />
+      <Button fx:id="commentsAds" layoutX="260.0" layoutY="391.0" mnemonicParsing="false" onAction="#showComments" text="Comments" />
+   </children>
+</AnchorPane>
