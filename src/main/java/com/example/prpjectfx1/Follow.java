@@ -10,11 +10,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.prefs.Preferences;
 
 public class Follow {
@@ -61,6 +65,9 @@ public class Follow {
     private Button button6;
     @FXML
     private Button button7;
+    @FXML
+    private ImageView profileImage;
+
 
     protected void theme(){
         borderPane.getStylesheets().add(getClass().getResource("/com/styles/" +
@@ -92,6 +99,14 @@ public class Follow {
             followingLabel.setText("Following");
             postLabel.setText("Post");
             followButton.setVisible(true);
+            try{
+                Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(user.getPhoto())));
+                profileImage.setImage(image);
+                profileImage.setClip(new Circle(25,25,25));
+            }catch (NullPointerException e){
+                Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/image/user_icon.png")));
+                profileImage.setImage(image);
+            }
 
 //            numPostLabel.setText();
         }else {
@@ -106,8 +121,11 @@ public class Follow {
         String id = userPreferences.get("id", "");
 
         if(UserRepository.findFollowedOrNO(id,searchText.getText())){
-            UserRepository.addFollowing(id,searchText.getText());
-            noUserLabel.setText("Now you follow "+ searchText.getText());
+            if(UserRepository.addFollowing(id,searchText.getText())){
+                noUserLabel.setText("Now you follow "+ searchText.getText());
+            }else {
+                noUserLabel.setText("you can't follow yourself!");
+            }
         } else
             noUserLabel.setText("you used to follow " + searchText.getText());
         followButton.setVisible(false);

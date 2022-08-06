@@ -99,12 +99,16 @@ public class UserRepository {
         return null;
     }
 
-    public static void addFollowing(String fromId, String toId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("insert into follow (fromId,toId)" +
-                "VALUES (?,?)");
-        preparedStatement.setString(1,fromId);
-        preparedStatement.setString(2,toId);
-        preparedStatement.executeUpdate();
+    public static boolean addFollowing(String fromId, String toId) throws SQLException {
+        if(!fromId.equals(toId)){
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into follow (fromId,toId)" +
+                    "VALUES (?,?)");
+            preparedStatement.setString(1,fromId);
+            preparedStatement.setString(2,toId);
+            preparedStatement.executeUpdate();
+            return true;
+        }
+        return false;
     }
 
     public static void updateProfile(User user) throws SQLException {
@@ -130,7 +134,11 @@ public class UserRepository {
 
     public static void deleteUser(String username) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM my_user WHERE username=?");
+        PreparedStatement preparedStatement1 = connection.prepareStatement("DELETE FROM follow WHERE fromId=? OR toId=?" );
         preparedStatement.setString(1,username);
+        preparedStatement1.setString(1,username);
+        preparedStatement1.setString(2,username);
+        preparedStatement1.executeUpdate();
         preparedStatement.executeUpdate();
     }
 

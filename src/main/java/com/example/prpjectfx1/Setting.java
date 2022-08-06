@@ -6,12 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Accordion;
 import javafx.scene.control.Label;
-import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -23,15 +22,9 @@ public class Setting {
     public static boolean isLightMode = true;
 
     @FXML
-    private Accordion accordion;
-    @FXML
-    private TitledPane titledPane;
-    @FXML
     private BorderPane borderPane;
     @FXML
     private ImageView profileImage;
-    @FXML
-    private ImageView settingImage;
     @FXML
     private Label usernameLabel;
     @FXML
@@ -45,6 +38,7 @@ public class Setting {
     @FXML
     private Label numFollowersLabel;
 
+
     protected void setUserInSetting(String username) throws SQLException {
 
         User user = UserRepository.searchUser(username);
@@ -57,6 +51,7 @@ public class Setting {
         try{
             Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(user.getPhoto())));
             profileImage.setImage(image);
+            profileImage.setClip(new Circle(25,25,25));
         }catch (NullPointerException e){
             Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/image/user_icon.png")));
             profileImage.setImage(image);
@@ -76,7 +71,7 @@ public class Setting {
         LogIn logIn = loader.getController();
         logIn.theme();
         Stage stage = Main.mainStage;
-        Scene scene = new Scene(root);//Main.mainStage;
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
@@ -93,7 +88,7 @@ public class Setting {
         LogIn logIn = loader.getController();
         logIn.theme();
         Stage stage = Main.mainStage;
-        Scene scene = new Scene(root);//Main.mainStage;
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
