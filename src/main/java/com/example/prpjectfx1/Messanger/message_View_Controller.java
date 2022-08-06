@@ -19,6 +19,8 @@ import javafx.scene.text.TextFlow;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import static com.example.prpjectfx1.Main.OnlineUser;
 import static com.example.prpjectfx1.Main.connection;
@@ -68,7 +70,7 @@ public class message_View_Controller implements Initializable {
                 while (chats.next()){
                     boolean is_me = chats.getString("sender_username").equals(OnlineUser);
                     addMassage(chats.getString("Name"),
-                            chats.getInt("id"), chats.getString("content")
+                             chats.getString("content")
                             , chats.getString("picture") , chats.getTimestamp("send_time").toString(),
                             chats.getString("photo"),is_me );
                     }
@@ -78,11 +80,22 @@ public class message_View_Controller implements Initializable {
         }
     }
 
-    public void newMassage(){
-
+    public void newMassage() throws SQLException {
+        if (message.getText().isEmpty()){
+            return;
+        }else {
+            //DB
+            String content = message.getText().trim();
+            connection.createStatement().executeUpdate
+                    ("INSERT INTO `messenger`.`"+id+"_chat`" +
+                            " (`sender_username`, `content`) " +
+                            "VALUES ('"+OnlineUser+"', '"+content+"')");
+            //GUI
+            addMassage(OnlineUser,content,"", LocalDateTime.now().toString(),Chats_View_Controller.user.getPhoto(),true);
+        }
     }
 
-    public void addMassage(String Name, int messageId , String content , String image , String time , String sender_profile , boolean IsOnlineUser) {
+    public void addMassage(String Name , String content , String image , String time , String sender_profile , boolean IsOnlineUser) {
         HBox hbox = new HBox();
         chatList.getChildren().add(hbox);
         hbox.setLayoutX(20);
@@ -123,7 +136,7 @@ public class message_View_Controller implements Initializable {
 
                     MenuItem menuItem = new MenuItem("reply");
                     MenuItem menuItem2 = new MenuItem("forward");
-                    menuItem.setOnAction(event -> message.setText("[reply to "+Name+" about "+messageId+": "+content+"]"));
+                    menuItem.setOnAction(event -> System.out.println("reply"));
                     menuItem2.setOnAction(event -> System.out.println("Enter destination"));
                     splitMenuButton.getItems().addAll(menuItem,menuItem2);
 

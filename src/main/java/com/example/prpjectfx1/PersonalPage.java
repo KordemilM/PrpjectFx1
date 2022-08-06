@@ -1,5 +1,6 @@
 package com.example.prpjectfx1;
 
+import com.example.prpjectfx1.Messanger.Chats_View_Controller;
 import com.example.prpjectfx1.entity.User;
 import com.example.prpjectfx1.repository.UserRepository;
 import javafx.event.ActionEvent;
@@ -49,6 +50,7 @@ public class PersonalPage {
     public void setUser(String username) throws SQLException {
 
         User user = UserRepository.searchUser(username);
+        Chats_View_Controller.user = user;
         assert user != null;
         usernameLabel.setText(user.getUserName());
         OnlineUser = user.getUserName();

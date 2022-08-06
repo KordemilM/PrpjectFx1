@@ -2,6 +2,7 @@ package com.example.prpjectfx1.Messanger;
 
 import com.example.prpjectfx1.Main;
 import com.example.prpjectfx1.PersonalPage;
+import com.example.prpjectfx1.entity.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,6 +26,7 @@ import java.util.prefs.Preferences;
 import static com.example.prpjectfx1.Main.OnlineUser;
 
 public class Chats_View_Controller implements Initializable {
+    public static User user;
     @FXML
     private VBox chatListView;
     @Override
