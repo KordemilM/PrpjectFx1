@@ -26,8 +26,6 @@ public class PersonalPage {
     @FXML
     private BorderPane borderPane;
     @FXML
-    private Circle circle;
-    @FXML
     private ImageView profileImage;
     @FXML
     private Label usernameLabel;
@@ -62,7 +60,7 @@ public class PersonalPage {
         try{
             Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(user.getPhoto())));
             profileImage.setImage(image);
-            profileImage.setClip(new Circle(20,20,20));
+            profileImage.setClip(new Circle(25,25,25));
         }catch (NullPointerException e){
             Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/image/user_icon.png")));
             profileImage.setImage(image);
@@ -130,8 +128,37 @@ public class PersonalPage {
         stage.show();
     }
 
-    public void messengerButton() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/chat/Chats_View.fxml"));
-        Main.mainStage.setScene(new Scene(loader.load()));
+    @FXML
+    protected void chatButtonClick() {
+//        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Chats_View.fxml"));
+//        try {
+//            Scene scene = new Scene(fxmlLoader.load(), 400, 500);
+//            Stage stage  = Main.mainStage;
+//            stage.setTitle("");
+//            stage.setScene(scene);
+//            stage.show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
+
+    @FXML
+    protected void homeButtonClick() {
+//        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Chats_View.fxml"));
+//        try {
+//            Scene scene = new Scene(fxmlLoader.load(), 400, 500);
+//            Stage stage  = Main.mainStage;
+//            stage.setTitle("");
+//            stage.setScene(scene);
+//            stage.show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+    }
+
+    @FXML
+    protected void addPostButtonClick() {
+
+    }
+
 }

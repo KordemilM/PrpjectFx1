@@ -12,11 +12,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.prefs.Preferences;
 
 public class EditProfile {
@@ -40,6 +42,7 @@ public class EditProfile {
 
     final FileChooser fileChooser = new FileChooser();
 
+
     protected void theme(){
         pane.getStylesheets().add(getClass().getResource("/com/styles/" +
                 (Setting.isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
@@ -50,14 +53,14 @@ public class EditProfile {
         usernameText.setText(user.getUserName());
         nameText.setText(user.getName());
         bioText.setText(user.getBio());
-        if(user.getPhoto() != null){
-            Image image = new Image(getClass().getResourceAsStream(user.getPhoto()));
+        try{
+            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(user.getPhoto())));
             imageView.setImage(image);
-        }else {
-            Image image = new Image(getClass().getResourceAsStream("/image/user_icon.png"));
+            imageView.setClip(new Circle(25,20,20));
+        }catch (NullPointerException e){
+            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/image/user_icon.png")));
             imageView.setImage(image);
         }
-//        /image/icon.png
     }
 
     @FXML
@@ -66,8 +69,7 @@ public class EditProfile {
         File file = fileChooser.showOpenDialog(null);
         String address = file.getAbsolutePath();
         int i = address.lastIndexOf("\\");
-        oooo.setText("/image/" + address.substring(i+1));
-        // icon.png
+        oooo.setText("/image/" + address.substring(i+1)); // "/image/" + icon.png
     }
 
     @FXML
@@ -76,7 +78,7 @@ public class EditProfile {
         user.setUserName(usernameText.getText());
         user.setName(nameText.getText());
         user.setBio(bioText.getText());
-        user.setPhoto(oooo.getText());
+        user.setPhoto(oooo.getText()); ////??
         if(account.isSelected()){
             user.setAccount(0);
         }else

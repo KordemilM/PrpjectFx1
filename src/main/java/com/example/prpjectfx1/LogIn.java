@@ -81,7 +81,6 @@ public class LogIn {
             passwordField.setText("");
         }
         if(i==2){
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("personalPage.fxml"));
             Parent root = null;
             try {
@@ -105,7 +104,6 @@ public class LogIn {
         try {
             Scene scene = new Scene(fxmlLoader.load(), 400, 500);
             Stage stage  = Main.mainStage;
-            stage.setTitle("forgot Password");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

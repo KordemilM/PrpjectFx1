@@ -152,7 +152,7 @@ public class SignUp {
         LogIn logIn = loader.getController();
         logIn.theme();
         Stage stage = Main.mainStage;
-        Scene scene = new Scene(root);//Main.mainStage;
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }

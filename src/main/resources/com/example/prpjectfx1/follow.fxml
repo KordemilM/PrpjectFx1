@@ -167,7 +167,6 @@
                         <Label fx:id="bioLabel" layoutX="14.0" layoutY="123.0" prefHeight="17.0" prefWidth="57.0" textFill="#cd055f" />
                     </children>
                 </AnchorPane>
-            <StackPane layoutX="286.0" layoutY="-48.0" prefHeight="150.0" prefWidth="30.0" />
             <StackPane layoutX="351.0" layoutY="14.0" prefHeight="40.0" prefWidth="40.0" AnchorPane.rightAnchor="9.0">
                <children>
                   <ImageView fitHeight="40.0" fitWidth="40.0" onMouseClicked="#userSuggestionClick" pickOnBounds="true" preserveRatio="true">
