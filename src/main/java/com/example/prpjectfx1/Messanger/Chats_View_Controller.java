@@ -30,7 +30,8 @@ public class Chats_View_Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             //get Chats from DB
-            ResultSet chats = Main.connection.createStatement().executeQuery("SELECT * FROM `messenger`.`"+OnlineUser+"_chatslist` ORDER BY `last_Update` DESC " );
+            ResultSet chats = Main.connection.createStatement().executeQuery
+                    ("SELECT * FROM `messenger`.`"+OnlineUser+"_chatslist` ORDER BY `last_Update` DESC " );
             //make the list of chats
             while (chats.next()){
                 Button btn = new Button();//init button
@@ -99,7 +100,7 @@ public class Chats_View_Controller implements Initializable {
                     ResultSet lastMessageResult = Main.connection.createStatement().executeQuery
                             ("SELECT * ّ" +
                                     "FROM `messenger`.`"+chats.getString("chat_id")+"_chat` c " +
-                                    "LEFT JOIN `project`.`user` u ON c.`sender_username` = u.`username` " +
+                                    "LEFT JOIN `project`.`my_user` u ON c.`sender_username` = u.`username` " +
                                     "ORDER BY `send_time` DESC LIMIT 1");
                     if(lastMessageResult.next()){
                         lastMessageText = lastMessageResult.getString("content");
@@ -130,6 +131,24 @@ public class Chats_View_Controller implements Initializable {
                 });
             }
         } catch (SQLException e) {
+            System.out.println("no Chats");
+        }
+    }
+
+    public void addChat() {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("newChat.fxml"));
+        try {
+            Main.mainStage.setScene(new Scene(fxmlLoader.load()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void backClick(){
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("personalPage.fxml"));
+        try {
+            Main.mainStage.setScene(new Scene(fxmlLoader.load()));
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
