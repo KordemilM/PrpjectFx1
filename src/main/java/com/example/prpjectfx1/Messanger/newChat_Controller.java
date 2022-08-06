@@ -79,8 +79,9 @@ public class newChat_Controller implements Initializable {
             m.setOnAction(event -> {
                 members.remove(username);
                 memberList.getChildren().remove(newMember);
-            });}catch(Exception e){
-                System.out.println(e);
+            });
+            }catch(Exception e){
+                System.out.println(e.getMessage());
             }
             Check_username.setText("added");
         }else{
@@ -165,7 +166,7 @@ public class newChat_Controller implements Initializable {
                             "(`member_username`,\n" +
                             "`rool`)\n" +
                             "VALUES\n" +
-                            "(<{member_username: }>,\n" +
+                            "("+member+",\n" +
                             ""+roll+");\n");
 
                 }
@@ -177,7 +178,7 @@ public class newChat_Controller implements Initializable {
         }
         //Change scene to Chat_View
             {
-                Chats_View_Controller.id = id;
+                message_View_Controller.id = id;
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Chats_View.fxml"));
                 Main.mainStage.setScene(new Scene(fxmlLoader.load()));
             }
@@ -251,7 +252,7 @@ public class newChat_Controller implements Initializable {
                     ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;\n");
             //Initialize chat screen
             {
-                Chats_View_Controller.id = Last_id;
+                message_View_Controller.id = Last_id;
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Chats_View.fxml"));
                 Main.mainStage.setScene(new Scene(fxmlLoader.load()));
             }

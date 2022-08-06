@@ -5,7 +5,6 @@ import com.example.prpjectfx1.PersonalPage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -28,8 +27,6 @@ import static com.example.prpjectfx1.Main.OnlineUser;
 public class Chats_View_Controller implements Initializable {
     @FXML
     private VBox chatListView;
-
-    public static int id;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -125,7 +122,7 @@ public class Chats_View_Controller implements Initializable {
 
                 //add event to button
                 btn.setOnAction(event -> {
-                    Chats_View_Controller.id = Integer.parseInt(btn.getId());
+                    message_View_Controller.id = Integer.parseInt(btn.getId());
                     FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Chats_View.fxml"));
                     try {
                         Main.mainStage.setScene(new Scene(fxmlLoader.load()));
@@ -149,22 +146,16 @@ public class Chats_View_Controller implements Initializable {
         }
     }
 
-    public void backClick() throws SQLException {
+    public void backClick() throws SQLException, IOException {
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         String id = userPreferences.get("id", "");
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/prpjectfx1/personalPage.fxml"));
-        Parent root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         PersonalPage personalPage = loader.getController();
         personalPage.setUser(id);
         personalPage.theme();
         Stage stage = Main.mainStage;
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(loader.load());
         stage.setScene(scene);
         stage.show();
     }
