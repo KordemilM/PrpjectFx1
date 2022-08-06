@@ -1,5 +1,6 @@
 package com.example.prpjectfx1.repository;
 
+import com.example.prpjectfx1.entity.PostCom;
 import com.example.prpjectfx1.entity.User;
 import java.io.FileNotFoundException;
 import java.sql.*;
