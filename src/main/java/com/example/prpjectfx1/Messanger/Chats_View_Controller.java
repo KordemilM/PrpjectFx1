@@ -1,9 +1,11 @@
 package com.example.prpjectfx1.Messanger;
 
 import com.example.prpjectfx1.Main;
+import com.example.prpjectfx1.PersonalPage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,12 +14,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
 
 import static com.example.prpjectfx1.Main.OnlineUser;
 
@@ -145,12 +149,23 @@ public class Chats_View_Controller implements Initializable {
         }
     }
 
-    public void backClick(){
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("personalPage.fxml"));
+    public void backClick() throws SQLException {
+        Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
+        String id = userPreferences.get("id", "");
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/prpjectfx1/personalPage.fxml"));
+        Parent root = null;
         try {
-            Main.mainStage.setScene(new Scene(fxmlLoader.load()));
+            root = loader.load();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+        PersonalPage personalPage = loader.getController();
+        personalPage.setUser(id);
+        personalPage.theme();
+        Stage stage = Main.mainStage;
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

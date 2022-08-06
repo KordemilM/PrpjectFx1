@@ -41,12 +41,12 @@ public class PersonalPage {
     private Label numFollowersLabel;
 
 
-    protected void theme(){
+    public void theme(){
         borderPane.getStylesheets().add(getClass().getResource("/com/styles/" +
                 (Setting.isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
     }
 
-    protected void setUser(String username) throws SQLException {
+    public void setUser(String username) throws SQLException {
 
         User user = UserRepository.searchUser(username);
         assert user != null;
@@ -130,16 +130,16 @@ public class PersonalPage {
 
     @FXML
     protected void chatButtonClick() {
-//        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Chats_View.fxml"));
-//        try {
-//            Scene scene = new Scene(fxmlLoader.load(), 400, 500);
-//            Stage stage  = Main.mainStage;
-//            stage.setTitle("");
-//            stage.setScene(scene);
-//            stage.show();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/chat/Chats_View.fxml"));
+        try {
+            Scene scene = new Scene(fxmlLoader.load(), 400, 500);
+            Stage stage  = Main.mainStage;
+            stage.setTitle("");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
