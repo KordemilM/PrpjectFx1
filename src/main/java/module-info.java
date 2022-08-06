@@ -13,4 +13,8 @@ module com.example.prpjectfx1 {
     opens com.example.prpjectfx1.repository to javafx.fxml;
     exports com.example.prpjectfx1.Messanger;
     opens com.example.prpjectfx1.Messanger to javafx.fxml;
+    exports com.example.prpjectfx1.Post;
+    opens com.example.prpjectfx1.Post to javafx.fxml;
+    exports com.example.prpjectfx1.Holder;
+    opens com.example.prpjectfx1.Holder to javafx.fxml;
 }
