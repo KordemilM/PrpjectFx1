@@ -71,7 +71,7 @@ public class newChat_Controller implements Initializable {
         String username = addUser.getText();
         if (username.equals(""))
             return;
-        PreparedStatement st = Main.connection.prepareStatement("SELECT * FROM `project`.`user` WHERE username = ?");
+        PreparedStatement st = Main.connection.prepareStatement("SELECT * FROM `project`.`my_user` WHERE username = ?");
         st.setString(1, username);
         ResultSet rs = st.executeQuery();
         if (members.contains(username)){
@@ -189,7 +189,7 @@ public class newChat_Controller implements Initializable {
         String new_Contact = addContact.getText();
         ResultSet already_added = Main.connection.createStatement().executeQuery
                 ("SELECT `* FROM `messenger`.`"+OnlineUser+"_chatslist` WHERE `Type` = 'private' AND `Name` = '"+new_Contact+"'");
-        ResultSet if_exists = Main.connection.createStatement().executeQuery("SELECT `username` FROM `project`.`user` WHERE `username` = '"+new_Contact+"'");
+        ResultSet if_exists = Main.connection.createStatement().executeQuery("SELECT `username` FROM `project`.`my_user` WHERE `username` = '"+new_Contact+"'");
         //check Name
             //Want to chat with himself/herself
         if (new_Contact.equals(OnlineUser)) {Warnings.setText("Talk with yourself out of my App XD");}
