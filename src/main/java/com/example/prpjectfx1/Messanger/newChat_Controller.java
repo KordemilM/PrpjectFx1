@@ -71,7 +71,7 @@ public class newChat_Controller implements Initializable {
         String username = addUser.getText();
         if (username.equals(""))
             return;
-        PreparedStatement st = Main.connection.prepareStatement("SELECT * FROM `project`.`user` WHERE username = ?");
+        PreparedStatement st = Main.connection.prepareStatement("SELECT * FROM `project`.`my_user` WHERE username = ?");
         st.setString(1, username);
         ResultSet rs = st.executeQuery();
         if (members.contains(username)){
@@ -126,7 +126,6 @@ public class newChat_Controller implements Initializable {
                 Main.connection.createStatement().executeUpdate("CREATE TABLE `"+id+"_members` (\n" +
                         "  `id` int NOT NULL AUTO_INCREMENT,\n" +
                         "  `member_username` varchar(45) NOT NULL,\n" +
-                        "  `has_unchecked_message` int NOT NULL DEFAULT '0',\n" +
                         "  `rool` enum('onerowner','admin','member') NOT NULL DEFAULT 'member',\n" +
                         "  PRIMARY KEY (`id`),\n" +
                         "  UNIQUE KEY `member_username_UNIQUE` (`member_username`)\n" +
@@ -152,6 +151,8 @@ public class newChat_Controller implements Initializable {
                                           `id` int NOT NULL AUTO_INCREMENT,
                                           `chat_id` int NOT NULL,
                                           `Type` enum('Group','private') NOT NULL DEFAULT 'Group',
+                                          `last_Update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                                          `has_unseen_message` enum('true','false') DEFAULT 'false',
                                           PRIMARY KEY (`id`),
                                           UNIQUE KEY `chat_id_UNIQUE` (`chat_id`)
                                         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;""");
@@ -188,7 +189,7 @@ public class newChat_Controller implements Initializable {
         String new_Contact = addContact.getText();
         ResultSet already_added = Main.connection.createStatement().executeQuery
                 ("SELECT `* FROM `messenger`.`"+OnlineUser+"_chatslist` WHERE `Type` = 'private' AND `Name` = '"+new_Contact+"'");
-        ResultSet if_exists = Main.connection.createStatement().executeQuery("SELECT `username` FROM `project`.`user` WHERE `username` = '"+new_Contact+"'");
+        ResultSet if_exists = Main.connection.createStatement().executeQuery("SELECT `username` FROM `project`.`my_user` WHERE `username` = '"+new_Contact+"'");
         //check Name
             //Want to chat with himself/herself
         if (new_Contact.equals(OnlineUser)) {Warnings.setText("Talk with yourself out of my App XD");}
@@ -215,6 +216,8 @@ public class newChat_Controller implements Initializable {
                     "  `id` int NOT NULL AUTO_INCREMENT,\n" +
                     "  `chat_id` int NOT NULL,\n" +
                     "  `Type` enum('Group','private') NOT NULL DEFAULT 'private',\n" +
+                    "  `last_Update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n" +//last update
+                    "  `has_unseen_message` enum('true','false') DEFAULT 'false',\n" +//has unseen message
                     "  PRIMARY KEY (`id`),\n" +
                     "  UNIQUE KEY `chat_id_UNIQUE` (`chat_id`)\n" +
                     ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;\n");
@@ -269,6 +272,7 @@ public class newChat_Controller implements Initializable {
                       `description` varchar(200) DEFAULT NULL,
                       `profile` varchar(200) NOT NULL DEFAULT 'file: /Profile_pic/default.png',
                       `Type` enum('Group','private') NOT NULL DEFAULT 'Group',
+                        `last_Update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                       PRIMARY KEY (`chat_id`),
                       UNIQUE KEY `chat_id_UNIQUE` (`chat_id`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -278,6 +282,8 @@ public class newChat_Controller implements Initializable {
                     "  `id` int NOT NULL AUTO_INCREMENT,\n" +
                     "  `chat_id` int NOT NULL,\n" +
                     "  `Type` enum('Group','private') NOT NULL DEFAULT 'Group',\n" +
+                    "  `last_Update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n" +//last update
+                    "`has_unseen_message` enum('true','false') DEFAULT 'false',\n" +
                     "  PRIMARY KEY (`id`),\n" +
                     "  UNIQUE KEY `chat_id_UNIQUE` (`chat_id`)\n" +
                     ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;\n");

@@ -11,4 +11,6 @@ module com.example.prpjectfx1 {
     opens com.example.prpjectfx1.entity to javafx.fxml;
     exports com.example.prpjectfx1.repository;
     opens com.example.prpjectfx1.repository to javafx.fxml;
+    exports com.example.prpjectfx1.Messanger;
+    opens com.example.prpjectfx1.Messanger to javafx.fxml;
 }

@@ -18,14 +18,14 @@
 
 <BorderPane maxHeight="500.0" maxWidth="400.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prpjectfx1.Messanger.">
    <top>
-      <HBox alignment="TOP_CENTER" prefHeight="57.0" prefWidth="400.0" spacing="15.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="57.0" prefWidth="400.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Button">
+            <Button mnemonicParsing="false" text="&lt;-">
                <HBox.margin>
-                  <Insets left="20.0" top="20.0" />
+                  <Insets left="20.0" />
                </HBox.margin>
             </Button>
-            <ImageView fitHeight="79.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="68.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
                   <Insets top="10.0" />
                </HBox.margin>
@@ -33,9 +33,9 @@
                   <Image url="@image.png" />
                </image>
             </ImageView>
-            <VBox prefHeight="90.0" prefWidth="214.0" HBox.hgrow="ALWAYS">
+            <VBox prefHeight="72.0" prefWidth="208.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Label prefHeight="34.0" prefWidth="214.0" text="Group Name">
+                  <Label prefHeight="34.0" prefWidth="194.0" text="Group Name">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -53,6 +53,11 @@
                   </Label>
                </children>
             </VBox>
+            <Button layoutX="30.0" layoutY="30.0" mnemonicParsing="false" text="؟">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
          </children>
          <BorderPane.margin>
             <Insets />
