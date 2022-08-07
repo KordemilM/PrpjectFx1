@@ -66,7 +66,7 @@ public class RecentController {
     }
 
     public void initializeUser() {
-        UserHolder userHolder = UserHolder.getInstance();
+        UserHolder userHolder = UserHolder.getINSTANCE();
         user = userHolder.getUser();
     }
 
@@ -145,9 +145,9 @@ public class RecentController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Explore/Comment/AddComment.fxml"));
         Parent root = loader.load();
         AddCommentController addCommentController = loader.getController();
-        PostHolder postHolder = PostHolder.getInstance();
+        PostHolder postHolder = PostHolder.getINSTANCE();
         postHolder.setPostCom(postCom);
-        UserHolder userHolder = UserHolder.getInstance();
+        UserHolder userHolder = UserHolder.getINSTANCE();
         userHolder.setUser(user);
         addCommentController.initializePost();
         addCommentController.initializeUser();
@@ -171,7 +171,7 @@ public class RecentController {
         commentsController.initializeIndex();
         ManyPostsHolder manyPostsHolder = ManyPostsHolder.getInstance(ManyPostsHolder.instances.size());
         manyPostsHolder.setPosts(AppContext.getPostComRepos().getChildren(postCom.getId(),AppContext.getConnection()));
-        UserHolder userHolder = UserHolder.getInstance();
+        UserHolder userHolder = UserHolder.getINSTANCE();
         userHolder.setUser(user);
         commentsController.initializePost();
         commentsController.initializeUser();
