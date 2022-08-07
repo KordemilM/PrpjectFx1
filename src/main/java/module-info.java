@@ -3,6 +3,7 @@ module com.example.prpjectfx1 {
     requires javafx.fxml;
     requires java.sql;
     requires java.prefs;
+    requires lombok;
 
 
     opens com.example.prpjectfx1 to javafx.fxml;
