@@ -31,6 +31,7 @@ public class PostMainController {
             UserHolder holder = UserHolder.getInstance();
             holder.setUser(user);
             controller.initializeUser();
+            controller.theme();
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);

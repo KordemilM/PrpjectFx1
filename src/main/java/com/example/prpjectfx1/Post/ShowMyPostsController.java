@@ -44,7 +44,7 @@ public class ShowMyPostsController {
 
     private User user;
     private PostCom postCom;
-    static int pageNumber;
+    public static int pageNumber;
 
     public void initializePost() {
         PostsHolder postsHolder = PostsHolder.getInstance();

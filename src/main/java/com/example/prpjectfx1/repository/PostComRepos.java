@@ -306,4 +306,16 @@ public class PostComRepos {
         statement.close();
         return numberOfPosts;
     }
+
+    //last post of a user
+
+    public PostCom getLastPost(String username, Connection connection) throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(
+                "select * from PostCom where username = '"+username+"' order by datetime desc limit 1"
+        );
+        ArrayList<PostCom> postComArrayList = getPostCom(statement, resultSet);
+        statement.close();
+        return postComArrayList.get(0);
+    }
 }
