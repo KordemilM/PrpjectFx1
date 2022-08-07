@@ -26,6 +26,8 @@ public class Setting {
     @FXML
     private ImageView profileImage;
     @FXML
+    private ImageView mode;
+    @FXML
     private Label usernameLabel;
     @FXML
     private Label bioLabel;
