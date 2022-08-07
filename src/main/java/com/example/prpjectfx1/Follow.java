@@ -1,5 +1,6 @@
 package com.example.prpjectfx1;
 
+import com.example.prpjectfx1.Post.AppContext;
 import com.example.prpjectfx1.entity.User;
 import com.example.prpjectfx1.repository.UserRepository;
 import javafx.fxml.FXML;
@@ -132,7 +133,7 @@ public class Follow {
     }
 
     @FXML
-    protected void PersonalPageClick() throws SQLException {
+    protected void PersonalPageClick() throws SQLException, ClassNotFoundException {
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         String id = userPreferences.get("id", "");
 
