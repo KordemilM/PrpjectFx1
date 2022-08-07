@@ -46,6 +46,7 @@ public class message_View_Controller implements Initializable {
             title.next();
             is_Group = title.getString("Type").equals("Group");
             GroupName.setText(title.getString("Name"));
+            GroupImage.setImage(new Image("file:/Profile_pic"+title.getString("profile")));
             //set Title (members)
             if(is_Group){
                 ResultSet members = connection.createStatement().executeQuery
@@ -81,9 +82,7 @@ public class message_View_Controller implements Initializable {
     }
 
     public void newMassage() throws SQLException {
-        if (message.getText().isEmpty()){
-            return;
-        }else {
+        if (!message.getText().isEmpty()){
             //DB
             String content = message.getText().trim();
             connection.createStatement().executeUpdate
