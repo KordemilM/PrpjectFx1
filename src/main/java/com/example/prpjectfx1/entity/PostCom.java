@@ -27,7 +27,7 @@ public class PostCom {
     private Timestamp date;
 
     private String image;
-
+    @Getter
     private boolean isAds;
 
     private ArrayList<PostCom> children;

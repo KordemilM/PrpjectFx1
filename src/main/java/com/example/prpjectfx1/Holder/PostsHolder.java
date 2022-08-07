@@ -10,13 +10,8 @@ import java.util.ArrayList;
 @Setter
 @NoArgsConstructor
 public class PostsHolder {
+    @Getter
     private static PostsHolder instance;
     private ArrayList<PostCom> posts = new ArrayList<>();
 
-    public static PostsHolder getInstance() {
-        if (instance == null) {
-            instance = new PostsHolder();
-        }
-        return instance;
-    }
 }

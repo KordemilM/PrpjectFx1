@@ -164,12 +164,12 @@ public class RecentController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Explore/Comment/Comments.fxml"));
         Parent root = loader.load();
         CommentsController commentsController = loader.getController();
-        IntegerHolder integerHolder = IntegerHolder.getInstance();
+        IntegerHolder integerHolder = IntegerHolder.getINSTANCE();
         integerHolder.setNum(1);
         integerHolder.setIndex(ManyPostsHolder.instances.size());
         commentsController.initializePageNumber();
         commentsController.initializeIndex();
-        ManyPostsHolder manyPostsHolder = ManyPostsHolder.getInstance(ManyPostsHolder.instances.size());
+        ManyPostsHolder manyPostsHolder = ManyPostsHolder.getINSTANCE(ManyPostsHolder.instances.size());
         manyPostsHolder.setPosts(AppContext.getPostComRepos().getChildren(postCom.getId(),AppContext.getConnection()));
         UserHolder userHolder = UserHolder.getINSTANCE();
         userHolder.setUser(user);

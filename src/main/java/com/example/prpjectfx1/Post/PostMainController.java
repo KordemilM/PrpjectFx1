@@ -20,7 +20,7 @@ public class PostMainController {
     private static User user;
 
     public void initializeUser() {
-        UserHolder userHolder = UserHolder.getInstance();
+        UserHolder userHolder = UserHolder.getINSTANCE();
         user = userHolder.getUser();
     }
 
@@ -28,7 +28,7 @@ public class PostMainController {
             FXMLLoader loader =  new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("AddPost/AddPost.fxml")));
             Parent root = loader.load();
             AddPostController controller = loader.getController();
-            UserHolder holder = UserHolder.getInstance();
+            UserHolder holder = UserHolder.getINSTANCE();
             holder.setUser(user);
             controller.initializeUser();
             Scene scene = new Scene(root);
@@ -41,7 +41,7 @@ public class PostMainController {
         FXMLLoader loader =  new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("Myposts/ShowMyPosts.fxml")));
         Parent root = loader.load();
         ShowMyPostsController controller = loader.getController();
-        UserHolder holder = UserHolder.getInstance();
+        UserHolder holder = UserHolder.getINSTANCE();
         holder.setUser(user);
         controller.initializeUser();
         ShowMyPostsController.pageNumber = 1;
@@ -63,7 +63,7 @@ public class PostMainController {
         PostsHolder postsHolder = PostsHolder.getInstance();
         postsHolder.setPosts(AppContext.getPostComRepos().getLast10Post(user.getUserName(), AppContext.getConnection()));
         controller.initializePost();
-        UserHolder holder = UserHolder.getInstance();
+        UserHolder holder = UserHolder.getINSTANCE();
         holder.setUser(user);
         controller.initializeUser();
         controller.main();
@@ -78,10 +78,10 @@ public class PostMainController {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("Explore/ShowAd.fxml")));
             Parent root = loader.load();
             ShowAdController controller = loader.getController();
-            UserHolder holder = UserHolder.getInstance();
+            UserHolder holder = UserHolder.getINSTANCE();
             holder.setUser(user);
             controller.initializeUser();
-            PostHolder postHolder = PostHolder.getInstance();
+            PostHolder postHolder = PostHolder.getINSTANCE();
             postHolder.setPostCom(AppContext.getPostComRepos().getRandomAdsPost(user.getUserName(), AppContext.getConnection()));
             controller.initializePost();
             controller.main();
@@ -95,7 +95,7 @@ public class PostMainController {
         try {
             FXMLLoader loader2 = new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("Explore/Explore.fxml")));
             Parent root2 = loader2.load();
-            IntegerHolder holder2 = IntegerHolder.getInstance();
+            IntegerHolder holder2 = IntegerHolder.getINSTANCE();
             holder2.setNum(1);
             ExploreController controller2 = loader2.getController();
             controller2.initializePageNumber();

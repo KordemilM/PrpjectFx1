@@ -1,5 +1,6 @@
 package com.example.prpjectfx1.Post;
 
+import com.example.prpjectfx1.Holder.PostHolder;
 import com.example.prpjectfx1.Holder.PostsHolder;
 import com.example.prpjectfx1.Holder.UserHolder;
 import com.example.prpjectfx1.Main;
@@ -54,7 +55,7 @@ public class ShowMyPostsController {
     }
 
     public void initializeUser() {
-        UserHolder userHolder = UserHolder.getInstance();
+        UserHolder userHolder = UserHolder.getINSTANCE();
         this.user = userHolder.getUser();
     }
 
@@ -124,7 +125,7 @@ public class ShowMyPostsController {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("PostMain.fxml"));
         Parent root = fxmlLoader.load();
         PostMainController controller = fxmlLoader.getController();
-        UserHolder holder = UserHolder.getInstance();
+        UserHolder holder = UserHolder.getINSTANCE();
         holder.setUser(user);
         controller.initializeUser();
         Scene scene = new Scene(root);

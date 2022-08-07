@@ -26,7 +26,7 @@ public class PostComRepos {
         preparedStatement.setInt(6, 0);
         preparedStatement.setTimestamp(7, post.getDate());
         preparedStatement.setString(8, post.getImage());
-        preparedStatement.setInt(9, post.getIsAds()?1:0);
+        preparedStatement.setInt(9, post.isAds()?1:0);
         preparedStatement.executeUpdate();
     }
 
@@ -51,7 +51,7 @@ public class PostComRepos {
             postCom.setParent(0);
             postCom.setDate(resultSet.getTimestamp("datetime"));
             postCom.setImage(resultSet.getString("image"));
-            postCom.setIsAds(resultSet.getInt("isAds") == 1);
+            postCom.setAds(resultSet.getInt("isAds") == 1);
             postComArrayList.add(postCom);
         }
         statement.close();
@@ -115,7 +115,7 @@ public class PostComRepos {
         preparedStatement.setInt(6, post.getParent());
         preparedStatement.setTimestamp(7, post.getDate());
         preparedStatement.setString(8, post.getImage());
-        preparedStatement.setInt(9, post.getIsAds()?1:0);
+        preparedStatement.setInt(9, post.isAds()?1:0);
         preparedStatement.executeUpdate();
     }
 

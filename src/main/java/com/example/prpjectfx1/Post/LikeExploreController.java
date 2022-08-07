@@ -14,7 +14,7 @@ public class LikeExploreController {
     private PostCom postCom;
 
     public void initializePost() {
-        PostHolder postHolder = PostHolder.getInstance();
+        PostHolder postHolder = PostHolder.getINSTANCE();
         this.postCom = postHolder.getPostCom();
     }
 

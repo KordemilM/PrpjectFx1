@@ -14,7 +14,7 @@ public class ManyPostsHolder {
     public static ArrayList<ManyPostsHolder> instances = new ArrayList<>();
     private ArrayList<PostCom> posts = new ArrayList<>();
 
-    public static ManyPostsHolder getInstance(int index) {
+    public static ManyPostsHolder getINSTANCE(int index) {
         if (instances.size() <= index) {
             instances.add(new ManyPostsHolder());
         }
