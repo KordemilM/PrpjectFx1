@@ -8,6 +8,8 @@ import lombok.Setter;
 @Setter
 public class UserHolder {
     private User user;
+
+    @Getter
     private static final UserHolder INSTANCE = new UserHolder();
 
 }

@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 public class PostHolder {
     private PostCom postCom;
+    @Getter
     private static final PostHolder INSTANCE = new PostHolder();
 
 }

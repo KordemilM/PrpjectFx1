@@ -24,12 +24,12 @@ public class AddCommentController {
     User user;
 
     public void initializePost() {
-        PostHolder postComHolder = PostHolder.getInstance();
+        PostHolder postComHolder = PostHolder.getINSTANCE();
         parent = postComHolder.getPostCom();
     }
 
     public void initializeUser() {
-        UserHolder userHolder = UserHolder.getInstance();
+        UserHolder userHolder = UserHolder.getINSTANCE();
         user = userHolder.getUser();
     }
 
@@ -39,7 +39,7 @@ public class AddCommentController {
         postCom.setSubject(commentSub.getText());
         postCom.setUserName(user.getUserName());
         postCom.setParent(parent.getId());
-        postCom.setIsAds(false);
+        postCom.setAds(false);
         postCom.setLikes(0);
         postCom.setViews(0);
         postCom.setDate(Timestamp.valueOf(java.time.LocalDateTime.now()));
