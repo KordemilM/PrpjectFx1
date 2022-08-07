@@ -100,14 +100,18 @@ public class LogIn {
 
     @FXML
     protected void forgotPasswordClick(){
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("forgotPassword.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("forgotPassword.fxml"));
+        Parent root = null;
         try {
-            Scene scene = new Scene(fxmlLoader.load(), 400, 500);
-            Stage stage  = Main.mainStage;
-            stage.setScene(scene);
-            stage.show();
+            root = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        ForgotPassword forgotPassword = loader.getController();
+        forgotPassword.theme();
+        Stage stage = Main.mainStage;
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }
