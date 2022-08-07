@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
@@ -40,9 +41,10 @@ public class Chats_View_Controller implements Initializable {
             user = UserRepository.searchUser(OnlineUser);
             //get Chats from DB
             ResultSet chats = Main.connection.createStatement().executeQuery
-                    ("SELECT * FROM `project`.`"+OnlineUser+"_chatslist`" +
-                            "LEFT JOIN `project`.`chat_info`" +
-                            "ORDER BY `last_Update` DESC " );
+                    ("SELECT * FROM `project`.`"+OnlineUser+"_chatslist` lis" +
+                            "LEFT JOIN `project`.`chat_info` inf " +
+                            " USING (chat_id) " +
+                            "ORDER BY inf.last_Update DESC" );
             //make the list of chats
             while (chats.next()){
                 Button btn = new Button();//init button
@@ -55,10 +57,12 @@ public class Chats_View_Controller implements Initializable {
                 }
                 HBox hBox = new HBox();
                 btn.setGraphic(hBox);
-                Image image = new Image("file: Profile_pic/default.png");
+                Image image ;
                 try {
                     image = new Image(chats.getString("profile"));
-                }catch (Exception e){
+                }catch (IllegalArgumentException e){
+                    image = new Image("/com/example/prpjectfx1/images/default.png");
+                    System.out.println(chats.getString("profile"));
                     e.printStackTrace();
                 }
                 ImageView imageView = new ImageView(image);//init image view
@@ -142,7 +146,7 @@ public class Chats_View_Controller implements Initializable {
                 });
             }
         } catch (SQLException e) {
-            System.out.println("no Chats");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -157,8 +161,8 @@ public class Chats_View_Controller implements Initializable {
     }
 
     public void theme(){
-        borderPane.getStylesheets().add(getClass().getResource("/com/styles/" +
-                (Setting.isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
+        borderPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/styles/" +
+                (Setting.isLightMode ? "light" : "dark") + "Mode.css")).toExternalForm());
     }
 
     @FXML

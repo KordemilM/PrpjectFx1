@@ -34,9 +34,8 @@ public class newChat_Controller implements Initializable {
     private Label Check_username , Warnings;
     @FXML
     private ImageView imageView;
-    private String pictureName = "default.png";
     private final List<String> members = new ArrayList<>();
-    private File GroupPic_file;
+
     public void choosePicture() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Group Picture");
@@ -44,11 +43,10 @@ public class newChat_Controller implements Initializable {
                 new FileChooser.ExtensionFilter("Photo",
                         "*.png","*.jpg");
         fileChooser.getExtensionFilters().add(extension);
-        GroupPic_file = fileChooser.showOpenDialog(null);
-        if(GroupPic_file != null){
-            Image image = new Image(String.valueOf(GroupPic_file.toURI()));
+        File groupPic_file = fileChooser.showOpenDialog(null);
+        if(groupPic_file != null){
+            Image image = new Image(String.valueOf(groupPic_file.toURI()));
             imageView.setImage(image);
-            pictureName = GroupPic_file.getName();
         }
     }
 
@@ -114,8 +112,7 @@ public class newChat_Controller implements Initializable {
                     VALUES (?,?,?)""");
                 p.setString(1,GroupName.getText());
                 p.setString(2,description.getText());
-                pictureName = id+".png";
-                p.setString(3,pictureName);
+                p.setString(3,imageView.getImage().getUrl());
                 p.executeUpdate();
                 //creat member Table for Group
                 Main.connection.createStatement().executeUpdate("CREATE TABLE `"+id+"_members` (\n" +
@@ -171,11 +168,6 @@ public class newChat_Controller implements Initializable {
 
                 }
             }
-        //copy picture to server
-        {
-            if(GroupPic_file != null)
-                copyFileUsingStream(GroupPic_file, new File("./src/main/resources/Profile_pic/" + pictureName));
-        }
         //Change scene to Chat_View
             {
                 message_View_Controller.id = id;
@@ -299,23 +291,4 @@ public class newChat_Controller implements Initializable {
         Main.mainStage.setScene(new Scene(fxmlLoader.load()));
     }
 
-    //methode to copy the image to the server
-    private static void copyFileUsingStream(File source, File dest) throws IOException {
-        InputStream is = null;
-        OutputStream os = null;
-        try {
-            is = new FileInputStream(source);
-            os = new FileOutputStream(dest);
-            byte[] buffer = new byte[1024];
-            int length;
-            while ((length = is.read(buffer)) > 0) {
-                os.write(buffer, 0, length);
-            }
-        } finally {
-            assert is != null;
-            is.close();
-            assert os != null;
-            os.close();
-        }
-    }
 }
