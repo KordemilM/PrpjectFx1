@@ -3,9 +3,7 @@ package com.example.prpjectfx1;
 import com.example.prpjectfx1.Holder.PostsHolder;
 import com.example.prpjectfx1.Holder.UserHolder;
 import com.example.prpjectfx1.Messanger.Chats_View_Controller;
-import com.example.prpjectfx1.Post.AppContext;
-import com.example.prpjectfx1.Post.PostMainController;
-import com.example.prpjectfx1.Post.ShowMyPostsController;
+import com.example.prpjectfx1.Post.*;
 import com.example.prpjectfx1.entity.PostCom;
 import com.example.prpjectfx1.entity.User;
 import com.example.prpjectfx1.repository.UserRepository;
@@ -113,7 +111,7 @@ public class PersonalPage implements Initializable {
             viewsLastPost.setText(String.valueOf(lastPost.getViews()));
         }
         catch(Exception ignored){}
-        UserHolder userHolder = UserHolder.getInstance();
+        UserHolder userHolder = UserHolder.getINSTANCE();
         userHolder.setUser(user);
 
     }
@@ -186,13 +184,33 @@ public class PersonalPage implements Initializable {
     }
 
     @FXML
-    protected void homeButtonClick() {
-
+    protected void homeButtonClick(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+        FXMLLoader loader =  new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("Recent/Recent.fxml")));
+        Parent root = loader.load();
+        RecentController controller = loader.getController();
+        RecentController.pageNumber = 1;
+        PostsHolder postsHolder = PostsHolder.getInstance();
+        postsHolder.setPosts(AppContext.getPostComRepos().getLast10Post(UserHolder.getINSTANCE().getUser().getUserName(), AppContext.getConnection()));
+        controller.initializePost();
+        controller.initializeUser();
+        controller.main();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
-    protected void addPostButtonClick() {
-
+    protected void addPostButtonClick(ActionEvent event) throws IOException {
+        FXMLLoader loader =  new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("AddPost/AddPost.fxml")));
+        Parent root = loader.load();
+        AddPostController controller = loader.getController();
+        controller.initializeUser();
+        controller.theme();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
     @Override
@@ -215,7 +233,7 @@ public class PersonalPage implements Initializable {
         controller.initializeUser();
         ShowMyPostsController.pageNumber = 1;
         PostsHolder postsHolder = PostsHolder.getInstance();
-        postsHolder.setPosts(AppContext.getPostComRepos().getAllPostsByUser(UserHolder.getInstance().getUser().getUserName(), AppContext.getConnection()));
+        postsHolder.setPosts(AppContext.getPostComRepos().getAllPostsByUser(UserHolder.getINSTANCE().getUser().getUserName(), AppContext.getConnection()));
         controller.initializePost();
         controller.main();
         Scene scene = new Scene(root);

@@ -1,10 +1,16 @@
 package com.example.prpjectfx1;
 
-import com.example.prpjectfx1.Post.AppContext;
+import com.example.prpjectfx1.Holder.IntegerHolder;
+import com.example.prpjectfx1.Holder.PostHolder;
+import com.example.prpjectfx1.Holder.PostsHolder;
+import com.example.prpjectfx1.Holder.UserHolder;
+import com.example.prpjectfx1.Post.*;
 import com.example.prpjectfx1.entity.User;
 import com.example.prpjectfx1.repository.UserRepository;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -76,7 +82,7 @@ public class Follow {
     }
 
     @FXML
-    protected void searchFollower() throws SQLException {
+    protected void searchFollower() throws SQLException, ClassNotFoundException {
         noUserLabel.setText("");
         usernameLabel.setText("");
         nameLabel.setText("");
@@ -87,7 +93,7 @@ public class Follow {
         followingLabel.setText("");
         postLabel.setText("");
 
-//        numPostLabel.setText("");
+        numPostLabel.setText("");
 
         if(!UserRepository.searchUserByUsername(searchText.getText()) && !searchText.getText().equals("")){
             User user = UserRepository.searchUser(searchText.getText());
@@ -109,7 +115,7 @@ public class Follow {
                 profileImage.setImage(image);
             }
 
-//            numPostLabel.setText();
+            numPostLabel.setText(Integer.toString(AppContext.getPostComRepos().getNumberOfPosts(user.getUserName(),AppContext.getConnection())));
         }else {
             noUserLabel.setText("no user exists with this Id");
         }
@@ -183,6 +189,89 @@ public class Follow {
         if(!button3.getText().equals("")){
             searchText.setText(button3.getText());
         }
+    }
+
+    public void toExplore(ActionEvent event) throws SQLException {
+        Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
+        String id = userPreferences.get("id", "");
+        User user = UserRepository.searchUser(id);
+
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("Explore/ShowAd.fxml")));
+            Parent root = loader.load();
+            ShowAdController controller = loader.getController();
+            UserHolder holder = UserHolder.getINSTANCE();
+            holder.setUser(user);
+            controller.initializeUser();
+            PostHolder postHolder = PostHolder.getINSTANCE();
+            postHolder.setPostCom(AppContext.getPostComRepos().getRandomAdsPost(user.getUserName(), AppContext.getConnection()));
+            controller.initializePost();
+            controller.main();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Ad");
+            stage.show();
+        }
+        catch (Exception ignored) {}
+        try {
+            FXMLLoader loader2 = new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("Explore/Explore.fxml")));
+            Parent root2 = loader2.load();
+            IntegerHolder holder2 = IntegerHolder.getINSTANCE();
+            holder2.setNum(1);
+            ExploreController controller2 = loader2.getController();
+            controller2.initializePageNumber();
+            controller2.initializeUser();
+            PostsHolder postsHolder = PostsHolder.getInstance();
+            postsHolder.setPosts(AppContext.getPostComRepos().getAllPosts(user.getUserName(), AppContext.getConnection()));
+            controller2.initializePost();
+            controller2.main();
+            Scene scene2 = new Scene(root2);
+            Stage stage2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage2.setScene(scene2);
+            stage2.show();
+        }
+        catch (Exception ignored) {}
+    }
+
+    public void toAddPost(ActionEvent event) throws IOException, SQLException {
+        Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
+        String id = userPreferences.get("id", "");
+        User user = UserRepository.searchUser(id);
+
+        FXMLLoader loader =  new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("AddPost/AddPost.fxml")));
+        Parent root = loader.load();
+        AddPostController controller = loader.getController();
+        UserHolder holder = UserHolder.getINSTANCE();
+        holder.setUser(user);
+        controller.initializeUser();
+        controller.theme();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void toHomePage(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+        Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
+        String id = userPreferences.get("id", "");
+        User user = UserRepository.searchUser(id);
+
+        FXMLLoader loader =  new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("Recent/Recent.fxml")));
+        Parent root = loader.load();
+        RecentController controller = loader.getController();
+        RecentController.pageNumber = 1;
+        PostsHolder postsHolder = PostsHolder.getInstance();
+        postsHolder.setPosts(AppContext.getPostComRepos().getLast10Post(user.getUserName(), AppContext.getConnection()));
+        controller.initializePost();
+        UserHolder holder = UserHolder.getINSTANCE();
+        holder.setUser(user);
+        controller.initializeUser();
+        controller.main();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
 }
