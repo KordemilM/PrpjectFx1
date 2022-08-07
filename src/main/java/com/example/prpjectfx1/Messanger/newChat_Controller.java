@@ -1,5 +1,6 @@
 package com.example.prpjectfx1.Messanger;
 
+import com.example.prpjectfx1.Setting;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -7,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
@@ -17,6 +19,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import com.example.prpjectfx1.Main;
@@ -24,6 +27,9 @@ import com.example.prpjectfx1.Main;
 import static com.example.prpjectfx1.Main.OnlineUser;
 
 public class newChat_Controller implements Initializable {
+
+    @FXML
+    private BorderPane borderPane;
     @FXML
     private TextField GroupName , addUser , addContact;
     @FXML
@@ -34,9 +40,8 @@ public class newChat_Controller implements Initializable {
     private Label Check_username , Warnings;
     @FXML
     private ImageView imageView;
-    private String pictureName = "default.png";
     private final List<String> members = new ArrayList<>();
-    private File GroupPic_file;
+
     public void choosePicture() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Group Picture");
@@ -44,11 +49,10 @@ public class newChat_Controller implements Initializable {
                 new FileChooser.ExtensionFilter("Photo",
                         "*.png","*.jpg");
         fileChooser.getExtensionFilters().add(extension);
-        GroupPic_file = fileChooser.showOpenDialog(null);
-        if(GroupPic_file != null){
-            Image image = new Image(String.valueOf(GroupPic_file.toURI()));
+        File groupPic_file = fileChooser.showOpenDialog(null);
+        if(groupPic_file != null){
+            Image image = new Image(String.valueOf(groupPic_file.toURI()));
             imageView.setImage(image);
-            pictureName = GroupPic_file.getName();
         }
     }
 
@@ -114,8 +118,7 @@ public class newChat_Controller implements Initializable {
                     VALUES (?,?,?)""");
                 p.setString(1,GroupName.getText());
                 p.setString(2,description.getText());
-                pictureName = id+".png";
-                p.setString(3,pictureName);
+                p.setString(3,imageView.getImage().getUrl());
                 p.executeUpdate();
                 //creat member Table for Group
                 Main.connection.createStatement().executeUpdate("CREATE TABLE `"+id+"_members` (\n" +
@@ -171,15 +174,10 @@ public class newChat_Controller implements Initializable {
 
                 }
             }
-        //copy picture to server
-        {
-            if(GroupPic_file != null)
-                copyFileUsingStream(GroupPic_file, new File("./src/main/resources/Profile_pic/" + pictureName));
-        }
         //Change scene to Chat_View
             {
                 message_View_Controller.id = id;
-                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Chats_View.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(message_View_Controller.class.getResource("/chat/Chats_View.fxml"));
                 Main.mainStage.setScene(new Scene(fxmlLoader.load()));
             }
         }
@@ -188,10 +186,10 @@ public class newChat_Controller implements Initializable {
     public void Add_new_Contact() throws SQLException, IOException {
         String new_Contact = addContact.getText();
         ResultSet already_added = Main.connection.createStatement().executeQuery
-                ("SELECT `* FROM `project`.`"+OnlineUser+"_chatslist` lis" +
+                ("SELECT * FROM `project`.`"+OnlineUser+"_chatslist` lis" +
                         "LEFT JOIN `project`.`chat_info` inf " +
-                        " ON inf.chat_id = lis.chat_id " +
-                        "WHERE Type = 'private' AND Name = '"+new_Contact+"'");
+                        " USING(chat_id)" +
+                        "WHERE inf.Type = 'private' AND Name = '"+new_Contact+"'");
         ResultSet if_exists = Main.connection.createStatement().executeQuery("SELECT `username` FROM `project`.`my_user` WHERE `username` = '"+new_Contact+"'");
         //check Name
             //Want to chat with himself/herself
@@ -203,11 +201,21 @@ public class newChat_Controller implements Initializable {
             //done
         else {
             //add to user_chatsList -> DataBase
+            //add to chat_info
+            Main.connection.createStatement().executeUpdate("INSERT INTO `project`.`chat_info`\n" +
+                    "(`name`,\n" +
+                    "`description`,\n" +
+                    "`Type` )\n " +
+                    "VALUES\n" +
+                    "('"+new_Contact+"',\n" +
+                    "NULL" +
+                    "'private');" );
                 //find Last id
             ResultSet r = Main.connection.createStatement().executeQuery
                     ("SELECT MAX(chat_id) AS Last_id FROM `project`.`chat_info`");
             r.next(); int Last_id = r.getInt("Last_id");
                 //add
+
             Main.connection.createStatement().executeUpdate("INSERT INTO `project`.`"+OnlineUser+"_chatslist`\n" +
                     "(`chat_id`,\n" +
                     "`Type`)\n" +
@@ -231,17 +239,6 @@ public class newChat_Controller implements Initializable {
                     "VALUES\n" +
                     "("+Last_id+",\n" +
                     "'private');\n");
-            //add to chat_info
-            Main.connection.createStatement().executeUpdate("INSERT INTO `project`.`chat_info`\n" +
-                    "(`chat_id`,\n" +
-                    "`name`,\n" +
-                    "`description`,\n" +
-                    "`profile`)\n" +
-                    "VALUES\n" +
-                    "("+Last_id+",\n" +
-                    "'"+new_Contact+"',\n" +
-                    "NULL,\n" +
-                    "NULL);\n");
             //create table for chat
             Main.connection.createStatement().executeUpdate("CREATE TABLE `"+Last_id+"_chat` (\n" +
                     "  `id` int NOT NULL AUTO_INCREMENT,\n" +
@@ -256,7 +253,7 @@ public class newChat_Controller implements Initializable {
             //Initialize chat screen
             {
                 message_View_Controller.id = Last_id;
-                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Chats_View.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(Chats_View_Controller.class.getResource("/chat/message_View.fxml"));
                 Main.mainStage.setScene(new Scene(fxmlLoader.load()));
             }
         }
@@ -267,6 +264,7 @@ public class newChat_Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Initialize DataBase
         try {
+            theme();
             Main.connection.createStatement().executeUpdate("""
                     CREATE TABLE IF NOT EXISTS `project`.`chat_info` (
                       `chat_id` int NOT NULL AUTO_INCREMENT,
@@ -299,23 +297,9 @@ public class newChat_Controller implements Initializable {
         Main.mainStage.setScene(new Scene(fxmlLoader.load()));
     }
 
-    //methode to copy the image to the server
-    private static void copyFileUsingStream(File source, File dest) throws IOException {
-        InputStream is = null;
-        OutputStream os = null;
-        try {
-            is = new FileInputStream(source);
-            os = new FileOutputStream(dest);
-            byte[] buffer = new byte[1024];
-            int length;
-            while ((length = is.read(buffer)) > 0) {
-                os.write(buffer, 0, length);
-            }
-        } finally {
-            assert is != null;
-            is.close();
-            assert os != null;
-            os.close();
-        }
+    public void theme(){
+        borderPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/styles/" +
+                (Setting.isLightMode ? "light" : "dark") + "Mode.css")).toExternalForm());
     }
+
 }

@@ -31,8 +31,8 @@ public class Main extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 400, 500);
         stage.setScene(scene);
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/image/icon2.png")));
-        //stage.setMinWidth(450.0);
-        //stage.setMinHeight(550.0);
+        stage.setMinWidth(400.0);
+        stage.setMinHeight(500.0);
         stage.show();
     }
 }

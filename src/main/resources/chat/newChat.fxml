@@ -1,29 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="400.0" onDragDetected="#backToChatList" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prpjectfx1.Messanger.newChat_Controller">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="400.0" onDragDetected="#backToChatList" prefHeight="500.0" prefWidth="400.0" stylesheets="@../com/styles/lightMode.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prpjectfx1.Messanger.newChat_Controller">
    <top>
-      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER_LEFT">
+      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="primary-color" BorderPane.alignment="CENTER_LEFT">
          <BorderPane.margin>
             <Insets left="10.0" top="10.0" />
          </BorderPane.margin>
          <children>
-            <Button mnemonicParsing="false" onAction="#BackToChatList" text="&lt;-" />
+            <Button mnemonicParsing="false" onAction="#BackToChatList" style="-fx-background-color: #dd439d;" styleClass="round-border" text="&lt;-" textFill="#ffd9ec">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
             <Label fx:id="Warnings" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="32.0" prefWidth="339.0" text="Felegram" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
@@ -42,16 +36,16 @@
                   </LinearGradient>
                </textFill>
                <font>
-                  <Font name="System Bold" size="22.0" />
+                  <Font name="Bell MT Bold" size="22.0" />
                </font>
             </Label>
          </children>
       </HBox>
    </top>
    <center>
-      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" BorderPane.alignment="CENTER">
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="primary-color" BorderPane.alignment="CENTER">
          <content>
-            <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="509.0" spacing="5.0">
+            <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="509.0" spacing="5.0" styleClass="primary-color">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="New Chat" textAlignment="CENTER" VBox.vgrow="ALWAYS">
                      <textFill>
@@ -79,8 +73,11 @@
                         <Image url="@../Profile_pic/default.png" />
                      </image>
                   </ImageView>
-                  <Button mnemonicParsing="false" onAction="#choosePicture" text="+" />
-                  <TextField fx:id="GroupName" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" promptText="GroupName" />
+                  <Button mnemonicParsing="false" onAction="#choosePicture" style="-fx-background-color: #dd439d;" styleClass="round-border" text="+" textFill="#ffd9ec">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <TextField fx:id="GroupName" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" promptText="GroupName" styleClass="round-border" />
                   <TextArea fx:id="description" prefHeight="139.0" prefWidth="151.0" promptText="description" />
                   <HBox prefWidth="200.0" spacing="5.0" VBox.vgrow="ALWAYS">
                      <children>
@@ -91,9 +88,15 @@
                         </ScrollPane>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                            <children>
-                              <TextField fx:id="addUser" promptText="usrname" />
-                              <Button mnemonicParsing="false" onAction="#addMember" text="add" />
-                              <Label fx:id="Check_username" text=": )" />
+                              <TextField fx:id="addUser" promptText="usrname" styleClass="round-border" />
+                              <Button mnemonicParsing="false" onAction="#addMember" style="-fx-background-color: #dd439d;" styleClass="round-border" text="add" textFill="#ffd9ec">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Button>
+                              <Label fx:id="Check_username" text=": )" textFill="#dd439d">
+                                 <font>
+                                    <Font name="System Bold Italic" size="12.0" />
+                                 </font></Label>
                            </children>
                         </VBox>
                      </children>
@@ -101,7 +104,10 @@
                         <Insets left="10.0" />
                      </VBox.margin>
                   </HBox>
-                  <Button mnemonicParsing="false" onAction="#CreateGroup" text="OK" />
+                  <Button mnemonicParsing="false" onAction="#CreateGroup" style="-fx-background-color: #dd439d;" styleClass="round-border" text="OK" textFill="#ffd9ec">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
                   <Label text="New Contact">
                      <textFill>
                         <LinearGradient endX="1.0" endY="1.0">
@@ -124,7 +130,10 @@
                      </font>
                   </Label>
                   <TextField fx:id="addContact" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" promptText="usrname" />
-                  <Button mnemonicParsing="false" onAction="#Add_new_Contact" text="add" />
+                  <Button mnemonicParsing="false" onAction="#Add_new_Contact" style="-fx-background-color: #dd439d;" text="add" textFill="#ffd9ec">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
                </children>
                <padding>
                   <Insets bottom="10.0" />

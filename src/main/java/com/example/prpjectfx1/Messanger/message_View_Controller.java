@@ -1,14 +1,22 @@
 package com.example.prpjectfx1.Messanger;
 
 
+import com.example.prpjectfx1.Main;
+import com.example.prpjectfx1.Setting;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitMenuButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -17,16 +25,19 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import static com.example.prpjectfx1.Main.OnlineUser;
 import static com.example.prpjectfx1.Main.connection;
 
 public class message_View_Controller implements Initializable {
 
+    @FXML
+    private BorderPane borderPane;
     @FXML
     private ImageView GroupImage;
     @FXML
@@ -41,8 +52,10 @@ public class message_View_Controller implements Initializable {
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
         try {
+            theme();
             //set Title (Name)
-            ResultSet title = connection.createStatement().executeQuery("SELECT * FROM ``project`.`chat_info` WHERE `chat_id` = "+id);
+            ResultSet title = connection.createStatement().executeQuery
+                    ("SELECT * FROM `project`.`chat_info` WHERE chat_id = "+id);
             title.next();
             is_Group = title.getString("Type").equals("Group");
             GroupName.setText(title.getString("Name"));
@@ -50,9 +63,9 @@ public class message_View_Controller implements Initializable {
             //set Title (members)
             if(is_Group){
                 ResultSet members = connection.createStatement().executeQuery
-                        ("SELECT * FROM ``project`.`"+id+"_members` m" +
+                        ("SELECT * FROM `project`.`"+id+"_members` m" +
                                 " LEFT JOIN `project`.`user` u " +
-                                "ON m.`member_username` = u.`username`");
+                                "ON m.member_username = u.username");
                 StringBuilder members_list = new StringBuilder();
                 while (members.next()){
                     members_list.append(members.getString("name")).append(",");
@@ -65,8 +78,8 @@ public class message_View_Controller implements Initializable {
                 ResultSet chats = connection.createStatement().executeQuery
                         ("SELECT * FROM `project`.`"+id+"_chat` ch" +
                                 " LEFT JOIN `project`.`user` un" +
-                                " ON ch.sender_username = us.username" +
-                                " ORDER BY `last_Update`  ");
+                                " ON ch.sender_username = un.username" +
+                                " ORDER BY send_time ");
 
                 while (chats.next()){
                     boolean is_me = chats.getString("sender_username").equals(OnlineUser);
@@ -158,6 +171,7 @@ public class message_View_Controller implements Initializable {
                             text.setStrokeType(StrokeType.OUTSIDE);
                             text.setStrokeWidth(0);
                             text.setWrappingWidth(146.53125);
+                            textFlow.setPrefHeight(text.getLayoutBounds().getHeight());
                         }
 
                         Label time_label = new Label();
@@ -165,4 +179,14 @@ public class message_View_Controller implements Initializable {
                         time_label.setText(time);
                         time_label.setTextAlignment(TextAlignment.RIGHT);
     }
+
+    public void back() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Chats_View_Controller.class.getResource("/chat/Chats_View.fxml"));
+        Main.mainStage.setScene(new Scene(fxmlLoader.load()));
     }
+
+    public void theme(){
+        borderPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/styles/" +
+                (Setting.isLightMode ? "light" : "dark") + "Mode.css")).toExternalForm());
+    }
+}

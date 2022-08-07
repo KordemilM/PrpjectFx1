@@ -43,7 +43,7 @@ public class AddPostController {
     private String imagePath;
 
     public void initializeUser() {
-        UserHolder userHolder = UserHolder.getInstance();
+        UserHolder userHolder = UserHolder.getINSTANCE();
         this.user = userHolder.getUser();
     }
 
@@ -70,7 +70,7 @@ public class AddPostController {
         postCom.setParent(0);
         postCom.setImage(imagePath);
         postCom.setViews(0);
-        postCom.setIsAds(user.getAccount() == 0);
+        postCom.setAds(user.getAccount() == 0);
         AppContext.getPostComRepos().addPost(postCom, AppContext.getConnection());
     }
 
@@ -78,7 +78,7 @@ public class AddPostController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("PostMain.fxml"));
         Parent root = loader.load();
         PostMainController controller = loader.getController();
-        UserHolder holder = UserHolder.getInstance();
+        UserHolder holder = UserHolder.getINSTANCE();
         holder.setUser(user);
         controller.initializeUser();
         Scene scene = new Scene(root);

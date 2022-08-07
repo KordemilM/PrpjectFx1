@@ -37,24 +37,24 @@ public class CommentsController {
     int index;
 
     public void initializePost() {
-        ManyPostsHolder manyPostsHolder = ManyPostsHolder.getInstance(index);
+        ManyPostsHolder manyPostsHolder = ManyPostsHolder.getINSTANCE(index);
         if(manyPostsHolder.getPosts().size() >= pageNumber) {
             postCom = manyPostsHolder.getPosts().get(pageNumber-1);
         }
     }
 
     public void initializeUser() {
-        UserHolder userHolder = UserHolder.getInstance();
+        UserHolder userHolder = UserHolder.getINSTANCE();
         this.user = userHolder.getUser();
     }
 
     public void initializePageNumber(){
-        IntegerHolder integerHolder = IntegerHolder.getInstance();
+        IntegerHolder integerHolder = IntegerHolder.getINSTANCE();
         this.pageNumber = integerHolder.getNum();
     }
 
     public void initializeIndex(){
-        IntegerHolder integerHolder = IntegerHolder.getInstance();
+        IntegerHolder integerHolder = IntegerHolder.getINSTANCE();
         this.index = integerHolder.getIndex();
     }
 
@@ -83,9 +83,9 @@ public class CommentsController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Explore/Comment/AddComment.fxml"));
         Parent root = loader.load();
         AddCommentController addCommentController = loader.getController();
-        PostHolder postHolder = PostHolder.getInstance();
+        PostHolder postHolder = PostHolder.getINSTANCE();
         postHolder.setPostCom(postCom);
-        UserHolder userHolder = UserHolder.getInstance();
+        UserHolder userHolder = UserHolder.getINSTANCE();
         userHolder.setUser(user);
         addCommentController.initializePost();
         addCommentController.initializeUser();
@@ -99,15 +99,15 @@ public class CommentsController {
     public void commentsCom() throws IOException, SQLException, ClassNotFoundException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Explore/Comment/Comments.fxml"));
         Parent root = loader.load();
-        IntegerHolder integerHolder = IntegerHolder.getInstance();
+        IntegerHolder integerHolder = IntegerHolder.getINSTANCE();
         integerHolder.setNum(1);
         integerHolder.setIndex(index+1);
         CommentsController commentsController = loader.getController();
         commentsController.initializePageNumber();
         commentsController.initializeIndex();
-        ManyPostsHolder manyPostsHolder = ManyPostsHolder.getInstance(index+1);
+        ManyPostsHolder manyPostsHolder = ManyPostsHolder.getINSTANCE(index+1);
         manyPostsHolder.setPosts(AppContext.getPostComRepos().getChildren(postCom.getId(), AppContext.getConnection()));
-        UserHolder userHolder = UserHolder.getInstance();
+        UserHolder userHolder = UserHolder.getINSTANCE();
         userHolder.setUser(user);
         commentsController.initializePost();
         commentsController.initializeUser();
@@ -121,7 +121,7 @@ public class CommentsController {
     }
 
     public void nextCom() {
-        if(ManyPostsHolder.getInstance(index).getPosts().size() > pageNumber) {
+        if(ManyPostsHolder.getINSTANCE(index).getPosts().size() > pageNumber) {
             pageNumber++;
             initializePost();
             initializeCom();

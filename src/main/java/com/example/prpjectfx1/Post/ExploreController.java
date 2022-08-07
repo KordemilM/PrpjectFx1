@@ -50,12 +50,12 @@ public class ExploreController {
     }
 
     public void initializeUser() {
-        UserHolder userHolder = UserHolder.getInstance();
+        UserHolder userHolder = UserHolder.getINSTANCE();
         this.user = userHolder.getUser();
     }
 
     public void initializePageNumber(){
-        IntegerHolder integerHolder = IntegerHolder.getInstance();
+        IntegerHolder integerHolder = IntegerHolder.getINSTANCE();
         this.pageNumber = integerHolder.getNum();
     }
 
@@ -93,7 +93,7 @@ public class ExploreController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Explore/Likes.fxml"));
         Parent root = loader.load();
         LikeExploreController likesController = loader.getController();
-        PostHolder postHolder = PostHolder.getInstance();
+        PostHolder postHolder = PostHolder.getINSTANCE();
         postHolder.setPostCom(postCom);
         likesController.initializePost();
         likesController.mainLikesUserName();
@@ -118,9 +118,9 @@ public class ExploreController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Explore/Comment/AddComment.fxml"));
         Parent root = loader.load();
         AddCommentController addCommentController = loader.getController();
-        PostHolder postHolder = PostHolder.getInstance();
+        PostHolder postHolder = PostHolder.getINSTANCE();
         postHolder.setPostCom(postCom);
-        UserHolder userHolder = UserHolder.getInstance();
+        UserHolder userHolder = UserHolder.getINSTANCE();
         userHolder.setUser(user);
         addCommentController.initializePost();
         addCommentController.initializeUser();
@@ -135,14 +135,14 @@ public class ExploreController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Explore/Comment/Comments.fxml"));
         Parent root = loader.load();
         CommentsController commentsController = loader.getController();
-        IntegerHolder integerHolder = IntegerHolder.getInstance();
+        IntegerHolder integerHolder = IntegerHolder.getINSTANCE();
         integerHolder.setNum(1);
         integerHolder.setIndex(ManyPostsHolder.instances.size());
         commentsController.initializePageNumber();
         commentsController.initializeIndex();
-        ManyPostsHolder manyPostsHolder = ManyPostsHolder.getInstance(ManyPostsHolder.instances.size());
+        ManyPostsHolder manyPostsHolder = ManyPostsHolder.getINSTANCE(ManyPostsHolder.instances.size());
         manyPostsHolder.setPosts(AppContext.getPostComRepos().getChildren(postCom.getId(),AppContext.getConnection()));
-        UserHolder userHolder = UserHolder.getInstance();
+        UserHolder userHolder = UserHolder.getINSTANCE();
         userHolder.setUser(user);
         commentsController.initializePost();
         commentsController.initializeUser();

@@ -1,18 +1,15 @@
 package com.example.prpjectfx1.Holder;
 
 import com.example.prpjectfx1.entity.User;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class UserHolder {
     private User user;
+
+    @Getter
     private static final UserHolder INSTANCE = new UserHolder();
-    public static UserHolder getInstance() {
-        return INSTANCE;
-    }
-    public User getUser() {
-        return user;
-    }
-    public void setUser(User user) {
-        this.user = user;
-    }
 
 }

@@ -175,4 +175,24 @@ public class UserRepository {
         list.sort((o1, o2) -> Integer.compare(map.get(o2), map.get(o1)));
         return list;
     }
+
+    public static boolean searchUserByUsernameAndQuestion(String username, String question) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM my_user WHERE username=?");
+        preparedStatement.setString(1, username);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(resultSet.next()){
+            if(question.equalsIgnoreCase(resultSet.getString(4))){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void updatePassword(String username,String password) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("update my_user set " +
+                "password=? WHERE username=?");
+        preparedStatement.setString(1,password);
+        preparedStatement.setString(2, username);
+        preparedStatement.executeUpdate();
+    }
 }
