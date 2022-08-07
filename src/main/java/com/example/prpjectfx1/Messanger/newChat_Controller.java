@@ -101,13 +101,13 @@ public class newChat_Controller implements Initializable {
             {
                 //get chatroom id
                 ResultSet r = Main.connection.createStatement().executeQuery
-                        ("SELECT MAX(chat_id) AS Last_id FROM `messenger`.`chat_info`");
+                        ("SELECT MAX(chat_id) AS Last_id FROM `project`.`chat_info`");
                 r.next(); id = r.getInt("Last_id") + 1;
                 //add Online User to members
                 members.add(OnlineUser);
                 //add to chat_info Table
                 PreparedStatement p = Main.connection.prepareStatement("""
-                    INSERT INTO `messenger`.`chat_info`
+                    INSERT INTO `project`.`chat_info`
                     (`Name`,
                     `description`,
                     `profile`)
@@ -141,7 +141,7 @@ public class newChat_Controller implements Initializable {
                     //creat table for user if it hasn't been created yet
                     {
                         Main.connection.createStatement().executeUpdate(
-                                "CREATE TABLE IF NOT EXISTS `messenger`.`"+member+"_chatslist` ( " +
+                                "CREATE TABLE IF NOT EXISTS `project`.`"+member+"_chatslist` ( " +
                                         """
                                           `id` int NOT NULL AUTO_INCREMENT,
                                           `chat_id` int NOT NULL,
@@ -154,7 +154,7 @@ public class newChat_Controller implements Initializable {
                     }
                     //add the new chat
                     Main.connection.createStatement().executeUpdate(
-                            "INSERT INTO `messenger`.`"+member+"_chatslist`\n" +
+                            "INSERT INTO `project`.`"+member+"_chatslist`\n" +
                                     "(`chat_id`)\n" +
                                     "VALUES\n" +
                                     "("+id+");\n");
@@ -162,12 +162,12 @@ public class newChat_Controller implements Initializable {
                     //set role
                     String roll = "member";
                     if (member.equals(OnlineUser))  roll = "onerowner";
-                    Main.connection.createStatement().executeUpdate("INSERT INTO `messenger`.`"+id+"_members`\n" +
+                    Main.connection.createStatement().executeUpdate("INSERT INTO `project`.`"+id+"_members`\n" +
                             "(`member_username`,\n" +
                             "`rool`)\n" +
                             "VALUES\n" +
-                            "("+member+",\n" +
-                            ""+roll+");\n");
+                            "( '"+member+"' ,\n" +
+                            " '"+roll+"' );\n");
 
                 }
             }
@@ -188,7 +188,10 @@ public class newChat_Controller implements Initializable {
     public void Add_new_Contact() throws SQLException, IOException {
         String new_Contact = addContact.getText();
         ResultSet already_added = Main.connection.createStatement().executeQuery
-                ("SELECT `* FROM `messenger`.`"+OnlineUser+"_chatslist` WHERE `Type` = 'private' AND `Name` = '"+new_Contact+"'");
+                ("SELECT `* FROM `project`.`"+OnlineUser+"_chatslist` lis" +
+                        "LEFT JOIN `project`.`chat_info` inf " +
+                        " ON inf.chat_id = lis.chat_id " +
+                        "WHERE Type = 'private' AND Name = '"+new_Contact+"'");
         ResultSet if_exists = Main.connection.createStatement().executeQuery("SELECT `username` FROM `project`.`my_user` WHERE `username` = '"+new_Contact+"'");
         //check Name
             //Want to chat with himself/herself
@@ -202,10 +205,10 @@ public class newChat_Controller implements Initializable {
             //add to user_chatsList -> DataBase
                 //find Last id
             ResultSet r = Main.connection.createStatement().executeQuery
-                    ("SELECT MAX(chat_id) AS Last_id FROM `messenger`.`chat_info`");
+                    ("SELECT MAX(chat_id) AS Last_id FROM `project`.`chat_info`");
             r.next(); int Last_id = r.getInt("Last_id");
                 //add
-            Main.connection.createStatement().executeUpdate("INSERT INTO `messenger`.`"+OnlineUser+"_chatslist`\n" +
+            Main.connection.createStatement().executeUpdate("INSERT INTO `project`.`"+OnlineUser+"_chatslist`\n" +
                     "(`chat_id`,\n" +
                     "`Type`)\n" +
                     "VALUES\n" +
@@ -222,14 +225,14 @@ public class newChat_Controller implements Initializable {
                     "  UNIQUE KEY `chat_id_UNIQUE` (`chat_id`)\n" +
                     ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;\n");
             //add to new_Contact_chatsList
-            Main.connection.createStatement().executeUpdate("INSERT INTO `messenger`.`"+new_Contact+"_chatslist`\n" +
+            Main.connection.createStatement().executeUpdate("INSERT INTO `project`.`"+new_Contact+"_chatslist`\n" +
                     "(`chat_id`,\n" +
                     "`Type`)\n" +
                     "VALUES\n" +
                     "("+Last_id+",\n" +
                     "'private');\n");
             //add to chat_info
-            Main.connection.createStatement().executeUpdate("INSERT INTO `messenger`.`chat_info`\n" +
+            Main.connection.createStatement().executeUpdate("INSERT INTO `project`.`chat_info`\n" +
                     "(`chat_id`,\n" +
                     "`name`,\n" +
                     "`description`,\n" +
@@ -264,9 +267,8 @@ public class newChat_Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Initialize DataBase
         try {
-            Main.connection.createStatement().executeUpdate("CREATE DATABASE IF NOT EXISTS `messenger` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;\n");
             Main.connection.createStatement().executeUpdate("""
-                    CREATE TABLE IF NOT EXISTS `chat_info` (
+                    CREATE TABLE IF NOT EXISTS `project`.`chat_info` (
                       `chat_id` int NOT NULL AUTO_INCREMENT,
                       `Name` varchar(45) NOT NULL,
                       `description` varchar(200) DEFAULT NULL,
@@ -278,7 +280,7 @@ public class newChat_Controller implements Initializable {
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
                     """);
             Main.connection.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS " +
-                    "`messenger`.`"+OnlineUser+"_chatslist` (\n" +
+                    "`project`.`"+OnlineUser+"_chatslist` (\n" +
                     "  `id` int NOT NULL AUTO_INCREMENT,\n" +
                     "  `chat_id` int NOT NULL,\n" +
                     "  `Type` enum('Group','private') NOT NULL DEFAULT 'Group',\n" +

@@ -42,7 +42,7 @@ public class message_View_Controller implements Initializable {
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
         try {
             //set Title (Name)
-            ResultSet title = connection.createStatement().executeQuery("SELECT * FROM ``messenger`.`chat_info` WHERE `chat_id` = "+id);
+            ResultSet title = connection.createStatement().executeQuery("SELECT * FROM ``project`.`chat_info` WHERE `chat_id` = "+id);
             title.next();
             is_Group = title.getString("Type").equals("Group");
             GroupName.setText(title.getString("Name"));
@@ -50,7 +50,7 @@ public class message_View_Controller implements Initializable {
             //set Title (members)
             if(is_Group){
                 ResultSet members = connection.createStatement().executeQuery
-                        ("SELECT * FROM ``messenger`.`"+id+"_members` m" +
+                        ("SELECT * FROM ``project`.`"+id+"_members` m" +
                                 " LEFT JOIN `project`.`user` u " +
                                 "ON m.`member_username` = u.`username`");
                 StringBuilder members_list = new StringBuilder();
@@ -63,7 +63,7 @@ public class message_View_Controller implements Initializable {
             //set previous messages
             {
                 ResultSet chats = connection.createStatement().executeQuery
-                        ("SELECT * FROM `messenger`.`"+id+"_chat` ch" +
+                        ("SELECT * FROM `project`.`"+id+"_chat` ch" +
                                 " LEFT JOIN `project`.`user` un" +
                                 " ON ch.sender_username = us.username" +
                                 " ORDER BY `last_Update`  ");
@@ -86,7 +86,7 @@ public class message_View_Controller implements Initializable {
             //DB
             String content = message.getText().trim();
             connection.createStatement().executeUpdate
-                    ("INSERT INTO `messenger`.`"+id+"_chat`" +
+                    ("INSERT INTO `project`.`"+id+"_chat`" +
                             " (`sender_username`, `content`) " +
                             "VALUES ('"+OnlineUser+"', '"+content+"')");
             //GUI
