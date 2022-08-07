@@ -54,7 +54,7 @@ public class ForgotPassword {
         usernameLabel.setText("");
         questionLabel.setText("");
         int i = 0;
-        if(UserRepository.searchUserByUsername(username.getText())){
+        if(!UserRepository.searchUserByUsername(username.getText())){
             i++;
         }else {
             username.setText("");
@@ -68,9 +68,9 @@ public class ForgotPassword {
         }
 
         if(i==2){
-            submit.setVisible(false);     login.setVisible(true);
-            username.setDisable(false);   question.setDisable(false);
-            question1.setDisable(false);  question2.setDisable(false);
+            submit.setVisible(false);     login.setVisible(true);   password.setVisible(true);
+            username.setDisable(true);   question.setDisable(true);
+            question1.setDisable(true);  question2.setDisable(true);
         }
     }
 
@@ -98,5 +98,23 @@ public class ForgotPassword {
             passwordLabel.setText("the length of the password must be at least 8!");
         }
     }
+
+    @FXML
+    protected void backButtonClick(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("logIn.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        LogIn logIn = loader.getController();
+        logIn.theme();
+        Stage stage = Main.mainStage;
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
 }
