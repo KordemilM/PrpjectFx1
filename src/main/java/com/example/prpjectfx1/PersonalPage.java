@@ -144,22 +144,13 @@ public class PersonalPage implements Initializable {
     }
 
     @FXML
-    protected void chatButtonClick() {
+    protected void chatButtonClick() throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/chat/Chats_View.fxml"));
-        Parent root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Chats_View_Controller chats_view_controller = loader.getController();
-        chats_view_controller.theme();
+        FXMLLoader loader = new FXMLLoader(Chats_View_Controller.class.getResource("/chat/Chats_View.fxml"));
         Stage stage = Main.mainStage;
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(loader.load());
         stage.setTitle("");
         stage.setScene(scene);
-        stage.show();
     }
 
     @FXML

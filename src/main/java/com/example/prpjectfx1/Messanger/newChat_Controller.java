@@ -171,7 +171,7 @@ public class newChat_Controller implements Initializable {
         //Change scene to Chat_View
             {
                 message_View_Controller.id = id;
-                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Chats_View.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(message_View_Controller.class.getResource("/chat/Chats_View.fxml"));
                 Main.mainStage.setScene(new Scene(fxmlLoader.load()));
             }
         }
@@ -180,10 +180,10 @@ public class newChat_Controller implements Initializable {
     public void Add_new_Contact() throws SQLException, IOException {
         String new_Contact = addContact.getText();
         ResultSet already_added = Main.connection.createStatement().executeQuery
-                ("SELECT `* FROM `project`.`"+OnlineUser+"_chatslist` lis" +
+                ("SELECT * FROM `project`.`"+OnlineUser+"_chatslist` lis" +
                         "LEFT JOIN `project`.`chat_info` inf " +
-                        " ON inf.chat_id = lis.chat_id " +
-                        "WHERE Type = 'private' AND Name = '"+new_Contact+"'");
+                        " USING(chat_id)" +
+                        "WHERE inf.Type = 'private' AND Name = '"+new_Contact+"'");
         ResultSet if_exists = Main.connection.createStatement().executeQuery("SELECT `username` FROM `project`.`my_user` WHERE `username` = '"+new_Contact+"'");
         //check Name
             //Want to chat with himself/herself
@@ -195,11 +195,21 @@ public class newChat_Controller implements Initializable {
             //done
         else {
             //add to user_chatsList -> DataBase
+            //add to chat_info
+            Main.connection.createStatement().executeUpdate("INSERT INTO `project`.`chat_info`\n" +
+                    "(`name`,\n" +
+                    "`description`,\n" +
+                    "`Type` )\n " +
+                    "VALUES\n" +
+                    "('"+new_Contact+"',\n" +
+                    "NULL" +
+                    "'private');" );
                 //find Last id
             ResultSet r = Main.connection.createStatement().executeQuery
                     ("SELECT MAX(chat_id) AS Last_id FROM `project`.`chat_info`");
             r.next(); int Last_id = r.getInt("Last_id");
                 //add
+
             Main.connection.createStatement().executeUpdate("INSERT INTO `project`.`"+OnlineUser+"_chatslist`\n" +
                     "(`chat_id`,\n" +
                     "`Type`)\n" +
@@ -223,17 +233,6 @@ public class newChat_Controller implements Initializable {
                     "VALUES\n" +
                     "("+Last_id+",\n" +
                     "'private');\n");
-            //add to chat_info
-            Main.connection.createStatement().executeUpdate("INSERT INTO `project`.`chat_info`\n" +
-                    "(`chat_id`,\n" +
-                    "`name`,\n" +
-                    "`description`,\n" +
-                    "`profile`)\n" +
-                    "VALUES\n" +
-                    "("+Last_id+",\n" +
-                    "'"+new_Contact+"',\n" +
-                    "NULL,\n" +
-                    "NULL);\n");
             //create table for chat
             Main.connection.createStatement().executeUpdate("CREATE TABLE `"+Last_id+"_chat` (\n" +
                     "  `id` int NOT NULL AUTO_INCREMENT,\n" +
@@ -248,7 +247,7 @@ public class newChat_Controller implements Initializable {
             //Initialize chat screen
             {
                 message_View_Controller.id = Last_id;
-                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Chats_View.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(Chats_View_Controller.class.getResource("/chat/message_View.fxml"));
                 Main.mainStage.setScene(new Scene(fxmlLoader.load()));
             }
         }

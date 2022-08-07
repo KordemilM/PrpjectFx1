@@ -38,6 +38,7 @@ public class Chats_View_Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
+            theme();
             user = UserRepository.searchUser(OnlineUser);
             //get Chats from DB
             ResultSet chats = Main.connection.createStatement().executeQuery
@@ -61,7 +62,7 @@ public class Chats_View_Controller implements Initializable {
                 try {
                     image = new Image(chats.getString("profile"));
                 }catch (IllegalArgumentException e){
-                    image = new Image("/com/example/prpjectfx1/images/default.png");
+                    image = new Image("file:/com/example/prpjectfx1/images/default.png");
                     System.out.println(chats.getString("profile"));
                     e.printStackTrace();
                 }
@@ -112,21 +113,23 @@ public class Chats_View_Controller implements Initializable {
                     vBox.getChildren().add(lastMessage);//add label to vBox
                     //find last message
                     String lastMessageText = "", lastMessage_sender = "" , lastMessage_time = "";
+                    int chat_id = chats.getInt("chat_id");
                     ResultSet lastMessageResult = Main.connection.createStatement().executeQuery
-                            ("SELECT * ّ" +
-                                    "FROM `project`.`"+chats.getString("chat_id")+"_chat` c " +
-                                    "LEFT JOIN `project`.`my_user` u ON c.`sender_username` = u.`username` " +
-                                    "ORDER BY `send_time` DESC LIMIT 1");
+                            ("SELECT * " +
+                                    "FROM `project`.`"+chat_id+"_chat` c " +
+                                    "LEFT JOIN `project`.`my_user` u ON c.sender_username = u.username " +
+                                    "ORDER BY c.send_time DESC LIMIT 1");
                     if(lastMessageResult.next()){
                         lastMessageText = lastMessageResult.getString("content");
-                        lastMessage_sender = lastMessageResult.getString("name");
+                        lastMessage_sender = lastMessageResult.getString("sender_username") ;
                         if (lastMessage_sender.equals(OnlineUser)){
                             lastMessage_sender = "You";
                         }
                         lastMessage_time = lastMessageResult.getTimestamp("send_time").toString();
                         if (lastMessageResult.getString("picture") != null) lastMessageText = "Picture";
+                        lastMessage.setText(lastMessage_sender + ": " + lastMessageText + " " + lastMessage_time);
                     }
-                    lastMessage.setText(lastMessage_sender + ": " + lastMessageText + " " + lastMessage_time);
+
                     lastMessage.setMnemonicParsing(false);
                     VBox.setVgrow(lastMessage, javafx.scene.layout.Priority.ALWAYS);
                     lastMessage.setPrefHeight(18.0);
@@ -137,7 +140,8 @@ public class Chats_View_Controller implements Initializable {
                 //add event to button
                 btn.setOnAction(event -> {
                     message_View_Controller.id = Integer.parseInt(btn.getId());
-                    FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Chats_View.fxml"));
+                    FXMLLoader fxmlLoader = new FXMLLoader
+                            (message_View_Controller.class.getResource("/chat/message_View.fxml"));
                     try {
                         Main.mainStage.setScene(new Scene(fxmlLoader.load()));
                     } catch (IOException e) {

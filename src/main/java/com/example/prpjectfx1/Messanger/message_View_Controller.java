@@ -1,11 +1,14 @@
 package com.example.prpjectfx1.Messanger;
 
 
+import com.example.prpjectfx1.Main;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
@@ -20,6 +23,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -44,7 +48,8 @@ public class message_View_Controller implements Initializable {
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
         try {
             //set Title (Name)
-            ResultSet title = connection.createStatement().executeQuery("SELECT * FROM ``project`.`chat_info` WHERE `chat_id` = "+id);
+            ResultSet title = connection.createStatement().executeQuery
+                    ("SELECT * FROM `project`.`chat_info` WHERE chat_id = "+id);
             title.next();
             is_Group = title.getString("Type").equals("Group");
             GroupName.setText(title.getString("Name"));
@@ -52,9 +57,9 @@ public class message_View_Controller implements Initializable {
             //set Title (members)
             if(is_Group){
                 ResultSet members = connection.createStatement().executeQuery
-                        ("SELECT * FROM ``project`.`"+id+"_members` m" +
+                        ("SELECT * FROM `project`.`"+id+"_members` m" +
                                 " LEFT JOIN `project`.`user` u " +
-                                "ON m.`member_username` = u.`username`");
+                                "ON m.member_username = u.username");
                 StringBuilder members_list = new StringBuilder();
                 while (members.next()){
                     members_list.append(members.getString("name")).append(",");
@@ -67,8 +72,8 @@ public class message_View_Controller implements Initializable {
                 ResultSet chats = connection.createStatement().executeQuery
                         ("SELECT * FROM `project`.`"+id+"_chat` ch" +
                                 " LEFT JOIN `project`.`user` un" +
-                                " ON ch.sender_username = us.username" +
-                                " ORDER BY `last_Update`  ");
+                                " ON ch.sender_username = un.username" +
+                                " ORDER BY send_time ");
 
                 while (chats.next()){
                     boolean is_me = chats.getString("sender_username").equals(OnlineUser);
@@ -160,6 +165,7 @@ public class message_View_Controller implements Initializable {
                             text.setStrokeType(StrokeType.OUTSIDE);
                             text.setStrokeWidth(0);
                             text.setWrappingWidth(146.53125);
+                            textFlow.setPrefHeight(text.getLayoutBounds().getHeight());
                         }
 
                         Label time_label = new Label();
@@ -167,4 +173,9 @@ public class message_View_Controller implements Initializable {
                         time_label.setText(time);
                         time_label.setTextAlignment(TextAlignment.RIGHT);
     }
+
+    public void back() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Chats_View_Controller.class.getResource("/chat/Chats_View.fxml"));
+        Main.mainStage.setScene(new Scene(fxmlLoader.load()));
     }
+}
