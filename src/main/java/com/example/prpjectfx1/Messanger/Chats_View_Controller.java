@@ -3,6 +3,8 @@ package com.example.prpjectfx1.Messanger;
 import com.example.prpjectfx1.Main;
 import com.example.prpjectfx1.PersonalPage;
 import com.example.prpjectfx1.Setting;
+import com.example.prpjectfx1.entity.User;
+import com.example.prpjectfx1.repository.UserRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,7 +29,7 @@ import java.util.prefs.Preferences;
 import static com.example.prpjectfx1.Main.OnlineUser;
 
 public class Chats_View_Controller implements Initializable {
-
+    public static User user;
     @FXML
     private BorderPane borderPane;
     @FXML
@@ -35,9 +37,12 @@ public class Chats_View_Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
+            user = UserRepository.searchUser(OnlineUser);
             //get Chats from DB
             ResultSet chats = Main.connection.createStatement().executeQuery
-                    ("SELECT * FROM `messenger`.`"+OnlineUser+"_chatslist` ORDER BY `last_Update` DESC " );
+                    ("SELECT * FROM `project`.`"+OnlineUser+"_chatslist`" +
+                            "LEFT JOIN `project`.`chat_info`" +
+                            "ORDER BY `last_Update` DESC " );
             //make the list of chats
             while (chats.next()){
                 Button btn = new Button();//init button
@@ -50,7 +55,7 @@ public class Chats_View_Controller implements Initializable {
                 }
                 HBox hBox = new HBox();
                 btn.setGraphic(hBox);
-                Image image = new Image("file : Profile_pic/default.png");
+                Image image = new Image("file: Profile_pic/default.png");
                 try {
                     image = new Image(chats.getString("profile"));
                 }catch (Exception e){
@@ -84,7 +89,7 @@ public class Chats_View_Controller implements Initializable {
                 }
                 //check if there is new message
                 ResultSet messages = Main.connection.createStatement().executeQuery
-                        ("SELECT * FROM `messenger`.`"+OnlineUser+"_chatslist` WHERE" +
+                        ("SELECT * FROM `project`.`"+OnlineUser+"_chatslist` WHERE" +
                                 " `has_unseen_message` = 'true' AND" +
                                 " `chat_id` = '"+chats.getString("chat_id")+"' ");
                 if(messages.next()){
@@ -105,7 +110,7 @@ public class Chats_View_Controller implements Initializable {
                     String lastMessageText = "", lastMessage_sender = "" , lastMessage_time = "";
                     ResultSet lastMessageResult = Main.connection.createStatement().executeQuery
                             ("SELECT * ّ" +
-                                    "FROM `messenger`.`"+chats.getString("chat_id")+"_chat` c " +
+                                    "FROM `project`.`"+chats.getString("chat_id")+"_chat` c " +
                                     "LEFT JOIN `project`.`my_user` u ON c.`sender_username` = u.`username` " +
                                     "ORDER BY `send_time` DESC LIMIT 1");
                     if(lastMessageResult.next()){
@@ -157,14 +162,13 @@ public class Chats_View_Controller implements Initializable {
     }
 
     @FXML
-    public void PersonalPageClick() throws SQLException, IOException {
+    public void PersonalPageClick() throws IOException {
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         String id = userPreferences.get("id", "");
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("com/example/prpjectfx1/PersonalPage.java"));
-        PersonalPage personalPage = loader.getController();
-        personalPage.setUser(id);
-        personalPage.theme();
+        FXMLLoader loader = new FXMLLoader(PersonalPage.class.getResource("personalPage.fxml"));
+        PersonalPage.setId(id);
+        PersonalPage.setIsFromChat(true);
         Stage stage = Main.mainStage;
         Scene scene = new Scene(loader.load());
         stage.setScene(scene);

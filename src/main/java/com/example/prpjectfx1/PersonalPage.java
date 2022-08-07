@@ -6,6 +6,7 @@ import com.example.prpjectfx1.repository.UserRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,13 +17,25 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.Objects;
+import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
 import static com.example.prpjectfx1.Main.OnlineUser;
 
-public class PersonalPage {
+public class PersonalPage implements Initializable {
+    public static String id;
+
+    public static void setIsFromChat(boolean isFromChat) {
+        PersonalPage.isFromChat = isFromChat;
+    }
+
+    public static boolean isFromChat = false;
+    public static void setId(String id) {
+        PersonalPage.id = id;
+    }
 
     @FXML
     private BorderPane borderPane;
@@ -168,4 +181,16 @@ public class PersonalPage {
 
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        if(isFromChat){
+            try {
+                setUser(id);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            theme();
+            setIsFromChat(false);
+        }
+    }
 }
