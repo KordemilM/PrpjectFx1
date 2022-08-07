@@ -1,25 +1,163 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prpjectfx1.Post.RecentController">
-   <children>
-      <Label fx:id="userName" layoutX="35.0" layoutY="27.0" prefHeight="18.0" prefWidth="187.0" text="Username" />
-      <ImageView fx:id="image" fitHeight="188.0" fitWidth="330.0" layoutX="35.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="content" alignment="TOP_LEFT" layoutX="34.0" layoutY="301.0" prefHeight="78.0" prefWidth="330.0" text="Content" />
-      <Label fx:id="subject" layoutX="35.0" layoutY="45.0" prefHeight="18.0" prefWidth="187.0" text="Subject" />
-      <Label fx:id="likes" layoutX="35.0" layoutY="265.0" prefHeight="18.0" prefWidth="66.0" text="Likes" />
-      <Label fx:id="views" layoutX="129.0" layoutY="266.0" prefHeight="18.0" prefWidth="66.0" text="Views" />
-      <Label fx:id="date" layoutX="222.0" layoutY="267.0" prefHeight="18.0" prefWidth="66.0" text="Date" />
-      <Label fx:id="page" alignment="CENTER" contentDisplay="CENTER" layoutX="178.0" layoutY="435.0" prefHeight="18.0" prefWidth="41.0" text="Page" textAlignment="CENTER" />
-      <Button layoutX="313.0" layoutY="432.0" mnemonicParsing="false" onAction="#nextPage" text="Next" />
-      <Button layoutX="34.0" layoutY="432.0" mnemonicParsing="false" onAction="#previousPage" text="Prev" />
-      <Button layoutX="180.0" layoutY="460.0" mnemonicParsing="false" onAction="#back" text="Back" />
-      <Button fx:id="likeRecent" layoutX="101.0" layoutY="391.0" mnemonicParsing="false" onAction="#likePost" text="like" />
-      <Button fx:id="addComRecent" layoutX="148.0" layoutY="391.0" mnemonicParsing="false" onAction="#addComment" text="Add Comment" />
-      <Button fx:id="commentsAds" layoutX="260.0" layoutY="391.0" mnemonicParsing="false" onAction="#showComments" text="Comments" />
-   </children>
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" stylesheets="@../../com/styles/lightMode.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prpjectfx1.Post.RecentController">
+   <bottom>
+      <AnchorPane prefHeight="39.0" prefWidth="400.0" styleClass="primary-color" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane layoutX="7.0" layoutY="7.0" prefHeight="30.0" prefWidth="30.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="363.0">
+               <children>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/1659250867121-fococlipping-standard.png" />
+                     </image>
+                     <StackPane.margin>
+                        <Insets top="1.0" />
+                     </StackPane.margin>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane layoutX="95.0" layoutY="9.0" prefHeight="30.0" prefWidth="30.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="9.0">
+               <children>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/1659251490458-fococlipping-standard.png" />
+                     </image>
+                     <StackPane.margin>
+                        <Insets bottom="3.0" />
+                     </StackPane.margin>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane layoutX="185.0" layoutY="9.0" prefHeight="30.0" prefWidth="30.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="185.0" AnchorPane.topAnchor="9.0">
+               <children>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/images-fococlipping-standard.png" />
+                     </image>
+                     <StackPane.margin>
+                        <Insets bottom="4.0" />
+                     </StackPane.margin>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane layoutX="356.0" layoutY="7.0" prefHeight="30.0" prefWidth="30.0" AnchorPane.leftAnchor="356.0" AnchorPane.rightAnchor="14.0">
+               <children>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#PersonalPageClick" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/user_icon.png" />
+                     </image>
+                     <StackPane.margin>
+                        <Insets bottom="2.0" />
+                     </StackPane.margin>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane layoutX="276.0" layoutY="7.0" prefHeight="30.0" prefWidth="30.0" AnchorPane.leftAnchor="276.0" AnchorPane.rightAnchor="94.0">
+               <children>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/download-fococlipping-standard.png" />
+                     </image>
+                     <StackPane.margin>
+                        <Insets bottom="2.0" />
+                     </StackPane.margin>
+                  </ImageView>
+               </children>
+            </StackPane>
+         </children>
+      </AnchorPane>
+   </bottom>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="400.0" styleClass="secondary-color" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane layoutX="100.0" layoutY="14.0" prefHeight="23.0" prefWidth="200.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+               <children>
+                  <Label fx:id="userName" prefHeight="23.0" prefWidth="200.0" text="Usenname:" textFill="#d3065f">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+               </children>
+            </StackPane>
+            <StackPane layoutX="35.0" layoutY="63.0" prefHeight="188.0" prefWidth="330.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0">
+               <children>
+                  <ImageView fx:id="image" fitHeight="188.0" fitWidth="330.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane layoutX="101.0" layoutY="37.0" prefHeight="26.0" prefWidth="200.0" AnchorPane.leftAnchor="101.0" AnchorPane.rightAnchor="99.0">
+               <children>
+                  <Label fx:id="subject" prefHeight="25.0" prefWidth="200.0" text="Subject:" textFill="#d3065f">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+               </children>
+            </StackPane>
+            <StackPane layoutX="35.0" layoutY="259.0" prefHeight="26.0" prefWidth="88.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="277.0">
+               <children>
+                  <Label fx:id="likes" prefHeight="23.0" prefWidth="81.0" text="Likes:" textFill="#d3065f">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+               </children>
+            </StackPane>
+            <StackPane layoutX="156.0" layoutY="259.0" prefHeight="26.0" prefWidth="88.0" AnchorPane.leftAnchor="156.0" AnchorPane.rightAnchor="156.0">
+               <children>
+                  <Label fx:id="views" prefHeight="23.0" prefWidth="80.0" text="Views:" textFill="#d3065f">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+               </children>
+            </StackPane>
+            <StackPane layoutX="293.0" layoutY="259.0" prefHeight="26.0" prefWidth="88.0" AnchorPane.leftAnchor="293.0" AnchorPane.rightAnchor="19.0">
+               <children>
+                  <Label fx:id="date" prefHeight="23.0" prefWidth="75.0" text="Date:" textFill="#d3065f">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+               </children>
+            </StackPane>
+            <StackPane layoutX="36.0" layoutY="294.0" prefHeight="78.0" prefWidth="330.0" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="34.0">
+               <children>
+                  <Label fx:id="content" alignment="TOP_LEFT" prefHeight="78.0" prefWidth="330.0" styleClass="primary-color" text="Content" textFill="#d3065f">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+               </children>
+            </StackPane>
+            <Button fx:id="likeRecent" layoutX="183.0" layoutY="385.0" mnemonicParsing="false" onAction="#likePost" prefHeight="25.0" prefWidth="43.0" style="-fx-background-color: #dd439d;" styleClass="round-border" text="Like" textFill="#ffd9ec" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="174.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button fx:id="addComRecent" layoutX="53.0" layoutY="385.0" mnemonicParsing="false" onAction="#addComment" style="-fx-background-color: #dd439d;" styleClass="round-border" text="Add Comment" textFill="#ffd9ec" AnchorPane.leftAnchor="53.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button fx:id="commentsAds" layoutX="264.0" layoutY="385.0" mnemonicParsing="false" onAction="#showComments" style="-fx-background-color: #dd439d;" styleClass="round-border" text="Comments" textFill="#ffd9ec" AnchorPane.rightAnchor="62.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <StackPane layoutX="188.0" layoutY="421.0" prefHeight="27.0" prefWidth="64.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="148.0">
+               <children>
+                  <Label fx:id="page" prefHeight="17.0" prefWidth="62.0" text="Page" textFill="#d3065f">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+               </children>
+            </StackPane>
+            <Button layoutX="281.0" layoutY="422.0" mnemonicParsing="false" onAction="#nextPage" style="-fx-background-color: #dd439d;" styleClass="round-border" text="Next" textFill="#ffd9ec" AnchorPane.rightAnchor="78.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button layoutX="82.0" layoutY="422.0" mnemonicParsing="false" onAction="#previousPage" style="-fx-background-color: #dd439d;" styleClass="round-border" text="Prev" textFill="#ffd9ec" AnchorPane.leftAnchor="82.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

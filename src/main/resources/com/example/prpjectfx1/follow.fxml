@@ -180,7 +180,7 @@
         </AnchorPane>
     </top>
    <right>
-        <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" pannable="true" prefHeight="200.0" prefWidth="400.0" visible="false" BorderPane.alignment="CENTER">
+        <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" pannable="true" prefHeight="200.0" prefWidth="400.0" styleClass="secondary-color" visible="false" BorderPane.alignment="CENTER">
             <content>
                 <VBox alignment="TOP_CENTER" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="secondary-color">
                     <children>

@@ -2,6 +2,8 @@ package com.example.prpjectfx1.Post;
 
 import com.example.prpjectfx1.Holder.*;
 import com.example.prpjectfx1.Main;
+import com.example.prpjectfx1.PersonalPage;
+import com.example.prpjectfx1.Setting;
 import com.example.prpjectfx1.entity.PostCom;
 import com.example.prpjectfx1.entity.User;
 import javafx.event.ActionEvent;
@@ -13,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,8 +23,12 @@ import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
+import java.util.prefs.Preferences;
 
 public class RecentController {
+
+    @FXML
+    private BorderPane borderPane;
     @FXML
     private Label userName;
     @FXML
@@ -174,6 +181,32 @@ public class RecentController {
         stage.setScene(scene);
         stage.setOnHidden(e -> commentsController.cleanUp());
         stage.setTitle("Comments");
+        stage.show();
+    }
+
+    public void theme(){
+        borderPane.getStylesheets().add(getClass().getResource("/com/styles/" +
+                (Setting.isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
+    }
+
+    @FXML
+    protected void PersonalPageClick() throws SQLException {
+        Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
+        String id = userPreferences.get("id", "");
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("personalPage.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        PersonalPage personalPage = loader.getController();
+        personalPage.setUser(id);
+        personalPage.theme();
+        Stage stage = Main.mainStage;
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
         stage.show();
     }
 }
