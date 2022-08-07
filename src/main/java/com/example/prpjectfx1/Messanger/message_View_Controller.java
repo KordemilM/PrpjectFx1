@@ -2,6 +2,7 @@ package com.example.prpjectfx1.Messanger;
 
 
 import com.example.prpjectfx1.Main;
+import com.example.prpjectfx1.Setting;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +16,7 @@ import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -27,12 +29,15 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import static com.example.prpjectfx1.Main.OnlineUser;
 import static com.example.prpjectfx1.Main.connection;
 
 public class message_View_Controller implements Initializable {
 
+    @FXML
+    private BorderPane borderPane;
     @FXML
     private ImageView GroupImage;
     @FXML
@@ -47,6 +52,7 @@ public class message_View_Controller implements Initializable {
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
         try {
+            theme();
             //set Title (Name)
             ResultSet title = connection.createStatement().executeQuery
                     ("SELECT * FROM `project`.`chat_info` WHERE chat_id = "+id);
@@ -177,5 +183,10 @@ public class message_View_Controller implements Initializable {
     public void back() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Chats_View_Controller.class.getResource("/chat/Chats_View.fxml"));
         Main.mainStage.setScene(new Scene(fxmlLoader.load()));
+    }
+
+    public void theme(){
+        borderPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/styles/" +
+                (Setting.isLightMode ? "light" : "dark") + "Mode.css")).toExternalForm());
     }
 }

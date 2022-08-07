@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="500.0" maxWidth="400.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" stylesheets="@../com/styles/lightMode.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prpjectfx1.Messanger.message_View_Controller">
+<BorderPane fx:id="borderPane" maxHeight="500.0" maxWidth="400.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" stylesheets="@../com/styles/lightMode.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prpjectfx1.Messanger.message_View_Controller">
    <top>
       <HBox alignment="CENTER" prefHeight="57.0" prefWidth="400.0" spacing="15.0" styleClass="secondary-color" BorderPane.alignment="CENTER">
          <children>

@@ -105,7 +105,7 @@
                            <children>
                               <ImageView fx:id="mode" cache="true" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#changeThemeClick" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../image/darkMode.jpg" />
+                                    <Image url="@../../../image/dark.png" />
                                  </image>
                               </ImageView>
                            </children>
