@@ -67,7 +67,7 @@ public class message_View_Controller implements Initializable {
             title.next();
             is_Group = title.getString("Type").equals("Group");
             GroupName.setText(title.getString("Name"));
-            GroupImage.setImage(new Image("file:/Profile_pic"+title.getString("profile")));
+            GroupImage.setImage(new Image(title.getString("profile")));
             //set Title (members)
             if(is_Group){
                 ResultSet members = connection.createStatement().executeQuery
@@ -144,7 +144,7 @@ public class message_View_Controller implements Initializable {
             imageView.setPickOnBounds(true);
             imageView.setPreserveRatio(true);
             HBox.setHgrow(imageView, Priority.ALWAYS);
-            imageView.setImage(new Image("file:/Profile_pic/"+image));
+            imageView.setImage(new Image(image));
             HBox.setMargin(imageView, new Insets(10));
 
             VBox vbox = new VBox();
@@ -187,7 +187,7 @@ public class message_View_Controller implements Initializable {
                                 imageView2.setFitWidth(200);
                                 imageView2.setPickOnBounds(true);
                                 imageView2.setPreserveRatio(true);
-                                imageView2.setImage(new Image("file:/Profile_pic/"+sender_profile));
+                                imageView2.setImage(new Image(sender_profile));
                         }else {
                             TextFlow textFlow = new TextFlow();
                             splitMenuButton.setGraphic(textFlow);
