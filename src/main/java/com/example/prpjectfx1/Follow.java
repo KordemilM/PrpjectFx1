@@ -278,6 +278,7 @@ public class Follow {
 //            stage2.show();
 //        }
 //        catch (Exception ignored) {}
+
     }
 
     public void toAddPost() throws IOException, SQLException {   ///OK
