@@ -31,6 +31,7 @@ import java.util.prefs.Preferences;
 import static com.example.prpjectfx1.Main.OnlineUser;
 
 public class PersonalPage implements Initializable {
+
     public static String id;
 
     public static void setIsFromChat(boolean isFromChat) {
