@@ -3,6 +3,7 @@ package com.example.prpjectfx1.Post;
 import com.example.prpjectfx1.Holder.PostsHolder;
 import com.example.prpjectfx1.Holder.UserHolder;
 import com.example.prpjectfx1.Main;
+import com.example.prpjectfx1.Messanger.Chats_View_Controller;
 import com.example.prpjectfx1.PersonalPage;
 import com.example.prpjectfx1.Setting;
 import com.example.prpjectfx1.entity.PostCom;
@@ -123,6 +124,12 @@ public class AddPostController {
 
     public void toFollow(){}
 
-    public void toChat(){
+    public void toChat() throws IOException {  //OK
+
+        FXMLLoader loader = new FXMLLoader(Chats_View_Controller.class.getResource("/chat/Chats_View.fxml"));
+        Stage stage = Main.mainStage;
+        Scene scene = new Scene(loader.load());
+        stage.setTitle("");
+        stage.setScene(scene);
     }
 }

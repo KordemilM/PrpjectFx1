@@ -4,6 +4,7 @@ import com.example.prpjectfx1.Holder.IntegerHolder;
 import com.example.prpjectfx1.Holder.PostHolder;
 import com.example.prpjectfx1.Holder.PostsHolder;
 import com.example.prpjectfx1.Holder.UserHolder;
+import com.example.prpjectfx1.Messanger.Chats_View_Controller;
 import com.example.prpjectfx1.Post.*;
 import com.example.prpjectfx1.entity.User;
 import com.example.prpjectfx1.repository.UserRepository;
@@ -234,12 +235,12 @@ public class Follow {
         catch (Exception ignored) {}
     }
 
-    public void toAddPost(ActionEvent event) throws IOException, SQLException {
+    public void toAddPost() throws IOException, SQLException {   ///OK
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         String id = userPreferences.get("id", "");
         User user = UserRepository.searchUser(id);
 
-        FXMLLoader loader =  new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("AddPost/AddPost.fxml")));
+        FXMLLoader loader =  new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("/Post/AddPost/AddPost.fxml")));
         Parent root = loader.load();
         AddPostController controller = loader.getController();
         UserHolder holder = UserHolder.getINSTANCE();
@@ -247,7 +248,7 @@ public class Follow {
         controller.initializeUser();
         controller.theme();
         Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = Main.mainStage;
         stage.setScene(scene);
         stage.show();
     }
@@ -274,4 +275,12 @@ public class Follow {
         stage.show();
     }
 
+    public void toChat() throws IOException {  //OK
+
+        FXMLLoader loader = new FXMLLoader(Chats_View_Controller.class.getResource("/chat/Chats_View.fxml"));
+        Stage stage = Main.mainStage;
+        Scene scene = new Scene(loader.load());
+        stage.setTitle("");
+        stage.setScene(scene);
+    }
 }

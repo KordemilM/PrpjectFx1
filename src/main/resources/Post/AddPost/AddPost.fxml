@@ -60,7 +60,7 @@
             </StackPane>
             <StackPane layoutX="276.0" layoutY="7.0" prefHeight="30.0" prefWidth="30.0" AnchorPane.leftAnchor="276.0" AnchorPane.rightAnchor="94.0">
                <children>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#toChat" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../image/download-fococlipping-standard.png" />
                      </image>

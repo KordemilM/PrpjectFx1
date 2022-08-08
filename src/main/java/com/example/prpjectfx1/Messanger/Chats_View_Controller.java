@@ -1,13 +1,17 @@
 package com.example.prpjectfx1.Messanger;
 
+import com.example.prpjectfx1.Holder.UserHolder;
 import com.example.prpjectfx1.Main;
 import com.example.prpjectfx1.PersonalPage;
+import com.example.prpjectfx1.Post.AddPostController;
+import com.example.prpjectfx1.Post.PostMainController;
 import com.example.prpjectfx1.Setting;
 import com.example.prpjectfx1.entity.User;
 import com.example.prpjectfx1.repository.UserRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -192,5 +196,23 @@ public class Chats_View_Controller implements Initializable {
             stage.setTitle("");
             stage.setScene(scene);
         }
+    }
+
+    public void toAddPost() throws IOException, SQLException {   ///OK
+        Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
+        String id = userPreferences.get("id", "");
+        User user = UserRepository.searchUser(id);
+
+        FXMLLoader loader =  new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("/Post/AddPost/AddPost.fxml")));
+        Parent root = loader.load();
+        AddPostController controller = loader.getController();
+        UserHolder holder = UserHolder.getINSTANCE();
+        holder.setUser(user);
+        controller.initializeUser();
+        controller.theme();
+        Scene scene = new Scene(root);
+        Stage stage = Main.mainStage;
+        stage.setScene(scene);
+        stage.show();
     }
 }

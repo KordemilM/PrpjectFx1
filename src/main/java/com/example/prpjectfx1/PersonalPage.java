@@ -181,7 +181,7 @@ public class PersonalPage implements Initializable {
         Scene scene = new Scene(loader.load());
         stage.setTitle("");
         stage.setScene(scene);
-    }
+    } ///ok
 
     @FXML
     protected void homeButtonClick() throws IOException, SQLException, ClassNotFoundException {

@@ -2,6 +2,7 @@ package com.example.prpjectfx1.Post;
 
 import com.example.prpjectfx1.Holder.*;
 import com.example.prpjectfx1.Main;
+import com.example.prpjectfx1.Messanger.Chats_View_Controller;
 import com.example.prpjectfx1.PersonalPage;
 import com.example.prpjectfx1.Setting;
 import com.example.prpjectfx1.entity.PostCom;
@@ -211,8 +212,8 @@ public class RecentController {
         stage.show();
     }
 
-    public void toAddPost(ActionEvent event) throws IOException {
-        FXMLLoader loader =  new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("AddPost/AddPost.fxml")));
+    public void toAddPost() throws IOException {
+        FXMLLoader loader =  new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("/Post/AddPost/AddPost.fxml")));
         Parent root = loader.load();
         AddPostController controller = loader.getController();
         UserHolder holder = UserHolder.getINSTANCE();
@@ -220,12 +221,19 @@ public class RecentController {
         controller.initializeUser();
         controller.theme();
         Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = Main.mainStage;
         stage.setScene(scene);
         stage.show();
     }
 
-    public void toChat(){}
+    public void toChat() throws IOException {  //OK
+
+        FXMLLoader loader = new FXMLLoader(Chats_View_Controller.class.getResource("/chat/Chats_View.fxml"));
+        Stage stage = Main.mainStage;
+        Scene scene = new Scene(loader.load());
+        stage.setTitle("");
+        stage.setScene(scene);
+    }
 
     public void toFollow(){}
 }
