@@ -97,7 +97,7 @@
    <bottom>
       <Accordion fx:id="accordion" BorderPane.alignment="CENTER">
         <panes>
-          <TitledPane animated="false" prefHeight="314.0" prefWidth="400.0">
+          <TitledPane prefHeight="314.0" prefWidth="400.0">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="secondary-color">
                      <children>

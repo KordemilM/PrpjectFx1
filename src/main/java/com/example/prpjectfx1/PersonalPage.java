@@ -184,31 +184,67 @@ public class PersonalPage implements Initializable {
     }
 
     @FXML
-    protected void homeButtonClick(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
-        FXMLLoader loader =  new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("Recent/Recent.fxml")));
-        Parent root = loader.load();
+    protected void homeButtonClick() throws IOException, SQLException, ClassNotFoundException {
+//        FXMLLoader loader =  new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("/Post/Recent/Recent.fxml")));
+//        Parent root = loader.load();
+//        RecentController controller = loader.getController();
+//        RecentController.pageNumber = 1;
+//        PostsHolder postsHolder = PostsHolder.getInstance();
+//        postsHolder.setPosts(AppContext.getPostComRepos().getLast10Post(UserHolder.getINSTANCE().getUser().getUserName(),AppContext.getConnection()));
+//        controller.initializePost();
+//        controller.initializeUser();
+//        controller.main();
+//        Scene scene = new Scene(root);
+//        Stage stage = Main.mainStage;
+//        stage.setScene(scene);
+//        stage.show();
+
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("/Post/Recent/Recent.fxml")));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         RecentController controller = loader.getController();
         RecentController.pageNumber = 1;
         PostsHolder postsHolder = PostsHolder.getInstance();
-        postsHolder.setPosts(AppContext.getPostComRepos().getLast10Post(UserHolder.getINSTANCE().getUser().getUserName(), AppContext.getConnection()));
+        postsHolder.setPosts(AppContext.getPostComRepos().getLast10Post(UserHolder.getINSTANCE().getUser().getUserName(),AppContext.getConnection()));
         controller.initializePost();
         controller.initializeUser();
         controller.main();
+        Stage stage = Main.mainStage;
         Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle("");
         stage.setScene(scene);
         stage.show();
     }
 
     @FXML
-    protected void addPostButtonClick(ActionEvent event) throws IOException {
-        FXMLLoader loader =  new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("AddPost/AddPost.fxml")));
-        Parent root = loader.load();
+    protected void addPostButtonClick(){  ///OK
+//        FXMLLoader loader =  new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("AddPost/AddPost.fxml")));
+//        Parent root = loader.load();
+//        AddPostController controller = loader.getController();
+//        controller.initializeUser();
+//        controller.theme();
+//        Scene scene = new Scene(root);
+//        Stage stage = Main.mainStage;
+//        stage.setScene(scene);
+//        stage.show();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Post/AddPost/AddPost.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         AddPostController controller = loader.getController();
         controller.initializeUser();
         controller.theme();
+        Stage stage = Main.mainStage;
         Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle("");
         stage.setScene(scene);
         stage.show();
     }
@@ -226,8 +262,9 @@ public class PersonalPage implements Initializable {
         }
     }
 
-    public void toMyPosts(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
-        FXMLLoader loader =  new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("Myposts/ShowMyPosts.fxml")));
+    @FXML
+    public void toMyPosts() throws IOException, SQLException, ClassNotFoundException {
+        FXMLLoader loader =  new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("/Post/Myposts/ShowMyPosts.fxml")));
         Parent root = loader.load();
         ShowMyPostsController controller = loader.getController();
         controller.initializeUser();
@@ -237,7 +274,7 @@ public class PersonalPage implements Initializable {
         controller.initializePost();
         controller.main();
         Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = Main.mainStage;
         stage.setScene(scene);
         stage.show();
     }
