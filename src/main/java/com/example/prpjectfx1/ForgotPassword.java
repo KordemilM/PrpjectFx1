@@ -75,7 +75,7 @@ public class ForgotPassword {
     }
 
     @FXML
-    protected void loginClick() throws SQLException {
+    protected void loginClick() throws SQLException, ClassNotFoundException {
         passwordLabel.setText("");
         if(password.getText().length()>=8){
             UserRepository.updatePassword(username.getText(),password.getText());

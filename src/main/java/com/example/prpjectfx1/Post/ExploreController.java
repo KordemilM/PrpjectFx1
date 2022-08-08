@@ -154,4 +154,8 @@ public class ExploreController {
         stage.setTitle("Comments");
         stage.show();
     }
+
+    public void toFollow(){
+        // go to follow page
+    }
 }

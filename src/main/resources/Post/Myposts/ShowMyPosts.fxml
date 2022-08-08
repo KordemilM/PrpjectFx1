@@ -18,6 +18,6 @@
       <Button layoutX="313.0" layoutY="432.0" mnemonicParsing="false" onAction="#nextPage" text="Next" />
       <Button layoutX="34.0" layoutY="432.0" mnemonicParsing="false" onAction="#previousPage" text="Prev" />
       <Button fx:id="info" layoutX="177.0" layoutY="391.0" mnemonicParsing="false" onAction="#info" text="Info" />
-      <Button layoutX="175.0" layoutY="460.0" mnemonicParsing="false" onAction="#back" text="back" />
+      <Button layoutX="175.0" layoutY="460.0" mnemonicParsing="false" onAction="#backToPersonal" text="back" />
    </children>
 </AnchorPane>

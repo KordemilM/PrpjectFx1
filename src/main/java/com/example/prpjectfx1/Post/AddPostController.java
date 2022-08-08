@@ -1,11 +1,13 @@
 package com.example.prpjectfx1.Post;
 
+import com.example.prpjectfx1.Holder.PostsHolder;
 import com.example.prpjectfx1.Holder.UserHolder;
 import com.example.prpjectfx1.Main;
 import com.example.prpjectfx1.PersonalPage;
 import com.example.prpjectfx1.Setting;
 import com.example.prpjectfx1.entity.PostCom;
 import com.example.prpjectfx1.entity.User;
+import com.example.prpjectfx1.repository.UserRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +26,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Objects;
 import java.util.prefs.Preferences;
 
 public class AddPostController {
@@ -74,26 +77,13 @@ public class AddPostController {
         AppContext.getPostComRepos().addPost(postCom, AppContext.getConnection());
     }
 
-    public void backToMain(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("PostMain.fxml"));
-        Parent root = loader.load();
-        PostMainController controller = loader.getController();
-        UserHolder holder = UserHolder.getINSTANCE();
-        holder.setUser(user);
-        controller.initializeUser();
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-    }
-
     public void theme(){
         borderPane.getStylesheets().add(getClass().getResource("/com/styles/" +
                 (Setting.isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
     }
 
     @FXML
-    protected void PersonalPageClick() throws SQLException {
+    protected void PersonalPageClick() throws SQLException, ClassNotFoundException {
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         String id = userPreferences.get("id", "");
 
@@ -111,5 +101,28 @@ public class AddPostController {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void toHome(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+        FXMLLoader loader =  new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("Recent/Recent.fxml")));
+        Parent root = loader.load();
+        RecentController controller = loader.getController();
+        RecentController.pageNumber = 1;
+        PostsHolder postsHolder = PostsHolder.getInstance();
+        postsHolder.setPosts(AppContext.getPostComRepos().getLast10Post(user.getUserName(), AppContext.getConnection()));
+        controller.initializePost();
+        UserHolder holder = UserHolder.getINSTANCE();
+        holder.setUser(user);
+        controller.initializeUser();
+        controller.main();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void toFollow(){}
+
+    public void toChat(){
     }
 }

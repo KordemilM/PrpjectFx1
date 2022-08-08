@@ -62,7 +62,7 @@ public class LogIn {
     }
 
     @FXML
-    protected void submitClick(ActionEvent event) throws SQLException {
+    protected void submitClick(ActionEvent event) throws SQLException, ClassNotFoundException {
         usernameLabel.setText("");
         passwordLabel.setText("");
         int i = 0;

@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" styleClass="primary-color" stylesheets="@../../styles/lightMode.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prpjectfx1.PersonalPage">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" styleClass="primary-color" stylesheets="@../../styles/lightMode.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prpjectfx1.PersonalPage">
    <bottom>
       <AnchorPane prefHeight="37.0" prefWidth="400.0" styleClass="primary-color" BorderPane.alignment="CENTER">
          <children>
@@ -163,7 +168,13 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="secondary-color" BorderPane.alignment="CENTER">
          <children>
-            <ScrollPane prefHeight="298.0" prefWidth="400.0" styleClass="secondary-color" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Label fx:id="subjectLastPost" layoutX="14.0" layoutY="14.0" prefHeight="18.0" prefWidth="230.0" styleClass="secondary-color" text="Subject" />
+            <ImageView fx:id="imageLastPost" fitHeight="145.0" fitWidth="370.0" layoutX="15.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" styleClass="secondary-color" />
+            <Label fx:id="contentLastPost" layoutX="14.0" layoutY="196.0" prefHeight="50.0" prefWidth="371.0" styleClass="secondary-color" text="Content" />
+            <Button layoutX="168.0" layoutY="249.0" mnemonicParsing="false" onAction="#toMyPosts" prefHeight="34.0" prefWidth="64.0" styleClass="primary-color" text="My Posts" />
+            <Label fx:id="likesLastPost" layoutX="14.0" layoutY="247.0" prefHeight="18.0" prefWidth="140.0" text="Likes" />
+            <Label fx:id="viewsLastPost" layoutX="14.0" layoutY="265.0" prefHeight="18.0" prefWidth="140.0" text="Views" />
+            <Label fx:id="dateLastPost" layoutX="259.0" layoutY="15.0" prefHeight="18.0" prefWidth="129.0" text="Date" />
          </children>
       </AnchorPane>
    </center>
