@@ -100,11 +100,11 @@ public class ShowMyPostsController {
     }
 
     public void info() throws IOException, SQLException, ClassNotFoundException {
-        FXMLLoader loader1 = new FXMLLoader(getClass().getResource("Myposts/ShowLikesViews.fxml"));
+        FXMLLoader loader1 = new FXMLLoader(PostMainController.class.getResource("/Post/Myposts/ShowLikesViews.fxml"));
         Parent root1 = loader1.load();
         ShowLikesViewsController showLikesViewsController = loader1.getController();
         showLikesViewsController.mainLike(postCom);
-        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("Myposts/ShowLikesViews.fxml"));
+        FXMLLoader loader2 = new FXMLLoader(PostMainController.class.getResource("/Post/Myposts/ShowLikesViews.fxml"));
         Parent root2 = loader2.load();
         ShowLikesViewsController showLikesViewsController2 = loader2.getController();
         showLikesViewsController2.mainView(postCom);

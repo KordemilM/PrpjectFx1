@@ -239,26 +239,29 @@ public class Follow {
 //        }
 //        catch (Exception ignored) {}
 
-        FXMLLoader loader2 = new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("/Post/Explore/Explore.fxml")));
-        Parent root2 = null;
         try {
-            root2 = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
+            FXMLLoader loader2 = new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("/Post/Explore/Explore.fxml")));
+            Parent root2 = null;
+            try {
+                root2 = loader2.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            IntegerHolder holder2 = IntegerHolder.getINSTANCE();
+            holder2.setNum(1);
+            ExploreController controller2 = loader2.getController();
+            controller2.initializePageNumber();
+            controller2.initializeUser();
+            PostsHolder postsHolder = PostsHolder.getInstance();
+            postsHolder.setPosts(AppContext.getPostComRepos().getAllPosts(user.getUserName(), AppContext.getConnection()));
+            controller2.initializePost();
+            controller2.main();
+            Scene scene2 = new Scene(root2);
+            Stage stage2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage2.setScene(scene2);
+            stage2.show();
         }
-        IntegerHolder holder2 = IntegerHolder.getINSTANCE();
-        holder2.setNum(1);
-        ExploreController controller2 = loader2.getController();
-        controller2.initializePageNumber();
-        controller2.initializeUser();
-        PostsHolder postsHolder = PostsHolder.getInstance();
-        postsHolder.setPosts(AppContext.getPostComRepos().getAllPosts(user.getUserName(), AppContext.getConnection()));
-        controller2.initializePost();
-        controller2.main();
-        Scene scene2 = new Scene(root2);
-        Stage stage2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage2.setScene(scene2);
-        stage2.show();
+        catch (Exception ignored) {}
 
 //        try {
 //            FXMLLoader loader2 = new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("/Post/Explore/Explore.fxml")));

@@ -103,9 +103,11 @@ public class RecentController {
     //next page
 
     public void nextPage() throws MalformedURLException {
-        pageNumber++;
-        initializePost();
-        main();
+        if(pageNumber < PostsHolder.getInstance().getPosts().size()) {
+            pageNumber++;
+            initializePost();
+            main();
+        }
     }
 
     //previous page
@@ -197,7 +199,7 @@ public class RecentController {
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         String id = userPreferences.get("id", "");
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("personalPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("com/example/prpjectfx1/personalPage.fxml"));
         Parent root = null;
         try {
             root = loader.load();
