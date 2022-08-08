@@ -1,7 +1,6 @@
 package com.example.prpjectfx1.Messanger;
 
 import com.example.prpjectfx1.Main;
-import com.example.prpjectfx1.PersonalPage;
 import com.example.prpjectfx1.Setting;
 import com.example.prpjectfx1.entity.User;
 import com.example.prpjectfx1.repository.UserRepository;
@@ -19,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,11 +27,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.prefs.Preferences;
 
 import static com.example.prpjectfx1.Main.OnlineUser;
+import static com.example.prpjectfx1.Main.connection;
 
-public class Chats_View_Controller implements Initializable {
+public class forward_Controller implements Initializable {
     public static User user;
     @FXML
     private CheckBox onlyGroup;
@@ -39,6 +39,8 @@ public class Chats_View_Controller implements Initializable {
     private BorderPane borderPane;
     @FXML
     private VBox chatListView;
+    @Setter
+    public static String content;
     public ArrayList<Button> Groups = new ArrayList<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -99,11 +101,21 @@ public class Chats_View_Controller implements Initializable {
                     label.setFont(new javafx.scene.text.Font("System Bold", 19.0));
                 }
                 //check if there is new message
-                System.out.println(chats.getString("has_unseen_message"));
-                    if(chats.getString("has_unseen_message").equals("true"))
-                        label.setStyle("-fx-font-weight: Italic");//bold
-
-
+                ResultSet messages = Main.connection.createStatement().executeQuery
+                        ("SELECT * FROM `project`.`"+OnlineUser+"_chatslist` WHERE" +
+                                " `has_unseen_message` = 'true' AND" +
+                                " `chat_id` = '"+chats.getString("chat_id")+"' ");
+                if(messages.next()){
+                    Circle circle = new Circle();//init circle
+                    {
+                        //<Circle fill="DODGERBLUE" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+                        circle.setFill(javafx.scene.paint.Color.DODGERBLUE);
+                        circle.setRadius(4.0);
+                        circle.setStroke(javafx.scene.paint.Color.BLACK);
+                        circle.setStrokeType(javafx.scene.shape.StrokeType.INSIDE);
+                    }
+                    label.setGraphic(circle);//add circle to label
+                }
                 Label lastMessage = new Label();//init label
                 {
                     vBox.getChildren().add(lastMessage);//add label to vBox
@@ -135,6 +147,16 @@ public class Chats_View_Controller implements Initializable {
 
                 //add event to button
                 btn.setOnAction(event -> {
+                    //DB
+                    try {
+                        connection.createStatement().executeUpdate
+                                ("INSERT INTO `project`.`"+btn.getId()+"_chat`" +
+                                        " (`sender_username`, `content`) " +
+                                        "VALUES ('"+OnlineUser+"', '[Forwarded] "+content+"')");
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    //fxml
                     message_View_Controller.id = Integer.parseInt(btn.getId());
                     FXMLLoader fxmlLoader = new FXMLLoader
                             (message_View_Controller.class.getResource("/chat/message_View.fxml"));
@@ -150,33 +172,9 @@ public class Chats_View_Controller implements Initializable {
         }
     }
 
-    public void addChat() {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/chat/newChat.fxml"));
-        try {
-            Main.mainStage.setScene(new Scene(fxmlLoader.load()));
-        } catch (IOException e) {
-            System.out.println("problem with newChat.fxml");
-            throw new RuntimeException(e);
-        }
-    }
-
     public void theme(){
         borderPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/styles/" +
                 (Setting.isLightMode ? "light" : "dark") + "Mode.css")).toExternalForm());
-    }
-
-    @FXML
-    public void PersonalPageClick() throws IOException {
-        Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
-        String id = userPreferences.get("id", "");
-
-        FXMLLoader loader = new FXMLLoader(PersonalPage.class.getResource("personalPage.fxml"));
-        PersonalPage.setId(id);
-        PersonalPage.setIsFromChat(true);
-        Stage stage = Main.mainStage;
-        Scene scene = new Scene(loader.load());
-        stage.setScene(scene);
-        stage.show();
     }
     @FXML
     public void Filter() throws IOException {
@@ -186,11 +184,17 @@ public class Chats_View_Controller implements Initializable {
             }
         }
         else{
-            FXMLLoader loader = new FXMLLoader(Chats_View_Controller.class.getResource("/chat/Chats_View.fxml"));
+            FXMLLoader loader = new FXMLLoader(forward_Controller.class.getResource("/chat/Chats_View.fxml"));
             Stage stage = Main.mainStage;
             Scene scene = new Scene(loader.load());
             stage.setTitle("");
             stage.setScene(scene);
         }
+    }
+
+    @FXML
+    public void Cancel() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Chats_View_Controller.class.getResource("/chat/message_View.fxml"));
+        Main.mainStage.setScene(new Scene(fxmlLoader.load()));
     }
 }

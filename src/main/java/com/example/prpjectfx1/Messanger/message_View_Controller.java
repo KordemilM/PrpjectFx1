@@ -29,6 +29,8 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static com.example.prpjectfx1.Main.OnlineUser;
@@ -49,9 +51,15 @@ public class message_View_Controller implements Initializable {
 
     public static int id;
     public static boolean is_Group;
+    public List<String> membersList = new ArrayList<>();
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
         try {
+            //DB set has_unseen_message = false
+            connection.createStatement().executeUpdate("UPDATE `project`.`"+OnlineUser+"_chatslist` " +
+                    "SET has_unseen_message = 'false' " +
+                    "WHERE chat_id = "+ id );
+
             theme();
             //set Title (Name)
             ResultSet title = connection.createStatement().executeQuery
@@ -64,11 +72,13 @@ public class message_View_Controller implements Initializable {
             if(is_Group){
                 ResultSet members = connection.createStatement().executeQuery
                         ("SELECT * FROM `project`.`"+id+"_members` m" +
-                                " LEFT JOIN `project`.`user` u " +
+                                " LEFT JOIN `project`.`my_user` u " +
                                 "ON m.member_username = u.username");
                 StringBuilder members_list = new StringBuilder();
                 while (members.next()){
-                    members_list.append(members.getString("name")).append(",");
+                    String us = members.getString("username");
+                    members_list.append(us).append(",");
+                    membersList.add(us);
                 }
                 this.members.setText(members_list.toString());
             }
@@ -77,7 +87,7 @@ public class message_View_Controller implements Initializable {
             {
                 ResultSet chats = connection.createStatement().executeQuery
                         ("SELECT * FROM `project`.`"+id+"_chat` ch" +
-                                " LEFT JOIN `project`.`user` un" +
+                                " LEFT JOIN `project`.`my_user` un" +
                                 " ON ch.sender_username = un.username" +
                                 " ORDER BY send_time ");
 
@@ -97,6 +107,13 @@ public class message_View_Controller implements Initializable {
     public void newMassage() throws SQLException {
         if (!message.getText().isEmpty()){
             //DB
+            membersList.remove(OnlineUser);
+            for (String username : membersList ){
+                connection.createStatement().executeUpdate
+                        ("UPDATE `project`.`"+username+"_chatslist` " +
+                                "SET has_unseen_message = 'true' " +
+                                "WHERE chat_id = "+ id );
+            }
             String content = message.getText().trim();
             connection.createStatement().executeUpdate
                     ("INSERT INTO `project`.`"+id+"_chat`" +
@@ -148,8 +165,16 @@ public class message_View_Controller implements Initializable {
 
                     MenuItem menuItem = new MenuItem("reply");
                     MenuItem menuItem2 = new MenuItem("forward");
-                    menuItem.setOnAction(event -> System.out.println("reply"));
-                    menuItem2.setOnAction(event -> System.out.println("Enter destination"));
+                    menuItem.setOnAction(event -> message.setText("[reply to "+content+" ]"));
+                    menuItem2.setOnAction(event -> {
+                        forward_Controller.content = content;
+                        FXMLLoader fxmlLoader = new FXMLLoader(forward_Controller.class.getResource("/chat/forward.fxml"));
+                        try {
+                            Main.mainStage.setScene(new Scene(fxmlLoader.load()));
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
                     splitMenuButton.getItems().addAll(menuItem,menuItem2);
 
 
@@ -172,6 +197,8 @@ public class message_View_Controller implements Initializable {
                             text.setStrokeWidth(0);
                             text.setWrappingWidth(146.53125);
                             textFlow.setPrefHeight(text.getLayoutBounds().getHeight());
+                            splitMenuButton.setPrefHeight(text.getLayoutBounds().getHeight());
+                            splitMenuButton.setWrapText(true);
                         }
 
                         Label time_label = new Label();

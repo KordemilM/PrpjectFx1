@@ -1,6 +1,5 @@
 package com.example.prpjectfx1.Messanger;
 
-import com.example.prpjectfx1.Setting;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
@@ -19,7 +17,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 import com.example.prpjectfx1.Main;
@@ -27,9 +24,6 @@ import com.example.prpjectfx1.Main;
 import static com.example.prpjectfx1.Main.OnlineUser;
 
 public class newChat_Controller implements Initializable {
-
-    @FXML
-    private BorderPane borderPane;
     @FXML
     private TextField GroupName , addUser , addContact;
     @FXML
@@ -264,7 +258,6 @@ public class newChat_Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Initialize DataBase
         try {
-            theme();
             Main.connection.createStatement().executeUpdate("""
                     CREATE TABLE IF NOT EXISTS `project`.`chat_info` (
                       `chat_id` int NOT NULL AUTO_INCREMENT,
@@ -295,11 +288,6 @@ public class newChat_Controller implements Initializable {
     public void BackToChatList() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/chat/Chats_View.fxml"));
         Main.mainStage.setScene(new Scene(fxmlLoader.load()));
-    }
-
-    public void theme(){
-        borderPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/styles/" +
-                (Setting.isLightMode ? "light" : "dark") + "Mode.css")).toExternalForm());
     }
 
 }
