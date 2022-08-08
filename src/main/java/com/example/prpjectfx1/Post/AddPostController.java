@@ -1,5 +1,6 @@
 package com.example.prpjectfx1.Post;
 
+import com.example.prpjectfx1.Follow;
 import com.example.prpjectfx1.Holder.PostsHolder;
 import com.example.prpjectfx1.Holder.UserHolder;
 import com.example.prpjectfx1.Main;
@@ -8,7 +9,6 @@ import com.example.prpjectfx1.PersonalPage;
 import com.example.prpjectfx1.Setting;
 import com.example.prpjectfx1.entity.PostCom;
 import com.example.prpjectfx1.entity.User;
-import com.example.prpjectfx1.repository.UserRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +21,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -88,7 +87,7 @@ public class AddPostController {
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         String id = userPreferences.get("id", "");
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("personalPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/prpjectfx1/personalPage.fxml"));
         Parent root = null;
         try {
             root = loader.load();
@@ -122,7 +121,23 @@ public class AddPostController {
         stage.show();
     }
 
-    public void toFollow(){}
+    @FXML
+    private void toFollow(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/prpjectfx1/follow.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Follow follow = loader.getController();
+        follow.theme();
+        Stage stage = Main.mainStage;
+        Scene scene = new Scene(root);
+        stage.setTitle("");
+        stage.setScene(scene);
+        stage.show();
+    }
 
     public void toChat() throws IOException {  //OK
 

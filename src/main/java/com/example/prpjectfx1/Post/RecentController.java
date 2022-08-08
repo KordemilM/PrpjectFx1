@@ -1,5 +1,6 @@
 package com.example.prpjectfx1.Post;
 
+import com.example.prpjectfx1.Follow;
 import com.example.prpjectfx1.Holder.*;
 import com.example.prpjectfx1.Main;
 import com.example.prpjectfx1.Messanger.Chats_View_Controller;
@@ -235,5 +236,21 @@ public class RecentController {
         stage.setScene(scene);
     }
 
-    public void toFollow(){}
+    @FXML
+    private  void toFollow(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/prpjectfx1/follow.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Follow follow = loader.getController();
+        follow.theme();
+        Stage stage = Main.mainStage;
+        Scene scene = new Scene(root);
+        stage.setTitle("");
+        stage.setScene(scene);
+        stage.show();
+    }
 }

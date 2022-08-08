@@ -1,12 +1,11 @@
 package com.example.prpjectfx1.Post;
 
-import com.example.prpjectfx1.Holder.PostHolder;
 import com.example.prpjectfx1.Holder.PostsHolder;
 import com.example.prpjectfx1.Holder.UserHolder;
 import com.example.prpjectfx1.Main;
+import com.example.prpjectfx1.PersonalPage;
 import com.example.prpjectfx1.entity.PostCom;
 import com.example.prpjectfx1.entity.User;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,12 +15,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
+import java.util.prefs.Preferences;
 
 public class ShowMyPostsController {
     @FXML
@@ -121,5 +120,23 @@ public class ShowMyPostsController {
         stage2.show();
     }
 
-    public void backToPersonal(ActionEvent event) throws IOException {}
+    public void backToPersonal() throws SQLException, ClassNotFoundException {
+        Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
+        String id = userPreferences.get("id", "");
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/prpjectfx1/personalPage.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        PersonalPage personalPage = loader.getController();
+        personalPage.setUser(id);
+        personalPage.theme();
+        Stage stage = Main.mainStage;
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

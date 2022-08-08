@@ -1,5 +1,6 @@
 package com.example.prpjectfx1.Messanger;
 
+import com.example.prpjectfx1.Follow;
 import com.example.prpjectfx1.Holder.UserHolder;
 import com.example.prpjectfx1.Main;
 import com.example.prpjectfx1.PersonalPage;
@@ -21,9 +22,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -212,6 +211,24 @@ public class Chats_View_Controller implements Initializable {
         controller.theme();
         Scene scene = new Scene(root);
         Stage stage = Main.mainStage;
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void toFollow(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/prpjectfx1/follow.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Follow follow = loader.getController();
+        follow.theme();
+        Stage stage = Main.mainStage;
+        Scene scene = new Scene(root);
+        stage.setTitle("");
         stage.setScene(scene);
         stage.show();
     }

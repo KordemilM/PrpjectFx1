@@ -78,7 +78,7 @@ public class Follow {
     private ImageView profileImage;
 
 
-    protected void theme(){
+    public void theme(){
         borderPane.getStylesheets().add(getClass().getResource("/com/styles/" +
                 (Setting.isLightMode ? "light" : "dark") + "Mode.css").toExternalForm());
     }
