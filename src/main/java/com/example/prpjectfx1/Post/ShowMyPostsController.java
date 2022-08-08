@@ -121,17 +121,5 @@ public class ShowMyPostsController {
         stage2.show();
     }
 
-    public void back(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("PostMain.fxml"));
-        Parent root = fxmlLoader.load();
-        PostMainController controller = fxmlLoader.getController();
-        UserHolder holder = UserHolder.getINSTANCE();
-        holder.setUser(user);
-        controller.initializeUser();
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        stage.setTitle("Post Main");
-        stage.setScene(scene);
-        stage.show();
-    }
+    public void backToPersonal(ActionEvent event) throws IOException {}
 }

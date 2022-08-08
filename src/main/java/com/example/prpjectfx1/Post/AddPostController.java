@@ -103,14 +103,7 @@ public class AddPostController {
         stage.show();
     }
 
-    public void toFollow(){
-    }
-
     public void toHome(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
-        Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
-        String id = userPreferences.get("id", "");
-        User user = UserRepository.searchUser(id);
-
         FXMLLoader loader =  new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("Recent/Recent.fxml")));
         Parent root = loader.load();
         RecentController controller = loader.getController();
@@ -127,6 +120,8 @@ public class AddPostController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void toFollow(){}
 
     public void toChat(){
     }

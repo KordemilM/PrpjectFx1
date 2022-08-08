@@ -116,7 +116,7 @@ public class Setting {
     }
 
     @FXML
-    protected void backClick() throws SQLException {
+    protected void backClick() throws SQLException, ClassNotFoundException {
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         String id = userPreferences.get("id", "");
 

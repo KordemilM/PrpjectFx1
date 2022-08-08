@@ -65,7 +65,7 @@ public class SignUp {
     }
 
     @FXML
-    protected void submitButtonClick(ActionEvent event) throws SQLException {
+    protected void submitButtonClick(ActionEvent event) throws SQLException, ClassNotFoundException {
         emailLabel.setText("");           usernameLabel.setText("");   passwordLabel.setText("");
         repeatPasswordLabel.setText("");  accountLabel.setText("");    securityLabel.setText("");
 

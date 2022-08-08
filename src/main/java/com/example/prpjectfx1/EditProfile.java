@@ -89,7 +89,7 @@ public class EditProfile {
     }
 
     @FXML
-    protected void back1ButtonClick() throws SQLException {
+    protected void back1ButtonClick() throws SQLException, ClassNotFoundException {
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         String id = userPreferences.get("id", "");
 
