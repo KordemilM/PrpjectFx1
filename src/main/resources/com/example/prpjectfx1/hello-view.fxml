@@ -6,13 +6,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" styleClass="secondary-color" stylesheets="@../../styles/lightMode.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prpjectfx1.HelloController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" styleClass="gradient-color" stylesheets="@../../styles/lightMode.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prpjectfx1.HelloController">
    <children>
-      <AnchorPane layoutX="25.0" layoutY="25.0" prefHeight="450.0" prefWidth="350.0" styleClass="primary-color" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+      <AnchorPane layoutX="25.0" layoutY="25.0" prefHeight="450.0" prefWidth="350.0" styleClass="gradient-color" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
          <children>
-            <AnchorPane layoutX="25.0" layoutY="25.0" prefHeight="400.0" prefWidth="300.0" styleClass="secondary-color" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+            <AnchorPane layoutX="25.0" layoutY="25.0" prefHeight="400.0" prefWidth="300.0" styleClass="gradient-color" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
                <children>
-                  <AnchorPane layoutX="25.0" layoutY="25.0" prefHeight="350.0" prefWidth="250.0" styleClass="primary-color" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+                  <AnchorPane layoutX="25.0" layoutY="25.0" prefHeight="350.0" prefWidth="250.0" styleClass="gradient-color" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
                      <children>
                         <Button layoutX="103.0" layoutY="299.0" mnemonicParsing="false" onAction="#onStartButtonClick" style="-fx-background-color: #dd439d;" styleClass="round-border" text="Start" textFill="#ffd9ec" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="103.0" AnchorPane.rightAnchor="103.0">
                            <font>

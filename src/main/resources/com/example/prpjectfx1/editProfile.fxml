@@ -93,7 +93,7 @@
       </StackPane>
       <StackPane layoutX="147.0" layoutY="115.0" prefHeight="23.0" prefWidth="70.0" AnchorPane.leftAnchor="147.0" AnchorPane.rightAnchor="183.0">
          <children>
-            <Label fx:id="oooo" prefHeight="17.0" prefWidth="69.0" textFill="#cd055f" />
+            <Label fx:id="oooo" prefHeight="17.0" prefWidth="69.0" textFill="#cd055f" visible="false" />
          </children>
       </StackPane>
    </children>

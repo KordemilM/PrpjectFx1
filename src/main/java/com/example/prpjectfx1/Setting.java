@@ -51,8 +51,8 @@ public class Setting {
         numFollowingLabel.setText(UserRepository.numberOfFollowing(username));
 //        numPostLabel.setText(UserRepository.);
         try{
-            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(user.getPhoto())));
-            profileImage.setImage(image);
+            //Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(user.getPhoto())));
+            profileImage.setImage(new Image(user.getPhoto()));
             profileImage.setClip(new Circle(25,25,25));
         }catch (NullPointerException e){
             Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/image/user_icon.png")));
