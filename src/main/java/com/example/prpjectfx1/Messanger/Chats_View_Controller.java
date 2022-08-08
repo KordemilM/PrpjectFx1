@@ -1,11 +1,14 @@
 package com.example.prpjectfx1.Messanger;
 
 import com.example.prpjectfx1.Follow;
+import com.example.prpjectfx1.Holder.PostsHolder;
 import com.example.prpjectfx1.Holder.UserHolder;
 import com.example.prpjectfx1.Main;
 import com.example.prpjectfx1.PersonalPage;
 import com.example.prpjectfx1.Post.AddPostController;
+import com.example.prpjectfx1.Post.AppContext;
 import com.example.prpjectfx1.Post.PostMainController;
+import com.example.prpjectfx1.Post.RecentController;
 import com.example.prpjectfx1.Setting;
 import com.example.prpjectfx1.entity.User;
 import com.example.prpjectfx1.repository.UserRepository;
@@ -231,5 +234,31 @@ public class Chats_View_Controller implements Initializable {
         stage.setTitle("");
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    protected void homeButtonClick() throws IOException, SQLException, ClassNotFoundException {
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("/Post/Recent/Recent.fxml")));
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            RecentController controller = loader.getController();
+            RecentController.pageNumber = 1;
+            PostsHolder postsHolder = PostsHolder.getInstance();
+            postsHolder.setPosts(AppContext.getPostComRepos().getLast10Post(UserHolder.getINSTANCE().getUser().getUserName(), AppContext.getConnection()));
+            controller.initializePost();
+            controller.initializeUser();
+            controller.main();
+            Stage stage = Main.mainStage;
+            Scene scene = new Scene(root);
+            stage.setTitle("");
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (Exception ignored){}
     }
 }

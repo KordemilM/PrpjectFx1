@@ -147,7 +147,7 @@ public class RecentController {
     //add comment to the post
 
     public void addComment() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Explore/Comment/AddComment.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Post/Explore/Comment/AddComment.fxml"));
         Parent root = loader.load();
         AddCommentController addCommentController = loader.getController();
         PostHolder postHolder = PostHolder.getINSTANCE();
@@ -166,7 +166,7 @@ public class RecentController {
     //show all comments of the post
 
     public void showComments() throws IOException, SQLException, ClassNotFoundException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Explore/Comment/Comments.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Post/Explore/Comment/Comments.fxml"));
         Parent root = loader.load();
         CommentsController commentsController = loader.getController();
         IntegerHolder integerHolder = IntegerHolder.getINSTANCE();

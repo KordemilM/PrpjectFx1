@@ -92,7 +92,7 @@ public class ExploreController {
     }
 
     public void likesUserName() throws IOException, SQLException, ClassNotFoundException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Explore/Likes.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Post/Explore/Likes.fxml"));
         Parent root = loader.load();
         LikeExploreController likesController = loader.getController();
         PostHolder postHolder = PostHolder.getINSTANCE();
@@ -117,7 +117,7 @@ public class ExploreController {
     }
 
     public void addCommentExplore() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Explore/Comment/AddComment.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Post/Explore/Comment/AddComment.fxml"));
         Parent root = loader.load();
         AddCommentController addCommentController = loader.getController();
         PostHolder postHolder = PostHolder.getINSTANCE();
@@ -134,7 +134,7 @@ public class ExploreController {
     }
 
     public void commentsExplore() throws IOException, SQLException, ClassNotFoundException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Explore/Comment/Comments.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Post/Explore/Comment/Comments.fxml"));
         Parent root = loader.load();
         CommentsController commentsController = loader.getController();
         IntegerHolder integerHolder = IntegerHolder.getINSTANCE();

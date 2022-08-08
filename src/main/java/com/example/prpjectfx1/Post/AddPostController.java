@@ -75,6 +75,9 @@ public class AddPostController {
         postCom.setViews(0);
         postCom.setAds(user.getAccount() == 0);
         AppContext.getPostComRepos().addPost(postCom, AppContext.getConnection());
+        postSubject.setText("");
+        postContent.setText("");
+        postImage.setImage(null);
     }
 
     public void theme(){
@@ -99,24 +102,6 @@ public class AddPostController {
         personalPage.theme();
         Stage stage = Main.mainStage;
         Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void toHome(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
-        FXMLLoader loader =  new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("Recent/Recent.fxml")));
-        Parent root = loader.load();
-        RecentController controller = loader.getController();
-        RecentController.pageNumber = 1;
-        PostsHolder postsHolder = PostsHolder.getInstance();
-        postsHolder.setPosts(AppContext.getPostComRepos().getLast10Post(user.getUserName(), AppContext.getConnection()));
-        controller.initializePost();
-        UserHolder holder = UserHolder.getINSTANCE();
-        holder.setUser(user);
-        controller.initializeUser();
-        controller.main();
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
@@ -146,5 +131,31 @@ public class AddPostController {
         Scene scene = new Scene(loader.load());
         stage.setTitle("");
         stage.setScene(scene);
+    }
+
+    @FXML
+    protected void homeButtonClick() throws IOException, SQLException, ClassNotFoundException {
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("/Post/Recent/Recent.fxml")));
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            RecentController controller = loader.getController();
+            RecentController.pageNumber = 1;
+            PostsHolder postsHolder = PostsHolder.getInstance();
+            postsHolder.setPosts(AppContext.getPostComRepos().getLast10Post(UserHolder.getINSTANCE().getUser().getUserName(), AppContext.getConnection()));
+            controller.initializePost();
+            controller.initializeUser();
+            controller.main();
+            Stage stage = Main.mainStage;
+            Scene scene = new Scene(root);
+            stage.setTitle("");
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (Exception ignored){}
     }
 }
