@@ -11,22 +11,22 @@ import java.util.LinkedHashMap;
 
 public class ChartController {
     @FXML
-    private LineChart<Date, Number> Chart;
+    private LineChart<String, Number> Chart;
 
     public void chartLikes(PostCom postCom) throws SQLException, ClassNotFoundException {
         LinkedHashMap<java.sql.Date, Integer> likes = AppContext.getPostComRepos().getLikes(postCom, AppContext.getConnection());
-        XYChart.Series<Date, Number> series = new XYChart.Series<>();
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
         for(Date date : likes.keySet()){
-            series.getData().add(new XYChart.Data<>(date, likes.get(date)));
+            series.getData().add(new XYChart.Data<>(date.toString(), likes.get(date)));
         }
         Chart.getData().add(series);
     }
 
     public void chartViews(PostCom postCom) throws SQLException, ClassNotFoundException {
         LinkedHashMap<java.sql.Date, Integer> views = AppContext.getPostComRepos().getViews(postCom, AppContext.getConnection());
-        XYChart.Series<Date, Number> series = new XYChart.Series<>();
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
         for(Date date : views.keySet()){
-            series.getData().add(new XYChart.Data<>(date, views.get(date)));
+            series.getData().add(new XYChart.Data<>(date.toString(), views.get(date)));
         }
         Chart.getData().add(series);
     }

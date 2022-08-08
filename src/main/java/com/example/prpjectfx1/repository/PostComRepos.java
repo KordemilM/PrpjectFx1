@@ -239,12 +239,11 @@ public class PostComRepos {
         return postComArrayList.get(0);
     }
 
-    // get All posts other than ads and hasnt viewed other than user
-
+    // get All posts other than ads and hasnt viewed other than user where parent = 0
     public ArrayList<PostCom> getAllPosts(String username, Connection connection) throws SQLException {
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(
-                "select * from PostCom where isAds = false and id not in (select post_id from views where username = '"+username+"') and username != '" + username + "' order by datetime desc"
+                "select * from PostCom where parent = 0 and isAds = false and id not in (select post_id from views where username = '"+username+"') and username != '" + username + "' order by datetime desc"
         );
         return getPostCom(statement, resultSet);
     }

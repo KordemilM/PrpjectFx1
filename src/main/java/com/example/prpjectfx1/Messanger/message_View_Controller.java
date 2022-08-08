@@ -121,8 +121,11 @@ public class message_View_Controller implements Initializable {
                     ("INSERT INTO `project`.`"+id+"_chat`" +
                             " (`sender_username`, `content`) " +
                             "VALUES ('"+OnlineUser+"', '"+content+"')");
+            // user == onlineUser get image from my_user
+            ResultSet user = connection.createStatement().executeQuery
+                    ("SELECT * FROM `project`.`my_user` WHERE username = '"+OnlineUser+"'");
             //GUI
-            addMassage(OnlineUser,content,"", LocalDateTime.now().toString(),"null",true);
+            addMassage(OnlineUser,content,user.getString("photo"), LocalDateTime.now().toString(),"null",true);
         }
     }
 
@@ -144,8 +147,8 @@ public class message_View_Controller implements Initializable {
             imageView.setPickOnBounds(true);
             imageView.setPreserveRatio(true);
             HBox.setHgrow(imageView, Priority.ALWAYS);
-            if(image.equals("null"))
-            imageView.setImage(new Image(image));
+            //if(image.equals("null"))
+            //imageView.setImage(new Image(image));
             HBox.setMargin(imageView, new Insets(10));
 
             VBox vbox = new VBox();
