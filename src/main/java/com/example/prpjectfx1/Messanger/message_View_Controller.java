@@ -122,7 +122,7 @@ public class message_View_Controller implements Initializable {
                             " (`sender_username`, `content`) " +
                             "VALUES ('"+OnlineUser+"', '"+content+"')");
             //GUI
-            addMassage(OnlineUser,content,"", LocalDateTime.now().toString(),Chats_View_Controller.user.getPhoto(),true);
+            addMassage(OnlineUser,content,"", LocalDateTime.now().toString(),"null",true);
         }
     }
 
@@ -144,6 +144,7 @@ public class message_View_Controller implements Initializable {
             imageView.setPickOnBounds(true);
             imageView.setPreserveRatio(true);
             HBox.setHgrow(imageView, Priority.ALWAYS);
+            if(image.equals("null"))
             imageView.setImage(new Image(image));
             HBox.setMargin(imageView, new Insets(10));
 
