@@ -199,7 +199,7 @@ public class RecentController {
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         String id = userPreferences.get("id", "");
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("com/example/prpjectfx1/personalPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/prpjectfx1/personalPage.fxml"));
         Parent root = null;
         try {
             root = loader.load();

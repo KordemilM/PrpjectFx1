@@ -201,8 +201,8 @@ public class newChat_Controller implements Initializable {
                     "`description`,\n" +
                     "`Type` )\n " +
                     "VALUES\n" +
-                    "('"+new_Contact+"',\n" +
-                    "NULL" +
+                    "('"+new_Contact+"|"+ OnlineUser + "',\n" +
+                    "NULL," +
                     "'private');" );
                 //find Last id
             ResultSet r = Main.connection.createStatement().executeQuery
