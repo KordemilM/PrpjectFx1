@@ -81,7 +81,7 @@
         </AnchorPane>
     </bottom>
     <top>
-        <AnchorPane prefHeight="258.0" prefWidth="400.0" styleClass="primary-color" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="258.0" prefWidth="400.0" styleClass="secondary-color" BorderPane.alignment="CENTER">
             <children>
                 <StackPane layoutX="38.0" layoutY="20.0" prefHeight="27.0" prefWidth="30.0" style="-fx-background-color: #fffefe;" AnchorPane.leftAnchor="38.0">
                     <children>
@@ -183,7 +183,7 @@
                   </ImageView>
                </children>
             </StackPane>
-            <Button layoutX="9.0" layoutY="22.0" minWidth="26.0" mnemonicParsing="false" onAction="#toExplore" prefHeight="27.0" prefWidth="26.0" text="#">
+            <Button layoutX="9.0" layoutY="21.0" minWidth="26.0" mnemonicParsing="false" onAction="#toExplore" prefHeight="27.0" prefWidth="26.0" text="#" textFill="#d3065f">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

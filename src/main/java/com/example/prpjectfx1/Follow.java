@@ -109,8 +109,7 @@ public class Follow {
             postLabel.setText("Post");
             followButton.setVisible(true);
             try{
-                Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(user.getPhoto())));
-                profileImage.setImage(image);
+                profileImage.setImage(new Image(user.getPhoto()));
                 profileImage.setClip(new Circle(25,25,25));
             }catch (NullPointerException e){
                 Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/image/user_icon.png")));
@@ -166,11 +165,21 @@ public class Follow {
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         String id = userPreferences.get("id", "");
         ArrayList<String> users = UserRepository.userSuggestion(id);
-        if(users.size()>0){
+        if(users.size()>0) {
             scrollPane.setVisible(true);
-            button1.setText(users.get(0));  button2.setText(users.get(1));  button3.setText(users.get(2));
-            button4.setText(users.get(3));  button5.setText(users.get(4));  button6.setText(users.get(5));
-            button7.setText(users.get(6));
+            button1.setText(users.get(0));
+        }
+        if(users.size()==2){
+            button2.setText(users.get(1));
+        }
+        if(users.size()==3){
+            button2.setText(users.get(2));
+        }
+        if(users.size()==3){
+            button2.setText(users.get(3));
+        }
+        if(users.size()==3){
+            button2.setText(users.get(4));
         }
     }
 
@@ -194,7 +203,7 @@ public class Follow {
     }
 
     @FXML
-    public void toExplore(ActionEvent event) throws SQLException, ClassNotFoundException, MalformedURLException {
+    public void toExplore() throws SQLException, ClassNotFoundException {
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         String id = userPreferences.get("id", "");
         User user = UserRepository.searchUser(id);
@@ -219,49 +228,6 @@ public class Follow {
         stage.setScene(scene);
         stage.setTitle("Ad");
         stage.show();
-
-//        try {
-//            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("/Post/Explore/ShowAd.fxml")));
-//            Parent root = loader.load();
-//            ShowAdController controller = loader.getController();
-//            UserHolder holder = UserHolder.getINSTANCE();
-//            holder.setUser(user);
-//            controller.initializeUser();
-//            PostHolder postHolder = PostHolder.getINSTANCE();
-//            postHolder.setPostCom(AppContext.getPostComRepos().getRandomAdsPost(user.getUserName(), AppContext.getConnection()));
-//            controller.initializePost();
-//            controller.main();
-//            Scene scene = new Scene(root);
-//            Stage stage = new Stage();
-//            stage.setScene(scene);
-//            stage.setTitle("Ad");
-//            stage.show();
-//        }
-//        catch (Exception ignored) {}
-
-        try {
-            FXMLLoader loader2 = new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("/Post/Explore/Explore.fxml")));
-            Parent root2 = null;
-            try {
-                root2 = loader2.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            IntegerHolder holder2 = IntegerHolder.getINSTANCE();
-            holder2.setNum(1);
-            ExploreController controller2 = loader2.getController();
-            controller2.initializePageNumber();
-            controller2.initializeUser();
-            PostsHolder postsHolder = PostsHolder.getInstance();
-            postsHolder.setPosts(AppContext.getPostComRepos().getAllPosts(user.getUserName(), AppContext.getConnection()));
-            controller2.initializePost();
-            controller2.main();
-            Scene scene2 = new Scene(root2);
-            Stage stage2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage2.setScene(scene2);
-            stage2.show();
-        }
-        catch (Exception ignored) {}
 
 //        try {
 //            FXMLLoader loader2 = new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("/Post/Explore/Explore.fxml")));

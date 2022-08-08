@@ -17,6 +17,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.prefs.Preferences;
@@ -54,9 +55,9 @@ public class EditProfile {
         nameText.setText(user.getName());
         bioText.setText(user.getBio());
         try{
-            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(user.getPhoto())));
-            imageView.setImage(image);
-            imageView.setClip(new Circle(25,20,20));
+            //Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(user.getPhoto())));
+            imageView.setImage(new Image(user.getPhoto()));
+            imageView.setClip(new Circle(30,30,30));
         }catch (NullPointerException e){
             Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/image/user_icon.png")));
             imageView.setImage(image);
@@ -64,12 +65,14 @@ public class EditProfile {
     }
 
     @FXML
-    protected void setMyPhoto(){
+    protected void setMyPhoto() throws MalformedURLException {
         fileChooser.setTitle("My pictures");
         File file = fileChooser.showOpenDialog(null);
-        String address = file.getAbsolutePath();
-        int i = address.lastIndexOf("\\");
-        oooo.setText("/image/" + address.substring(i+1)); // "/image/" + icon.png
+//       String address = file.getAbsolutePath();
+//       int i = address.lastIndexOf("\\");
+//       oooo.setText("/image/" + address.substring(i+1)); // "/image/" + icon.png
+        String address = file.toURI().toURL().toString();
+        oooo.setText(address);
     }
 
     @FXML
@@ -78,7 +81,10 @@ public class EditProfile {
         user.setUserName(usernameText.getText());
         user.setName(nameText.getText());
         user.setBio(bioText.getText());
-        user.setPhoto(oooo.getText()); ////??
+        if(oooo.getText().equals("")){
+            oooo.setText("file:C:/Users/Classic/Documents/Java/Prpject/PrpjectFx1/src/main/resources/image/user_icon.png");
+        }
+        user.setPhoto(oooo.getText());
         if(account.isSelected()){
             user.setAccount(0);
         }else

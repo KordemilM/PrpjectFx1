@@ -8,3 +8,6 @@
 .round-border{
     -fx-background-radius: 50;
 }
+.gradient-color{
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100% , #6f6464 ,#323131);
+}
