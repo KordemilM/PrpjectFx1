@@ -203,50 +203,52 @@ public class Follow {
     }
 
     @FXML
-    public void toExplore() throws SQLException, ClassNotFoundException {
+    public void toExplore(ActionEvent event) throws SQLException, ClassNotFoundException {
         Preferences userPreferences = Preferences.userNodeForPackage(PersonalPage.class);
         String id = userPreferences.get("id", "");
         User user = UserRepository.searchUser(id);
-
-        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("/Post/Explore/ShowAd.fxml")));
-        Parent root = null;
         try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("/Post/Explore/ShowAd.fxml")));
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            ShowAdController controller = loader.getController();
+            UserHolder holder = UserHolder.getINSTANCE();
+            holder.setUser(user);
+            controller.initializeUser();
+            PostHolder postHolder = PostHolder.getINSTANCE();
+            postHolder.setPostCom(AppContext.getPostComRepos().getRandomAdsPost(user.getUserName(), AppContext.getConnection()));
+            controller.initializePost();
+            controller.main();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Ad");
+            stage.show();
         }
-        ShowAdController controller = loader.getController();
-        UserHolder holder = UserHolder.getINSTANCE();
-        holder.setUser(user);
-        controller.initializeUser();
-        PostHolder postHolder = PostHolder.getINSTANCE();
-        postHolder.setPostCom(AppContext.getPostComRepos().getRandomAdsPost(user.getUserName(), AppContext.getConnection()));
-        controller.initializePost();
-        controller.main();
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setTitle("Ad");
-        stage.show();
+        catch (Exception ignored){}
 
-//        try {
-//            FXMLLoader loader2 = new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("/Post/Explore/Explore.fxml")));
-//            Parent root2 = loader2.load();
-//            IntegerHolder holder2 = IntegerHolder.getINSTANCE();
-//            holder2.setNum(1);
-//            ExploreController controller2 = loader2.getController();
-//            controller2.initializePageNumber();
-//            controller2.initializeUser();
-//            PostsHolder postsHolder = PostsHolder.getInstance();
-//            postsHolder.setPosts(AppContext.getPostComRepos().getAllPosts(user.getUserName(), AppContext.getConnection()));
-//            controller2.initializePost();
-//            controller2.main();
-//            Scene scene2 = new Scene(root2);
-//            Stage stage2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//            stage2.setScene(scene2);
-//            stage2.show();
-//        }
-//        catch (Exception ignored) {}
+        try {
+            FXMLLoader loader2 = new FXMLLoader(Objects.requireNonNull(PostMainController.class.getResource("/Post/Explore/Explore.fxml")));
+            Parent root2 = loader2.load();
+            IntegerHolder holder2 = IntegerHolder.getINSTANCE();
+            holder2.setNum(1);
+            ExploreController controller2 = loader2.getController();
+            controller2.initializePageNumber();
+            controller2.initializeUser();
+            PostsHolder postsHolder = PostsHolder.getInstance();
+            postsHolder.setPosts(AppContext.getPostComRepos().getAllPosts(user.getUserName(), AppContext.getConnection()));
+            controller2.initializePost();
+            controller2.main();
+            Scene scene2 = new Scene(root2);
+            Stage stage2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage2.setScene(scene2);
+            stage2.show();
+        }
+        catch (Exception ignored) {}
 
     }
 

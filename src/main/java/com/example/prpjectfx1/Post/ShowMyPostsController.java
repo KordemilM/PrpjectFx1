@@ -118,6 +118,24 @@ public class ShowMyPostsController {
         stage2.setTitle("Views");
         stage2.setScene(scene2);
         stage2.show();
+        FXMLLoader loader3 = new FXMLLoader(PostMainController.class.getResource("/Post/Myposts/ChartPerDay.fxml"));
+        Parent root3 = loader3.load();
+        ChartController chartController = loader3.getController();
+        chartController.chartLikes(postCom);
+        Scene scene3 = new Scene(root3);
+        Stage stage3 = new Stage();
+        stage3.setTitle("Chart Likes");
+        stage3.setScene(scene3);
+        stage3.show();
+        FXMLLoader loader4 = new FXMLLoader(PostMainController.class.getResource("/Post/Myposts/ChartPerDay.fxml"));
+        Parent root4 = loader4.load();
+        ChartController chartController2 = loader4.getController();
+        chartController2.chartViews(postCom);
+        Scene scene4 = new Scene(root4);
+        Stage stage4 = new Stage();
+        stage4.setTitle("Chart Views");
+        stage4.setScene(scene4);
+        stage4.show();
     }
 
     public void backToPersonal() throws SQLException, ClassNotFoundException {
