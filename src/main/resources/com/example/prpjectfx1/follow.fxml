@@ -176,6 +176,11 @@
                   </ImageView>
                </children>
             </StackPane>
+            <Button layoutX="9.0" layoutY="22.0" minWidth="26.0" mnemonicParsing="false" onAction="#toExplore" prefHeight="27.0" prefWidth="26.0" text="#">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
             </children>
         </AnchorPane>
     </top>
