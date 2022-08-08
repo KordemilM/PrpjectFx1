@@ -108,12 +108,14 @@ public class message_View_Controller implements Initializable {
         if (!message.getText().isEmpty()){
             //DB
             membersList.remove(OnlineUser);
+            System.out.println(id);
             for (String username : membersList ){
                 connection.createStatement().executeUpdate
                         ("UPDATE `project`.`"+username+"_chatslist` " +
-                                "SET has_unseen_message = 'true' " +
-                                "WHERE chat_id = "+ id );
+                                "SET `has_unseen_message` = 'true' " +
+                                "WHERE ( `chat_id` = '" + id + "')" );
             }
+            //UPDATE `project`.`ali_chatslist` SET `has_unseen_message` = 'true' WHERE (`id` = '1');
             String content = message.getText().trim();
             connection.createStatement().executeUpdate
                     ("INSERT INTO `project`.`"+id+"_chat`" +
